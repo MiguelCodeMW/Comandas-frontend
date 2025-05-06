@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CreateUserForm from "./CreateUserForm"; // Importa el formulario de usuario
+import CreateUserForm from "./components/CreateUserForm/CreateUserForm"; // Importa el formulario de usuario
 
 class App extends Component {
   render() {
