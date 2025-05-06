@@ -1,14 +1,38 @@
-import React, { Component } from "react";
-import CreateUserForm from "./components/CreateUserForm/CreateUserForm"; // Importa el formulario de usuario
+import React, { useEffect } from "react";
+import CreateUserForm from "./components/CreateUserForm/CreateUserForm";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import LoginForm from "./components/LoginForm/LoginForm";
+import Dashboard from "./components/Dashboard/Dashboard";
+import PrivateRoute from "./components/PrivateRoute"; // Importa el componente de ruta privada
+// Importa el formulario de usuario
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <CreateUserForm /> {/* Aquí se renderiza el formulario */}
-      </div>
-    );
-  }
+function App() {
+  // useEffect(() => {
+  //   // Elimina el token al iniciar la aplicación
+  //   localStorage.removeItem("token");
+  // }, []);
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/create" element={<CreateUserForm />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />{" "}
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

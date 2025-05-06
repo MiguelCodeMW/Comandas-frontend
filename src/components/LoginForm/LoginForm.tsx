@@ -1,49 +1,48 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axio";
-import { User } from "../../utils/User";
 
-function CreateUserForm() {
-  const [formData, setFormData] = useState<User>({
-    name: "",
+function LoginForm() {
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [message, setMessage] = useState<string | null>(null);
-  const navigate = useNavigate(); // Hook para manejar la navegación
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); // Evita que la página se recargue al enviar el formulario
 
     try {
-      const res = await api.post("/create", formData); // Usa la instancia de Axios
-      setMessage("Usuario creado exitosamente!");
-      console.log(res.data);
+      // Enviar los datos del formulario al endpoint de inicio de sesión
+      const res = await api.post("/login", formData);
 
-      // Redirige al usuario a la página principal o al login
-      navigate("/login"); // Cambia "/dashboard" por la ruta deseada
+      // Obtener el token del backend
+      const token = res.data.token;
+
+      // Guardar el token en localStorage
+      localStorage.setItem("token", token);
+
+      // Mostrar un mensaje de éxito
+      setMessage("Inicio de sesión exitoso!");
+
+      // Redirigir al usuario a la página principal
+      navigate("/dashboard"); // Cambia "/dashboard" por la ruta de tu página principal
     } catch (error: any) {
-      setMessage("Error al crear usuario");
+      // Manejo de errores
+      setMessage("Error al iniciar sesión");
       console.error(error.response?.data || error.message);
     }
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Crear Usuario</h1>
+    <div>
+      <h1>Iniciar Sesión</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          onChange={handleChange}
-          value={formData.name}
-        />
-        <br />
         <input
           type="email"
           name="email"
@@ -51,7 +50,6 @@ function CreateUserForm() {
           onChange={handleChange}
           value={formData.email}
         />
-        <br />
         <input
           type="password"
           name="password"
@@ -59,12 +57,11 @@ function CreateUserForm() {
           onChange={handleChange}
           value={formData.password}
         />
-        <br />
-        <button type="submit">Crear</button>
+        <button type="submit">Iniciar Sesión</button>
       </form>
       {message && <p>{message}</p>}
     </div>
   );
 }
 
-export default CreateUserForm;
+export default LoginForm;
