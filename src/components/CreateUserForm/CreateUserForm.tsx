@@ -87,9 +87,10 @@ class CreateUserForm extends Component<
 import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import api from "../../api/axio";
+import { User } from "../../utils/User";
 
 function CreateUserForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<User>({
     name: "",
     email: "",
     password: "",
