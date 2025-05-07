@@ -8,7 +8,10 @@ import {
 } from "react-router-dom";
 import LoginForm from "./components/LoginForm/LoginForm";
 import Dashboard from "./components/Dashboard/Dashboard";
-import PrivateRoute from "./components/PrivateRoute"; // Importa el componente de ruta privada
+import PrivateRoute from "./components/PrivateRoute";
+import ComandaDetails from "./components/ComandaDetalle/ComandaDetalle";
+
+// Importa el componente de ruta privada
 // Importa el formulario de usuario
 
 function App() {
@@ -30,6 +33,14 @@ function App() {
             </PrivateRoute>
           }
         />{" "}
+        <Route
+          path="/comandas/:id"
+          element={
+            <PrivateRoute>
+              <ComandaDetails />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
