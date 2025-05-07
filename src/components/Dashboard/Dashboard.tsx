@@ -38,6 +38,10 @@ function Dashboard() {
     navigate(`/comandas/${comanda.id}`);
   };
 
+  const handleAddCategoria = () => {
+    navigate("/categorias/crear"); // Redirige a la página de creación de categorías
+  };
+
   if (loading) {
     return <div style={{ padding: "2rem" }}>Cargando comandas...</div>;
   }
@@ -48,7 +52,28 @@ function Dashboard() {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>Comandas</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h1>Comandas</h1>
+        <button
+          onClick={handleAddCategoria}
+          style={{
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            padding: "0.5rem 1rem",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Añadir Categoría
+        </button>
+      </div>
       {comandas.length === 0 ? (
         <p>No hay comandas.</p>
       ) : (

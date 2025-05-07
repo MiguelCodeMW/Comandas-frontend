@@ -8,18 +8,6 @@ const api = axios.create({
   },
 });
 
-// Interceptor para manejar errores globales (opcional)
-/*api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    console.error(
-      "Error en la solicitud:",
-      error.response?.data || error.message
-    );
-    return Promise.reject(error);
-  }
-);*/
-
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {

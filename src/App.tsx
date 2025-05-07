@@ -10,7 +10,7 @@ import LoginForm from "./components/LoginForm/LoginForm";
 import Dashboard from "./components/Dashboard/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import ComandaDetails from "./components/ComandaDetalle/ComandaDetalle";
-
+import CrearCategoria from "./components/CrearCategoria/CrearCategoria";
 // Importa el componente de ruta privada
 // Importa el formulario de usuario
 
@@ -38,6 +38,14 @@ function App() {
           element={
             <PrivateRoute>
               <ComandaDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/categorias/crear"
+          element={
+            <PrivateRoute>
+              <CrearCategoria />
             </PrivateRoute>
           }
         />
