@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+/*import React, { useState, useEffect } from "react";
 import api from "../../api/axio";
 import { useParams } from "react-router-dom";
 
@@ -62,6 +62,56 @@ const EditarCategoria = () => {
         </p>
       )}
     </div>
+  );
+};
+
+export default EditarCategoria;*/
+
+import React, { useState } from "react";
+import api from "../../api/axio";
+
+interface EditarCategoriaProps {
+  id: number;
+  onUpdateCategoria: (id: number, nuevoNombre: string) => void;
+}
+
+const EditarCategoria: React.FC<EditarCategoriaProps> = ({
+  id,
+  onUpdateCategoria,
+}) => {
+  const [nombre, setNombre] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!nombre.trim()) {
+      alert("El nombre de la categoría no puede estar vacío.");
+      return;
+    }
+
+    try {
+      await api.put(`/categorias/${id}`, { nombre });
+      onUpdateCategoria(id, nombre); // Notifica al componente padre
+    } catch (error) {
+      console.error("Error al actualizar la categoría:", error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Editar Nombre:
+        <input
+          type="text"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          placeholder="Nuevo nombre de la categoría"
+          required
+        />
+      </label>
+      <br />
+      <button type="submit">Actualizar</button>
+    </form>
   );
 };
 
