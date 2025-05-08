@@ -85,6 +85,20 @@ function Dashboard() {
         >
           Gestionar Productos
         </button>
+        <button
+          onClick={() => navigate("/comandas/crear")}
+          style={{
+            backgroundColor: "orange",
+            color: "white",
+            border: "none",
+            padding: "0.5rem 1rem",
+            borderRadius: "5px",
+            cursor: "pointer",
+            marginLeft: "1rem",
+          }}
+        >
+          Crear Comanda
+        </button>
       </div>
       {comandas.length === 0 ? (
         <p>No hay comandas.</p>
