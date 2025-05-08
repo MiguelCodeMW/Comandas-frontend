@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import ComandaDetails from "./components/ComandaDetalle/ComandaDetalle";
 import CrearCategoria from "./components/CrearCategoria/CrearCategoria";
+import CrearProducto from "./components/CrearProducto/CrearProducto";
 // Importa el componente de ruta privada
 // Importa el formulario de usuario
 
@@ -46,6 +47,14 @@ function App() {
           element={
             <PrivateRoute>
               <CrearCategoria />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/productos/crear"
+          element={
+            <PrivateRoute>
+              <CrearProducto />
             </PrivateRoute>
           }
         />

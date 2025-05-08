@@ -73,6 +73,18 @@ function Dashboard() {
         >
           Añadir Categoría
         </button>
+        <button
+          onClick={() => navigate("/productos/crear")}
+          style={{
+            backgroundColor: "green",
+            color: "white",
+            padding: "0.5rem 1rem",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Gestionar Productos
+        </button>
       </div>
       {comandas.length === 0 ? (
         <p>No hay comandas.</p>
