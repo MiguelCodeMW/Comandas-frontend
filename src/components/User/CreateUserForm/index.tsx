@@ -4,6 +4,7 @@ import api from "../../../api/axio";
 import { User } from "../../../utils/User";
 import Button from "../../Button/Button";
 import styles from "../LoginForm/LoginForm.module.css"; // Importa los estilos CSS
+import { ROUTES } from "../../../utils/Constants/routes";
 
 function CreateUserForm() {
   const [formData, setFormData] = useState<User>({
@@ -22,12 +23,12 @@ function CreateUserForm() {
     e.preventDefault();
 
     try {
-      const res = await api.post("/create", formData); // Usa la instancia de Axios
+      const res = await api.post(ROUTES.CREATE_USER, formData); // Usa la instancia de Axios
       setMessage("Usuario creado exitosamente!");
       console.log(res.data);
 
       // Redirige al usuario a la página principal o al login
-      navigate("/login"); // Cambia "/dashboard" por la ruta deseada
+      navigate(ROUTES.LOGIN); // Cambia "/dashboard" por la ruta deseada
     } catch (error: any) {
       setMessage("Error al crear usuario");
       console.error(error.response?.data || error.message);
@@ -69,7 +70,7 @@ function CreateUserForm() {
         />
         <Button
           text="Volver"
-          onClick={() => navigate("/login")}
+          onClick={() => navigate(ROUTES.LOGIN)}
           className={[styles.button, styles.padded].join(" ")}
         />
       </form>

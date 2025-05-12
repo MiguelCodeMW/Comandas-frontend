@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import LoginForm from "./components/User/LoginForm";
-import Dashboard from "./components/Dashboard/Dashboard";
+import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import ComandaDetails from "./components/Comanda/ComandaDetalle/ComandaDetalle";
 import CrearCategoria from "./components/Categoria/CrearCategoria/CrearCategoria";

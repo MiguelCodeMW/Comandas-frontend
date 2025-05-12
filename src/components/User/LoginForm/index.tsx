@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../api/axio";
 import Button from "../../Button/Button";
 import styles from "./LoginForm.module.css";
+import { ROUTES } from "../../../utils/Constants/routes";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -20,11 +21,11 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const res = await api.post("/login", formData);
+      const res = await api.post(ROUTES.LOGIN, formData);
       const token = res.data.token;
       localStorage.setItem("token", token);
       setMessage("Inicio de sesión exitoso!");
-      navigate("/dashboard");
+      navigate(ROUTES.DASHBOARD); // Redirige al dashboard después de iniciar sesión");
     } catch (error: any) {
       setMessage("Error al iniciar sesión");
       console.error(error.response?.data || error.message);
@@ -63,11 +64,6 @@ function LoginForm() {
         />
       </form>
       {message && <p className={styles.message}>{message}</p>}
-      {/* <Button
-        text="Registrarse"
-        onClick={() => navigate("/create")}
-        className={[styles.button, styles.padded].join(" ")}
-      /> */}
     </div>
   );
 }
