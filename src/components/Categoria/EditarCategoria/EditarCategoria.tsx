@@ -68,7 +68,7 @@ const EditarCategoria = () => {
 export default EditarCategoria;*/
 
 import React, { useState } from "react";
-import api from "../../api/axio";
+import api from "../../../api/axio";
 
 interface EditarCategoriaProps {
   id: number;

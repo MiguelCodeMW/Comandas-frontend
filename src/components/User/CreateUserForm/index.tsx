@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../api/axio";
-import { User } from "../../utils/User";
+import api from "../../../api/axio";
+import { User } from "../../../utils/User";
+import Button from "../../Button/Button";
+import styles from "../LoginForm/LoginForm.module.css"; // Importa los estilos CSS
 
 function CreateUserForm() {
   const [formData, setFormData] = useState<User>({
@@ -33,38 +35,47 @@ function CreateUserForm() {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className={styles.formContainer}>
       <h1>Crear Usuario</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
           name="name"
           placeholder="Nombre"
           onChange={handleChange}
           value={formData.name}
+          className={styles.input}
         />
-        <br />
         <input
           type="email"
           name="email"
           placeholder="Email"
           onChange={handleChange}
           value={formData.email}
+          className={styles.input}
         />
-        <br />
         <input
           type="password"
           name="password"
           placeholder="Contraseña"
           onChange={handleChange}
           value={formData.password}
+          className={styles.input}
         />
-        <br />
-        <button type="submit">Crear</button>
+        <Button
+          text="Registrarse"
+          type="submit"
+          className={[styles.button, styles.padded].join(" ")}
+        />
+        <Button
+          text="Volver"
+          onClick={() => navigate("/login")}
+          className={[styles.button, styles.padded].join(" ")}
+        />
       </form>
-      {message && <p>{message}</p>}
+
+      {message && <p className={styles.message}>{message}</p>}
     </div>
   );
 }
-
 export default CreateUserForm;

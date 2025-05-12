@@ -149,7 +149,7 @@ const CrearCategoria = () => {
 export default CrearCategoria;*/
 
 import React, { useState, useEffect } from "react";
-import api from "../../api/axio";
+import api from "../../../api/axio";
 
 interface Categoria {
   id: number;

@@ -32,7 +32,7 @@ const CategoriasList = () => {
 
 export default CategoriasList;*/
 import React from "react";
-import api from "../../api/axio";
+import api from "../../../api/axio";
 
 interface Categoria {
   id: number;

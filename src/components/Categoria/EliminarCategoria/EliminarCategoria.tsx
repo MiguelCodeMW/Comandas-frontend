@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api from "../../api/axio";
+import api from "../../../api/axio";
 
 interface EliminarCategoriaProps {
   id: number; // Tipado explícito para el ID de la categoría

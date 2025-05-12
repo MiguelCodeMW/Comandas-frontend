@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "../../api/axio";
+import api from "../../../api/axio";
 
 interface Producto {
   id: number;

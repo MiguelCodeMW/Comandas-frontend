@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../api/axio";
+import api from "../../../api/axio";
+import Button from "../../Button/Button";
+import styles from "./LoginForm.module.css";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -15,40 +17,31 @@ function LoginForm() {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Evita que la página se recargue al enviar el formulario
+    e.preventDefault();
 
     try {
-      // Enviar los datos del formulario al endpoint de inicio de sesión
       const res = await api.post("/login", formData);
-
-      // Obtener el token del backend
       const token = res.data.token;
-
-      // Guardar el token en localStorage
       localStorage.setItem("token", token);
-
-      // Mostrar un mensaje de éxito
       setMessage("Inicio de sesión exitoso!");
-
-      // Redirigir al usuario a la página principal
-      navigate("/dashboard"); // Cambia "/dashboard" por la ruta de tu página principal
+      navigate("/dashboard");
     } catch (error: any) {
-      // Manejo de errores
       setMessage("Error al iniciar sesión");
       console.error(error.response?.data || error.message);
     }
   };
 
   return (
-    <div>
+    <div className={styles.formContainer}>
       <h1>Iniciar Sesión</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="email"
           name="email"
           placeholder="Email"
           onChange={handleChange}
           value={formData.email}
+          className={styles.input}
         />
         <input
           type="password"
@@ -56,10 +49,25 @@ function LoginForm() {
           placeholder="Contraseña"
           onChange={handleChange}
           value={formData.password}
+          className={styles.input}
         />
-        <button type="submit">Iniciar Sesión</button>
+        <Button
+          text="Iniciar Sesión"
+          type="submit"
+          className={[styles.button, styles.padded].join(" ")}
+        />
+        <Button
+          text="Crear Usuario"
+          onClick={() => navigate("/create")}
+          className={[styles.button, styles.padded].join(" ")}
+        />
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className={styles.message}>{message}</p>}
+      {/* <Button
+        text="Registrarse"
+        onClick={() => navigate("/create")}
+        className={[styles.button, styles.padded].join(" ")}
+      /> */}
     </div>
   );
 }

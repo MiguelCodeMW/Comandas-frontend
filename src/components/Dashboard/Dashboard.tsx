@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/axio";
 import { useNavigate } from "react-router-dom";
+import Button from "../Button/Button"; // Importa tu componente Button
 
 // Define la estructura de una comanda (ajusta los campos según tu necesidad)
 interface Comanda {
@@ -30,16 +31,9 @@ function Dashboard() {
     fetchComandas();
   }, []);
 
-  const handleComandaClick = (
-    e: React.MouseEvent<HTMLLIElement>,
-    comanda: Comanda
-  ) => {
-    e.stopPropagation();
-    navigate(`/comandas/${comanda.id}`);
-  };
-
-  const handleAddCategoria = () => {
-    navigate("/categorias/crear"); // Redirige a la página de creación de categorías
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Elimina el token del almacenamiento local
+    navigate("/login"); // Redirige al usuario a la página de inicio de sesión
   };
 
   if (loading) {
@@ -60,45 +54,22 @@ function Dashboard() {
         }}
       >
         <h1>Comandas</h1>
-        <button
-          onClick={handleAddCategoria}
-          style={{
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            padding: "0.5rem 1rem",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Añadir Categoría
-        </button>
-        <button
+        <Button
+          text="Añadir Categoría"
+          onClick={() => navigate("/categorias/crear")}
+        />
+        <Button
+          text="Gestionar Productos"
           onClick={() => navigate("/productos/crear")}
-          style={{
-            backgroundColor: "green",
-            color: "white",
-            padding: "0.5rem 1rem",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
-          Gestionar Productos
-        </button>
-        <button
+        />
+        <Button
+          text="Crear Comanda"
           onClick={() => navigate("/comandas/crear")}
-          style={{
-            backgroundColor: "orange",
-            color: "white",
-            border: "none",
-            padding: "0.5rem 1rem",
-            borderRadius: "5px",
-            cursor: "pointer",
-            marginLeft: "1rem",
-          }}
-        >
-          Crear Comanda
-        </button>
+        />
+        <Button
+          text="Cerrar Sesión"
+          onClick={handleLogout} // Usa la función handleLogout
+        />
       </div>
       {comandas.length === 0 ? (
         <p>No hay comandas.</p>
@@ -107,7 +78,10 @@ function Dashboard() {
           {comandas.map((comanda) => (
             <li
               key={comanda.id}
-              onClick={(e) => handleComandaClick(e, comanda)}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/comandas/${comanda.id}`);
+              }}
               style={{ cursor: "pointer", marginBottom: "1rem" }}
             >
               <h3>Comanda #{comanda.id}</h3>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import api from "../../api/axio";
+import api from "../../../api/axio";
 import ProductoList from "../ProductoList/ProductoList";
 import EditarProducto from "../EditarProducto/EditarProducto";
 

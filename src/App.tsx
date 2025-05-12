@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
-import CreateUserForm from "./components/CreateUserForm/CreateUserForm";
+import CreateUserForm from "./components/User/CreateUserForm";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-import LoginForm from "./components/LoginForm/LoginForm";
+import LoginForm from "./components/User/LoginForm";
 import Dashboard from "./components/Dashboard/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
-import ComandaDetails from "./components/ComandaDetalle/ComandaDetalle";
-import CrearCategoria from "./components/CrearCategoria/CrearCategoria";
-import CrearProducto from "./components/CrearProducto/CrearProducto";
-import CrearComanda from "./components/CrearComanda/CrearComanda";
+import ComandaDetails from "./components/Comanda/ComandaDetalle/ComandaDetalle";
+import CrearCategoria from "./components/Categoria/CrearCategoria/CrearCategoria";
+import CrearProducto from "./components/Producto/CrearProducto/CrearProducto";
+import CrearComanda from "./components/Comanda/CrearComanda/CrearComanda";
 // Importa el componente de ruta privada
 // Importa el formulario de usuario
 
