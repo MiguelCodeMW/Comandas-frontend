@@ -10,7 +10,7 @@ import LoginForm from "./components/User/LoginForm";
 import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import ComandaDetails from "./components/Comanda/ComandaDetalle/ComandaDetalle";
-import CrearCategoria from "./components/Categoria/CrearCategoria/CrearCategoria";
+import CrearCategoria from "./components/Categoria/CrearCategoria";
 import CrearProducto from "./components/Producto/CrearProducto/CrearProducto";
 import CrearComanda from "./components/Comanda/CrearComanda/CrearComanda";
 // Importa el componente de ruta privada
