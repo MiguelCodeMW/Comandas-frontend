@@ -9,5 +9,6 @@ export const ROUTES = {
   CATEGORY: "/categorias",
   CATEGORY_DETAIL: "/categorias/:id",
   PRODUCT: "/productos",
+  PRODUCT_DETAIL: "/productos/:id",
   COMANDA_DETAIL: "/comandas/:id",
 };

@@ -4,13 +4,14 @@ import { Category } from "../../../utils/Category";
 import { ROUTES } from "../../../utils/Constants/routes";
 import Button from "../../Button/Button"; // Importa tu componente Button
 import styles from "./CrearCategoria.module.css"; // Importa los estilos como módulo
+import { useNavigate } from "react-router-dom";
 
 const CrearCategoria = () => {
   const [categorias, setCategorias] = useState<Category[]>([]);
   const [nombre, setNombre] = useState<string>("");
   const [mensaje, setMensaje] = useState<string | null>(null);
   const [editandoId, setEditandoId] = useState<number | null>(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
@@ -167,6 +168,11 @@ const CrearCategoria = () => {
           </li>
         ))}
       </ul>
+      <Button
+        text="Volver al Dashboard"
+        onClick={() => navigate("/dashboard")}
+        className={styles.dashboardButton}
+      />
     </div>
   );
 };
