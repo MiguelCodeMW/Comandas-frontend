@@ -1,48 +1,36 @@
-import React from "react";
-import api from "../../../api/axio";
 import { Category } from "../../../utils/Category";
-import { ROUTES } from "../../../utils/Constants/routes";
+import styles from "../Categoria.module.css";
 
 interface CategoriaListProps {
-  onSelectCategoria: (id: number, nombre: string) => void;
-  onDeleteCategoria: (id: number) => void;
+  categorias: Category[];
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
-const CategoriaList: React.FC<CategoriaListProps> = ({
-  onSelectCategoria,
-  onDeleteCategoria,
-}) => {
-  const [categorias, setCategorias] = React.useState<Category[]>([]);
-
-  React.useEffect(() => {
-    const fetchCategorias = async () => {
-      try {
-        const response = await api.get(ROUTES.CATEGORY);
-        setCategorias(response.data);
-      } catch (error) {
-        console.error("Error al cargar las categorías:", error);
-      }
-    };
-
-    fetchCategorias();
-  }, []);
-
+function CategoriaList({ categorias, onEdit, onDelete }: CategoriaListProps) {
   return (
-    <ul>
+    <ul className={styles.categoryList}>
       {categorias.map((categoria) => (
-        <li key={categoria.id}>
-          <span
-            onClick={() => onSelectCategoria(categoria.id, categoria.nombre)}
-          >
-            {categoria.nombre}
-          </span>
-          <button onClick={() => onDeleteCategoria(categoria.id)}>
-            Eliminar
-          </button>
+        <li key={categoria.id} className={styles.categoryItem}>
+          <span className={styles.categoryName}>{categoria.nombre}</span>
+          <div className={styles.buttonGroup}>
+            <button
+              onClick={() => onEdit(categoria.id)}
+              className={`${styles.button} ${styles.edit}`}
+            >
+              Editar
+            </button>
+            <button
+              onClick={() => onDelete(categoria.id)}
+              className={`${styles.button} ${styles.delete}`}
+            >
+              Eliminar
+            </button>
+          </div>
         </li>
       ))}
     </ul>
   );
-};
+}
 
 export default CategoriaList;

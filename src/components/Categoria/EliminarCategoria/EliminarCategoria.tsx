@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import api from "../../../api/axio";
 import { ROUTES } from "../../../utils/Constants/routes";
-import { EliminarCategoriaProps } from "../../../utils/EliminarCategoriaProps";
+import styles from "../Categoria.module.css"; // Importa el archivo CSS centralizado
 
-const EliminarCategoria: React.FC<EliminarCategoriaProps> = ({ id }) => {
-  const [mensaje, setMensaje] = useState<string | null>(null); // Estado para mostrar mensajes de éxito o error
+interface EliminarCategoriaProps {
+  id: number;
+  onCategoriaEliminada: () => void;
+}
+
+function EliminarCategoria({
+  id,
+  onCategoriaEliminada,
+}: EliminarCategoriaProps) {
+  const [mensaje, setMensaje] = useState<string | null>(null);
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
@@ -15,6 +23,7 @@ const EliminarCategoria: React.FC<EliminarCategoriaProps> = ({ id }) => {
     try {
       await api.delete(ROUTES.CATEGORY_DETAIL.replace(":id", id.toString()));
       setMensaje("Categoría eliminada con éxito.");
+      onCategoriaEliminada();
     } catch (error) {
       setMensaje("Error al eliminar la categoría. Inténtalo de nuevo.");
       console.error("Error al eliminar la categoría:", error);
@@ -22,11 +31,24 @@ const EliminarCategoria: React.FC<EliminarCategoriaProps> = ({ id }) => {
   };
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <button onClick={handleDelete}>Eliminar</button>
-      {mensaje && <p>{mensaje}</p>}
+    <div className={styles.container}>
+      <button
+        onClick={handleDelete}
+        className={`${styles.button} ${styles.delete}`}
+      >
+        Eliminar
+      </button>
+      {mensaje && (
+        <p
+          className={`${styles.message} ${
+            mensaje.includes("éxito") ? styles.success : styles.error
+          }`}
+        >
+          {mensaje}
+        </p>
+      )}
     </div>
   );
-};
+}
 
 export default EliminarCategoria;

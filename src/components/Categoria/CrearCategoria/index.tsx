@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../../../api/axio";
 import { Category } from "../../../utils/Category";
 import { ROUTES } from "../../../utils/Constants/routes";
-import Button from "../../Button/Button"; // Importa tu componente Button
-import styles from "./CrearCategoria.module.css"; // Importa los estilos como módulo
+import Button from "../../Button/Button";
+import CategoriaList from "../CategoriaList/CategoriaList";
+import styles from "../Categoria.module.css"; // Cambiado para usar Categoria.module.css
 import { useNavigate } from "react-router-dom";
 
-const CrearCategoria = () => {
+function CrearCategoria() {
   const [categorias, setCategorias] = useState<Category[]>([]);
   const [nombre, setNombre] = useState<string>("");
   const [mensaje, setMensaje] = useState<string | null>(null);
   const [editandoId, setEditandoId] = useState<number | null>(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
@@ -35,34 +37,35 @@ const CrearCategoria = () => {
     }
 
     try {
-      const response = await api.post(ROUTES.CATEGORY, { nombre });
-      setCategorias((prev) => [...prev, response.data.categoria]);
-      setMensaje("Categoría creada con éxito.");
+      if (editandoId) {
+        await api.put(
+          ROUTES.CATEGORY_DETAIL.replace(":id", editandoId.toString()),
+          {
+            nombre,
+          }
+        );
+        setCategorias((prev) =>
+          prev.map((cat) => (cat.id === editandoId ? { ...cat, nombre } : cat))
+        );
+        setMensaje("Categoría actualizada con éxito.");
+      } else {
+        const response = await api.post(ROUTES.CATEGORY, { nombre });
+        setCategorias((prev) => [...prev, response.data.categoria]);
+        setMensaje("Categoría creada con éxito.");
+      }
       setNombre("");
+      setEditandoId(null);
     } catch (error) {
       setMensaje("Error al guardar la categoría. Inténtalo de nuevo.");
       console.error("Error al guardar la categoría:", error);
     }
   };
 
-  const handleEdit = async (id: number, nuevoNombre: string) => {
-    if (!nuevoNombre.trim()) {
-      setMensaje("El nombre de la categoría no puede estar vacío.");
-      return;
-    }
-
-    try {
-      await api.put(`${ROUTES.CATEGORY}/${id}`, { nombre: nuevoNombre });
-      setCategorias((prev) =>
-        prev.map((cat) =>
-          cat.id === id ? { ...cat, nombre: nuevoNombre } : cat
-        )
-      );
-      setMensaje("Categoría actualizada con éxito.");
-      setEditandoId(null);
-    } catch (error) {
-      setMensaje("Error al actualizar la categoría. Inténtalo de nuevo.");
-      console.error("Error al actualizar la categoría:", error);
+  const handleEdit = (id: number) => {
+    const categoria = categorias.find((cat) => cat.id === id);
+    if (categoria) {
+      setNombre(categoria.nombre);
+      setEditandoId(id);
     }
   };
 
@@ -73,7 +76,7 @@ const CrearCategoria = () => {
     if (!confirmDelete) return;
 
     try {
-      await api.delete(`${ROUTES.CATEGORY}/${id}`);
+      await api.delete(ROUTES.CATEGORY_DETAIL.replace(":id", id.toString()));
       setCategorias((prev) => prev.filter((cat) => cat.id !== id));
       setMensaje("Categoría eliminada con éxito.");
     } catch (error) {
@@ -99,7 +102,7 @@ const CrearCategoria = () => {
           />
         </label>
         <Button
-          text="Añadir Categoría"
+          text={editandoId ? "Guardar Cambios" : "Añadir Categoría"}
           type="submit"
           className={styles.button}
         />
@@ -116,58 +119,11 @@ const CrearCategoria = () => {
       )}
 
       <h2 className={styles.title}>Lista de Categorías</h2>
-      <ul className={styles.categoryList}>
-        {categorias.map((categoria) => (
-          <li key={categoria.id} className={styles.categoryItem}>
-            {editandoId === categoria.id ? (
-              <>
-                <input
-                  type="text"
-                  value={categoria.nombre}
-                  onChange={(e) =>
-                    setCategorias((prev) =>
-                      prev.map((cat) =>
-                        cat.id === categoria.id
-                          ? { ...cat, nombre: e.target.value }
-                          : cat
-                      )
-                    )
-                  }
-                  className={styles.input}
-                />
-                <div className={styles.buttonGroup}>
-                  <Button
-                    text="Guardar"
-                    onClick={() => handleEdit(categoria.id, categoria.nombre)}
-                    className={`${styles.button} ${styles.save}`}
-                  />
-                  <Button
-                    text="Cancelar"
-                    onClick={() => setEditandoId(null)}
-                    className={`${styles.button} ${styles.cancel}`}
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                <span className={styles.categoryName}>{categoria.nombre}</span>
-                <div className={styles.buttonGroup}>
-                  <Button
-                    text="Editar"
-                    onClick={() => setEditandoId(categoria.id)}
-                    className={styles.button}
-                  />
-                  <Button
-                    text="Eliminar"
-                    onClick={() => handleDelete(categoria.id)}
-                    className={`${styles.button} ${styles.delete}`}
-                  />
-                </div>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+      <CategoriaList
+        categorias={categorias}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
       <Button
         text="Volver"
         onClick={() => navigate(ROUTES.DASHBOARD)}
@@ -175,6 +131,6 @@ const CrearCategoria = () => {
       />
     </div>
   );
-};
+}
 
 export default CrearCategoria;
