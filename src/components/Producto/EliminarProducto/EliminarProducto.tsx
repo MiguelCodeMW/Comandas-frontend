@@ -1,35 +1,51 @@
-import React from "react";
+import { useState } from "react";
+import api from "../../../api/axio";
+import { ROUTES } from "../../../utils/Constants/routes";
+import styles from "../Producto.module.css"; // Importa el archivo CSS centralizado
 
 interface EliminarProductoProps {
   id: number;
-  onDelete: (id: number) => void;
+  onProductoEliminado: (id: number) => void; // Ajustamos el tipo para aceptar un argumento
 }
 
-const EliminarProducto = ({ id, onDelete }: EliminarProductoProps) => {
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); // Detiene la propagación del evento al elemento padre
+function EliminarProducto({ id, onProductoEliminado }: EliminarProductoProps) {
+  const [mensaje, setMensaje] = useState<string | null>(null);
+
+  const handleDelete = async () => {
     const confirmDelete = window.confirm(
       "¿Estás seguro de que deseas eliminar este producto?"
     );
-    if (confirmDelete) {
-      onDelete(id);
+    if (!confirmDelete) return;
+
+    try {
+      await api.delete(ROUTES.PRODUCT_DETAIL.replace(":id", id.toString()));
+      setMensaje("Producto eliminado con éxito.");
+      onProductoEliminado(id); // Pasamos el ID al callback
+    } catch (error) {
+      setMensaje("Error al eliminar el producto. Inténtalo de nuevo.");
+      console.error("Error al eliminar el producto:", error);
     }
   };
 
   return (
-    <button
-      onClick={handleDelete}
-      style={{
-        backgroundColor: "red",
-        color: "white",
-        border: "none",
-        padding: "0.3rem 0.6rem",
-        cursor: "pointer",
-      }}
-    >
-      Eliminar
-    </button>
+    <div className={styles.container}>
+      <button
+        onClick={handleDelete}
+        className={`${styles.button} ${styles.delete}`}
+      >
+        Eliminar
+      </button>
+      {mensaje && (
+        <p
+          className={`${styles.message} ${
+            mensaje.includes("éxito") ? styles.success : styles.error
+          }`}
+        >
+          {mensaje}
+        </p>
+      )}
+    </div>
   );
-};
+}
 
 export default EliminarProducto;

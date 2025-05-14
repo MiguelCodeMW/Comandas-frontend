@@ -1,0 +1,140 @@
+/* Contenedor principal */
+.container {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Título */
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Formulario */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+
+.select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  background-color: #fff;
+}
+
+/* Botones */
+.button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+  width: 120px;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #1d4ed8;
+}
+
+.save {
+  background-color: #16a34a;
+}
+
+.save:hover {
+  background-color: #15803d;
+}
+
+.cancel {
+  background-color: #6b7280;
+}
+
+.cancel:hover {
+  background-color: #4b5563;
+}
+
+.delete {
+  background-color: #dc2626;
+}
+
+.delete:hover {
+  background-color: #b91c1c;
+}
+
+.edit {
+  background-color: #f59e0b;
+}
+
+.edit:hover {
+  background-color: #d97706;
+}
+
+/* Lista de productos */
+.productList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.productItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9fafb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s;
+  min-height: 120px;
+  text-align: center;
+}
+
+.productName {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Mensajes */
+.success {
+  color: green;
+  text-align: center;
+  font-size: 16px;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  font-size: 16px;
+}

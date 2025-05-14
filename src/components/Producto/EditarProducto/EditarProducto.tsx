@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import api from "../../../api/axio";
+import { ROUTES } from "../../../utils/Constants/routes";
+import styles from "../Producto.module.css"; // Importa el archivo CSS centralizado
 
 interface EditarProductoProps {
   id: number;
@@ -6,76 +9,84 @@ interface EditarProductoProps {
   precioInicial: number;
   categoriaIdInicial: number;
   categorias: { id: number; nombre: string }[];
-  onUpdateProducto: (
-    id: number,
-    nuevoNombre: string,
-    nuevoPrecio: number,
-    nuevaCategoriaId: number
-  ) => void;
-  onCancel: () => void;
+  onProductoEditado: () => void;
 }
 
-const EditarProducto = ({
+function EditarProducto({
   id,
   nombreInicial,
   precioInicial,
   categoriaIdInicial,
   categorias,
-  onUpdateProducto,
-  onCancel,
-}: EditarProductoProps) => {
+  onProductoEditado,
+}: EditarProductoProps) {
   const [nombre, setNombre] = useState<string>(nombreInicial);
   const [precio, setPrecio] = useState<number>(precioInicial);
   const [categoriaId, setCategoriaId] = useState<number>(categoriaIdInicial);
+  const [mensaje, setMensaje] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onUpdateProducto(id, nombre, precio, categoriaId);
+  const handleEdit = async () => {
+    try {
+      await api.put(ROUTES.PRODUCT_DETAIL.replace(":id", id.toString()), {
+        nombre,
+        precio,
+        categoria_id: categoriaId,
+      });
+      setMensaje("Producto actualizado con éxito.");
+      onProductoEditado();
+    } catch (error) {
+      setMensaje("Error al actualizar el producto. Inténtalo de nuevo.");
+      console.error("Error al actualizar el producto:", error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Nombre:
-        <input
-          type="text"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-          required
-        />
-      </label>
-      <br />
-      <label>
-        Precio:
-        <input
-          type="number"
-          value={precio}
-          onChange={(e) => setPrecio(parseFloat(e.target.value))}
-          required
-        />
-      </label>
-      <br />
-      <label>
-        Categoría:
-        <select
-          value={categoriaId}
-          onChange={(e) => setCategoriaId(parseInt(e.target.value))}
-          required
+    <div className={styles.container}>
+      <h2 className={styles.title}>Editar Producto</h2>
+      <input
+        type="text"
+        value={nombre}
+        onChange={(e) => setNombre(e.target.value)}
+        placeholder="Nuevo nombre del producto"
+        className={styles.input}
+      />
+      <input
+        type="number"
+        value={precio}
+        onChange={(e) => setPrecio(Number(e.target.value))}
+        placeholder="Nuevo precio del producto"
+        className={styles.input}
+      />
+      <select
+        value={categoriaId}
+        onChange={(e) => setCategoriaId(Number(e.target.value))}
+        className={styles.select}
+      >
+        {categorias.map((categoria) => (
+          <option key={categoria.id} value={categoria.id}>
+            {categoria.nombre}
+          </option>
+        ))}
+      </select>
+      <div className={styles.buttonGroup}>
+        <button
+          onClick={handleEdit}
+          className={`${styles.button} ${styles.save}`}
         >
-          {categorias.map((categoria) => (
-            <option key={categoria.id} value={categoria.id}>
-              {categoria.nombre}
-            </option>
-          ))}
-        </select>
-      </label>
-      <br />
-      <button type="submit">Guardar</button>
-      <button type="button" onClick={onCancel}>
-        Cancelar
-      </button>
-    </form>
+          Guardar
+        </button>
+      </div>
+      {mensaje && (
+        <p
+          className={`${styles.message} ${
+            mensaje.includes("éxito") ? styles.success : styles.error
+          }`}
+        >
+          {mensaje}
+        </p>
+      )}
+    </div>
   );
-};
+}
 
 export default EditarProducto;

@@ -1,4 +1,4 @@
-import React from "react";
+import styles from "../Producto.module.css"; // Importa el archivo CSS centralizado
 import EliminarProducto from "../EliminarProducto/EliminarProducto";
 
 interface Producto {
@@ -20,27 +20,17 @@ interface ProductoListProps {
   onDeleteProducto: (id: number) => void;
 }
 
-const ProductoList = ({
+function ProductoList({
   productos,
   categorias,
   onEditProducto,
   onDeleteProducto,
-}: ProductoListProps) => {
+}: ProductoListProps) {
   return (
-    <ul>
+    <ul className={styles.productList}>
       {productos.map((producto) => (
-        <li
-          key={producto.id}
-          onClick={() => onEditProducto(producto.id)} // Lógica para manejar el clic en el <li>
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "0.5rem",
-            cursor: "pointer",
-          }}
-        >
-          <span>
+        <li key={producto.id} className={styles.productItem}>
+          <span className={styles.productName}>
             {producto.nombre} - ${producto.precio.toFixed(2)} -{" "}
             {
               categorias.find(
@@ -48,29 +38,22 @@ const ProductoList = ({
               )?.nombre
             }
           </span>
-          {/* Botón para editar el producto */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation(); // Detiene la propagación del evento al <li>
-              onEditProducto(producto.id);
-            }}
-            style={{
-              backgroundColor: "blue",
-              color: "white",
-              border: "none",
-              padding: "0.3rem 0.6rem",
-              cursor: "pointer",
-              marginLeft: "0.5rem",
-            }}
-          >
-            Editar
-          </button>
-          {/* Botón para eliminar el producto */}
-          <EliminarProducto id={producto.id} onDelete={onDeleteProducto} />
+          <div className={styles.buttonGroup}>
+            <button
+              onClick={() => onEditProducto(producto.id)}
+              className={`${styles.button} ${styles.edit}`}
+            >
+              Editar
+            </button>
+            <EliminarProducto
+              id={producto.id}
+              onProductoEliminado={onDeleteProducto} // Pasa la función correctamente
+            />
+          </div>
         </li>
       ))}
     </ul>
   );
-};
+}
 
 export default ProductoList;
