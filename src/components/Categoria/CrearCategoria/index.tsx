@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../../../api/axio";
-import { Category } from "../../../utils/Category";
+import { Categoria } from "../../../utils/Categoria";
 import { ROUTES } from "../../../utils/Constants/routes";
 import Button from "../../Button/Button";
 import CategoriaList from "../CategoriaList/CategoriaList";
@@ -8,7 +8,7 @@ import styles from "../Categoria.module.css"; // Cambiado para usar Categoria.mo
 import { useNavigate } from "react-router-dom";
 
 function CrearCategoria() {
-  const [categorias, setCategorias] = useState<Category[]>([]);
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [nombre, setNombre] = useState<string>("");
   const [mensaje, setMensaje] = useState<string | null>(null);
   const [editandoId, setEditandoId] = useState<number | null>(null);

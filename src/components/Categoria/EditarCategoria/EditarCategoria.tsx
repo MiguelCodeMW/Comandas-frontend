@@ -43,7 +43,7 @@ function EditarCategoria({
       <div className={styles.buttonGroup}>
         <button
           onClick={handleEdit}
-          className={`${styles.button} ${styles.save}`}
+          className={[styles.button, styles.save].join(" ")} // Concatenamos las clases correctamente
         >
           Guardar
         </button>

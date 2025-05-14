@@ -1,14 +1,15 @@
 import { useState } from "react";
 import api from "../../../api/axio";
 import { ROUTES } from "../../../utils/Constants/routes";
-import styles from "../Producto.module.css"; // Importa el archivo CSS centralizado
+import { EliminarProductoProps } from "../../../utils/EliminarProductoProps";
+import styles from "../Producto.module.css";
+import Button from "../../Button/Button";
 
-interface EliminarProductoProps {
-  id: number;
-  onProductoEliminado: (id: number) => void; // Ajustamos el tipo para aceptar un argumento
-}
-
-function EliminarProducto({ id, onProductoEliminado }: EliminarProductoProps) {
+function EliminarProducto({
+  id,
+  onProductoEliminado,
+  className,
+}: EliminarProductoProps) {
   const [mensaje, setMensaje] = useState<string | null>(null);
 
   const handleDelete = async () => {
@@ -20,7 +21,7 @@ function EliminarProducto({ id, onProductoEliminado }: EliminarProductoProps) {
     try {
       await api.delete(ROUTES.PRODUCT_DETAIL.replace(":id", id.toString()));
       setMensaje("Producto eliminado con éxito.");
-      onProductoEliminado(id); // Pasamos el ID al callback
+      onProductoEliminado(id);
     } catch (error) {
       setMensaje("Error al eliminar el producto. Inténtalo de nuevo.");
       console.error("Error al eliminar el producto:", error);
@@ -28,13 +29,12 @@ function EliminarProducto({ id, onProductoEliminado }: EliminarProductoProps) {
   };
 
   return (
-    <div className={styles.container}>
-      <button
+    <div>
+      <Button
+        text="Eliminar"
         onClick={handleDelete}
-        className={`${styles.button} ${styles.delete}`}
-      >
-        Eliminar
-      </button>
+        className={`${styles.button} ${styles.delete} ${className || ""}`} // Aseguramos que use los estilos base
+      />
       {mensaje && (
         <p
           className={`${styles.message} ${

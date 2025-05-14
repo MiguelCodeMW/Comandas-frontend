@@ -1,24 +1,7 @@
-import styles from "../Producto.module.css"; // Importa el archivo CSS centralizado
+import styles from "../Producto.module.css";
 import EliminarProducto from "../EliminarProducto/EliminarProducto";
-
-interface Producto {
-  id: number;
-  nombre: string;
-  precio: number;
-  categoria_id: number;
-}
-
-interface Categoria {
-  id: number;
-  nombre: string;
-}
-
-interface ProductoListProps {
-  productos: Producto[];
-  categorias: Categoria[];
-  onEditProducto: (id: number) => void;
-  onDeleteProducto: (id: number) => void;
-}
+import { ProductoListProps } from "../../../utils/ProductoListProps";
+import Button from "../../Button/Button";
 
 function ProductoList({
   productos,
@@ -26,7 +9,9 @@ function ProductoList({
   onEditProducto,
   onDeleteProducto,
 }: ProductoListProps) {
-  return (
+  return productos.length === 0 ? (
+    <p className={styles.message}>No hay productos disponibles.</p>
+  ) : (
     <ul className={styles.productList}>
       {productos.map((producto) => (
         <li key={producto.id} className={styles.productItem}>
@@ -39,15 +24,15 @@ function ProductoList({
             }
           </span>
           <div className={styles.buttonGroup}>
-            <button
+            <Button
+              text="Editar"
               onClick={() => onEditProducto(producto.id)}
-              className={`${styles.button} ${styles.edit}`}
-            >
-              Editar
-            </button>
+              className={[styles.button, styles.edit].join(" ")} // Concatenamos las clases correctamente
+            />
             <EliminarProducto
               id={producto.id}
-              onProductoEliminado={onDeleteProducto} // Pasa la función correctamente
+              onProductoEliminado={onDeleteProducto}
+              className={styles.button} // Aseguramos que use los mismos estilos base
             />
           </div>
         </li>

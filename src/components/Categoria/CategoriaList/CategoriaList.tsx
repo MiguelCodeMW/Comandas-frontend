@@ -1,8 +1,8 @@
-import { Category } from "../../../utils/Category";
+import { Categoria } from "../../../utils/Categoria";
 import styles from "../Categoria.module.css";
 
 interface CategoriaListProps {
-  categorias: Category[];
+  categorias: Categoria[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 }
