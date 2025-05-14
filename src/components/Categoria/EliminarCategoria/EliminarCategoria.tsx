@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import api from "../../../api/axio";
-
-interface EliminarCategoriaProps {
-  id: number; // Tipado explícito para el ID de la categoría
-}
+import { ROUTES } from "../../../utils/Constants/routes";
+import { EliminarCategoriaProps } from "../../../utils/EliminarCategoriaProps";
 
 const EliminarCategoria: React.FC<EliminarCategoriaProps> = ({ id }) => {
   const [mensaje, setMensaje] = useState<string | null>(null); // Estado para mostrar mensajes de éxito o error
@@ -15,7 +13,7 @@ const EliminarCategoria: React.FC<EliminarCategoriaProps> = ({ id }) => {
     if (!confirmDelete) return;
 
     try {
-      await api.delete(`/categorias/${id}`);
+      await api.delete(ROUTES.CATEGORY_DETAIL.replace(":id", id.toString()));
       setMensaje("Categoría eliminada con éxito.");
     } catch (error) {
       setMensaje("Error al eliminar la categoría. Inténtalo de nuevo.");
@@ -25,23 +23,8 @@ const EliminarCategoria: React.FC<EliminarCategoriaProps> = ({ id }) => {
 
   return (
     <div style={{ padding: "1rem" }}>
-      <button
-        onClick={handleDelete}
-        style={{
-          backgroundColor: "red",
-          color: "white",
-          padding: "0.5rem 1rem",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
-        Eliminar
-      </button>
-      {mensaje && (
-        <p style={{ color: mensaje.includes("éxito") ? "green" : "red" }}>
-          {mensaje}
-        </p>
-      )}
+      <button onClick={handleDelete}>Eliminar</button>
+      {mensaje && <p>{mensaje}</p>}
     </div>
   );
 };

@@ -169,8 +169,8 @@ const CrearCategoria = () => {
         ))}
       </ul>
       <Button
-        text="Volver al Dashboard"
-        onClick={() => navigate("/dashboard")}
+        text="Volver"
+        onClick={() => navigate(ROUTES.DASHBOARD)}
         className={styles.dashboardButton}
       />
     </div>
