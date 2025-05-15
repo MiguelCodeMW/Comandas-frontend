@@ -1,4 +1,4 @@
-import styles from "../Producto.module.css";
+import styles from "../../Comanda/Comandas.module.css";
 
 interface Producto {
   id: number;
@@ -21,13 +21,12 @@ function ProductoSelectorList({
   }
 
   return (
-    <ul className={styles.productList}>
+    <ul className={styles.productosGrid}>
       {productos.map((producto) => (
         <li
           key={producto.id}
           className={styles.productItem}
           onClick={() => onProductoClick(producto)}
-          style={{ cursor: "pointer" }}
         >
           <span className={styles.productName}>
             {producto.nombre} - ${producto.precio.toFixed(2)}
