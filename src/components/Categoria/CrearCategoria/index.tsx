@@ -4,7 +4,7 @@ import { Categoria } from "../../../utils/Categoria";
 import { ROUTES } from "../../../utils/Constants/routes";
 import Button from "../../Button/Button";
 import CategoriaList from "../CategoriaList/CategoriaList";
-import styles from "../Categoria.module.css"; // Cambiado para usar Categoria.module.css
+import styles from "../Categoria.module.css";
 import { useNavigate } from "react-router-dom";
 
 function CrearCategoria() {
@@ -37,24 +37,10 @@ function CrearCategoria() {
     }
 
     try {
-      if (editandoId) {
-        await api.put(
-          ROUTES.CATEGORY_DETAIL.replace(":id", editandoId.toString()),
-          {
-            nombre,
-          }
-        );
-        setCategorias((prev) =>
-          prev.map((cat) => (cat.id === editandoId ? { ...cat, nombre } : cat))
-        );
-        setMensaje("Categoría actualizada con éxito.");
-      } else {
-        const response = await api.post(ROUTES.CATEGORY, { nombre });
-        setCategorias((prev) => [...prev, response.data.categoria]);
-        setMensaje("Categoría creada con éxito.");
-      }
+      const response = await api.post(ROUTES.CATEGORY, { nombre });
+      setCategorias((categoria) => [...categoria, response.data.categoria]);
+      setMensaje("Categoría creada con éxito.");
       setNombre("");
-      setEditandoId(null);
     } catch (error) {
       setMensaje("Error al guardar la categoría. Inténtalo de nuevo.");
       console.error("Error al guardar la categoría:", error);
@@ -62,33 +48,46 @@ function CrearCategoria() {
   };
 
   const handleEdit = (id: number) => {
-    const categoria = categorias.find((cat) => cat.id === id);
-    if (categoria) {
-      setNombre(categoria.nombre);
-      setEditandoId(id);
-    }
+    setEditandoId(id);
   };
 
-  const handleDelete = async (id: number) => {
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que deseas eliminar esta categoría?"
-    );
-    if (!confirmDelete) return;
-
-    try {
-      await api.delete(ROUTES.CATEGORY_DETAIL.replace(":id", id.toString()));
-      setCategorias((prev) => prev.filter((cat) => cat.id !== id));
-      setMensaje("Categoría eliminada con éxito.");
-    } catch (error) {
-      setMensaje("Error al eliminar la categoría. Inténtalo de nuevo.");
-      console.error("Error al eliminar la categoría:", error);
+  const handleCategoriaEditada = async (id: number, nuevoNombre: string) => {
+    if (!nuevoNombre.trim()) {
+      setMensaje("El nombre no puede estar vacío.");
+      return;
     }
+    try {
+      await api.put(ROUTES.CATEGORY_DETAIL.replace(":id", id.toString()), {
+        nombre: nuevoNombre,
+      });
+      setCategorias((categorias) =>
+        categorias.map((categoria) =>
+          categoria.id === id
+            ? { ...categoria, nombre: nuevoNombre }
+            : categoria
+        )
+      );
+      setMensaje("Categoría actualizada con éxito.");
+    } catch (error: any) {
+      setMensaje(
+        error.response?.data?.message ||
+          "Error al actualizar la categoría. Inténtalo de nuevo."
+      );
+      console.error("Error al actualizar la categoría:", error);
+    }
+    setEditandoId(null);
+  };
+
+  const handleEliminarCategoria = (id: number) => {
+    setCategorias((categorias) =>
+      categorias.filter((categoria) => categoria.id !== id)
+    );
+    setMensaje("Categoría eliminada con éxito.");
   };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Gestionar Categorías</h1>
-
       <form onSubmit={handleSubmit} className={styles.form}>
         <label>
           Nombre:
@@ -102,12 +101,11 @@ function CrearCategoria() {
           />
         </label>
         <Button
-          text={editandoId ? "Guardar Cambios" : "Añadir Categoría"}
+          text="Añadir Categoría"
           type="submit"
           className={styles.button}
         />
       </form>
-
       {mensaje && (
         <p
           className={`${styles.message} ${
@@ -117,12 +115,14 @@ function CrearCategoria() {
           {mensaje}
         </p>
       )}
-
       <h2 className={styles.title}>Lista de Categorías</h2>
       <CategoriaList
         categorias={categorias}
+        editandoId={editandoId}
         onEdit={handleEdit}
-        onDelete={handleDelete}
+        onCategoriaEditada={handleCategoriaEditada}
+        onCancelar={() => setEditandoId(null)}
+        onEliminar={handleEliminarCategoria}
       />
       <Button
         text="Volver"

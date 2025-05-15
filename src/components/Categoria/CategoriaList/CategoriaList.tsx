@@ -1,36 +1,57 @@
-import { Categoria } from "../../../utils/Categoria";
+import EditarCategoria from "../EditarCategoria/EditarCategoria";
+import EliminarCategoria from "../EliminarCategoria/EliminarCategoria";
+import Button from "../../Button/Button";
 import styles from "../Categoria.module.css";
+import { Categoria } from "../../../utils/Categoria";
 
 interface CategoriaListProps {
   categorias: Categoria[];
+  editandoId: number | null;
   onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
+  onCategoriaEditada: (id: number, nuevoNombre: string) => void;
+  onCancelar: () => void;
+  onEliminar: (id: number) => void;
 }
 
-function CategoriaList({ categorias, onEdit, onDelete }: CategoriaListProps) {
-  return (
-    <ul className={styles.categoryList}>
-      {categorias.map((categoria) => (
-        <li key={categoria.id} className={styles.categoryItem}>
-          <span className={styles.categoryName}>{categoria.nombre}</span>
-          <div className={styles.buttonGroup}>
-            <button
-              onClick={() => onEdit(categoria.id)}
-              className={`${styles.button} ${styles.edit}`}
-            >
-              Editar
-            </button>
-            <button
-              onClick={() => onDelete(categoria.id)}
-              className={`${styles.button} ${styles.delete}`}
-            >
-              Eliminar
-            </button>
-          </div>
-        </li>
-      ))}
-    </ul>
-  );
-}
+const CategoriaList = ({
+  categorias,
+  editandoId,
+  onEdit,
+  onCategoriaEditada,
+  onCancelar,
+  onEliminar,
+}: CategoriaListProps) => (
+  <ul className={styles.categoriaList}>
+    {categorias.map((categoria) => (
+      <li key={categoria.id} className={styles.categoriaItem}>
+        <span className={styles.categoriaName}>{categoria.nombre}</span>
+        <div className={styles.buttonGroup}>
+          {editandoId === categoria.id ? (
+            <EditarCategoria
+              id={categoria.id}
+              nombreInicial={categoria.nombre}
+              onCategoriaEditada={(nuevoNombre) =>
+                onCategoriaEditada(categoria.id, nuevoNombre)
+              }
+              onCancelar={onCancelar}
+            />
+          ) : (
+            <>
+              <Button
+                text="Editar"
+                onClick={() => onEdit(categoria.id)}
+                className={styles.button}
+              />
+              <EliminarCategoria
+                id={categoria.id}
+                onCategoriaEliminada={() => onEliminar(categoria.id)}
+              />
+            </>
+          )}
+        </div>
+      </li>
+    ))}
+  </ul>
+);
 
 export default CategoriaList;

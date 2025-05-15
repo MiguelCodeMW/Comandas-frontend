@@ -1,33 +1,27 @@
 import { useState } from "react";
-import api from "../../../api/axio";
-import { ROUTES } from "../../../utils/Constants/routes";
-import styles from "../Categoria.module.css"; // Importa el archivo CSS centralizado
+import styles from "../Categoria.module.css";
 
 interface EditarCategoriaProps {
   id: number;
   nombreInicial: string;
-  onCategoriaEditada: () => void;
+  onCategoriaEditada: (nuevoNombre: string) => void;
+  onCancelar: () => void;
 }
 
 function EditarCategoria({
-  id,
   nombreInicial,
   onCategoriaEditada,
+  onCancelar,
 }: EditarCategoriaProps) {
   const [nombre, setNombre] = useState<string>(nombreInicial);
   const [mensaje, setMensaje] = useState<string | null>(null);
 
-  const handleEdit = async () => {
-    try {
-      await api.put(ROUTES.CATEGORY_DETAIL.replace(":id", id.toString()), {
-        nombre,
-      });
-      setMensaje("Categoría actualizada con éxito.");
-      onCategoriaEditada();
-    } catch (error) {
-      setMensaje("Error al actualizar la categoría. Inténtalo de nuevo.");
-      console.error("Error al actualizar la categoría:", error);
+  const handleEdit = () => {
+    if (!nombre.trim()) {
+      setMensaje("El nombre no puede estar vacío.");
+      return;
     }
+    onCategoriaEditada(nombre);
   };
 
   return (
@@ -43,9 +37,16 @@ function EditarCategoria({
       <div className={styles.buttonGroup}>
         <button
           onClick={handleEdit}
-          className={[styles.button, styles.save].join(" ")} // Concatenamos las clases correctamente
+          className={[styles.button, styles.save].join(" ")}
         >
           Guardar
+        </button>
+        <button
+          onClick={onCancelar}
+          className={[styles.button, styles.cancel].join(" ")}
+          type="button"
+        >
+          Cancelar
         </button>
       </div>
       {mensaje && (
