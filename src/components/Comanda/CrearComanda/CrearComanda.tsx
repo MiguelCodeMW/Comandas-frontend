@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import api from "../../../api/axio";
 import Button from "../../Button/Button";
 import ProductoSelectorList from "../../Producto/ProductoSelectorList/ProductoSelectorList";
+import { useNavigate } from "react-router-dom";
 
 interface Producto {
   id: number;
@@ -22,6 +23,7 @@ const CrearComanda = () => {
     { id: number; nombre: string; precio: number; cantidad: number }[]
   >([]);
   const [userId, setUserId] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,6 +65,20 @@ const CrearComanda = () => {
     });
   };
 
+  const handleAumentarCantidad = (id: number) => {
+    setProductosSeleccionados((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, cantidad: p.cantidad + 1 } : p))
+    );
+  };
+
+  const handleDisminuirCantidad = (id: number) => {
+    setProductosSeleccionados((prev) =>
+      prev
+        .map((p) => (p.id === id ? { ...p, cantidad: p.cantidad - 1 } : p))
+        .filter((p) => p.cantidad > 0)
+    );
+  };
+
   const handleFinalizarComanda = async () => {
     if (!userId) {
       alert("No se pudo obtener el ID del usuario. Por favor, inicia sesión.");
@@ -81,6 +97,7 @@ const CrearComanda = () => {
       });
       alert("Comanda creada con éxito");
       setProductosSeleccionados([]);
+      navigate("/dashboard"); // <-- Redirige al dashboard
     } catch (error) {
       console.error("Error al crear la comanda:", error);
       alert("Error al crear la comanda. Inténtalo de nuevo.");
@@ -109,6 +126,12 @@ const CrearComanda = () => {
           <li key={index}>
             {producto.nombre} - Cantidad: {producto.cantidad} - Precio Total: $
             {(producto.precio * producto.cantidad).toFixed(2)}
+            <button onClick={() => handleAumentarCantidad(producto.id)}>
+              +
+            </button>
+            <button onClick={() => handleDisminuirCantidad(producto.id)}>
+              −
+            </button>
           </li>
         ))}
       </ul>
