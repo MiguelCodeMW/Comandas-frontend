@@ -103,7 +103,7 @@ function CrearCategoria() {
         <Button
           text="Añadir Categoría"
           type="submit"
-          className={styles.button}
+          className={[styles.button, styles.save].join(" ")}
         />
       </form>
       {mensaje && (

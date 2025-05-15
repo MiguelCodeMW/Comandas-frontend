@@ -40,7 +40,7 @@ const CategoriaList = ({
               <Button
                 text="Editar"
                 onClick={() => onEdit(categoria.id)}
-                className={styles.button}
+                className={[styles.button, styles.edit].join(" ")}
               />
               <EliminarCategoria
                 id={categoria.id}
