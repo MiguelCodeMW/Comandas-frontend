@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../../api/axio";
+import styles from "./ComandaDetalle.module.css";
 
 interface Producto {
   id: number;
@@ -27,6 +28,7 @@ function ComandaDetails() {
   const [comanda, setComanda] = useState<Comanda | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [mensaje, setMensaje] = useState<string | null>(null); // Mensaje de éxito o error
 
   useEffect(() => {
     async function fetchComandaDetails() {
@@ -41,6 +43,18 @@ function ComandaDetails() {
     }
     fetchComandaDetails();
   }, [id]);
+
+  async function handlePagarComanda() {
+    if (!id) return;
+
+    try {
+      await api.put(`/comandas/${id}/pagar`); // Endpoint para pagar la comanda
+      setComanda({ ...comanda!, estado: "cerrada" }); // Actualiza el estado de la comanda a "cerrada"
+      setMensaje("La comanda ha sido pagada con éxito.");
+    } catch (err: any) {
+      setMensaje(err.message || "Error al pagar la comanda.");
+    }
+  }
 
   if (loading) {
     return (
@@ -61,27 +75,41 @@ function ComandaDetails() {
   }
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Detalles de la Comanda #{comanda.id}</h1>
-      <p>Estado: {comanda.estado}</p>
-      <p>Fecha: {new Date(comanda.fecha).toLocaleString()}</p>
-      <h2>Detalles:</h2>
+    <div className={styles.comandaDetalleContainer}>
+      <h1 className={styles.comandaDetalleTitulo}>
+        Detalles de la Comanda #{comanda.id}
+      </h1>
+      <p className={styles.comandaDetalleInfo}>Estado: {comanda.estado}</p>
+      <p className={styles.comandaDetalleInfo}>
+        Fecha: {new Date(comanda.fecha).toLocaleString()}
+      </p>
+      <h2 className={styles.detallesTitulo}>Detalles:</h2>
       {comanda.detalles.length === 0 ? (
-        <p>No hay detalles para esta comanda.</p>
+        <p className={styles.message}>No hay detalles para esta comanda.</p>
       ) : (
-        <ul>
+        <ul className={styles.detallesLista}>
           {comanda.detalles.map((detalle) => (
-            <li key={detalle.id}>
-              <p>Producto: {detalle.producto.nombre}</p>
-              <p>Cantidad: {detalle.cantidad}</p>
-              <p>Precio unitario: ${detalle.producto.precio.toFixed(2)}</p>
-              <p>
+            <li key={detalle.id} className={styles.detalleItem}>
+              <p className={styles.detalleInfo}>
+                Producto: {detalle.producto.nombre}
+              </p>
+              <p className={styles.detalleInfo}>Cantidad: {detalle.cantidad}</p>
+              <p className={styles.detalleInfo}>
+                Precio unitario: ${detalle.producto.precio.toFixed(2)}
+              </p>
+              <p className={styles.detalleTotal}>
                 Total: $
                 {(detalle.cantidad * detalle.producto.precio).toFixed(2)}
               </p>
             </li>
           ))}
         </ul>
+      )}
+      {mensaje && <p className={styles.message}>{mensaje}</p>}
+      {comanda.estado === "abierta" && (
+        <button className={styles.pagarButton} onClick={handlePagarComanda}>
+          Pagar Comanda
+        </button>
       )}
     </div>
   );
