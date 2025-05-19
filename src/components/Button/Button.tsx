@@ -2,11 +2,12 @@ import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 type ButtonProps = {
-  text: string; // Texto del botón
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void | Promise<void>; // Permite funciones síncronas o asíncronas
-  navigateTo?: string; // Ruta opcional para redirigir
+  text: string;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
+  navigateTo?: string;
   className?: string;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean; // <-- Ya está aquí
 };
 
 function Button({
@@ -20,12 +21,12 @@ function Button({
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     if (onClick) {
-      const result = onClick(e); // Ejecuta la función onClick
+      const result = onClick(e);
       if (result instanceof Promise) {
-        result.catch((err) => console.error("Error en onClick:", err)); // Maneja errores en funciones asíncronas
+        result.catch((err) => console.error("Error en onClick:", err));
       }
     } else if (navigateTo) {
-      navigate(navigateTo); // Navega a la ruta especificada
+      navigate(navigateTo);
     }
   };
 

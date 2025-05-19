@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../../../api/axio";
+import Button from "../../Button/Button";
 import styles from "./ComandaDetalle.module.css";
 
 interface Producto {
@@ -11,7 +12,7 @@ interface Producto {
 
 interface ComandaDetalle {
   id: number;
-  producto: Producto; // Relación con el producto
+  producto: Producto;
   cantidad: number;
 }
 
@@ -24,52 +25,58 @@ interface Comanda {
 }
 
 function ComandaDetails() {
-  const { id } = useParams<{ id: string }>(); // Obtiene el ID de la comanda desde la URL
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [comanda, setComanda] = useState<Comanda | null>(null);
+  const [mensaje, setMensaje] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [mensaje, setMensaje] = useState<string | null>(null); // Mensaje de éxito o error
 
   useEffect(() => {
-    async function fetchComandaDetails() {
+    const fetchComandaDetails = async () => {
       try {
-        const res = await api.get(`/comandas/${id}`); // Endpoint para obtener los detalles de la comanda
+        const res = await api.get(`/comandas/${id}`);
         setComanda(res.data);
       } catch (err: any) {
         setError(err.message || "Error al cargar los detalles de la comanda");
       } finally {
         setLoading(false);
       }
-    }
+    };
     fetchComandaDetails();
   }, [id]);
 
-  async function handlePagarComanda() {
-    if (!id) return;
+  const handleEditarComanda = () => {
+    navigate(`/comandas/crear?id=${id}`);
+  };
 
+  const handlePagarComanda = async () => {
     try {
-      await api.put(`/comandas/${id}/pagar`); // Endpoint para pagar la comanda
-      setComanda({ ...comanda!, estado: "cerrada" }); // Actualiza el estado de la comanda a "cerrada"
-      setMensaje("La comanda ha sido pagada con éxito.");
+      await api.put(`/comandas/${id}/pagar`);
+      setMensaje("¡Comanda pagada con éxito!");
+      // Opcional: recargar los datos para actualizar el estado
+      const res = await api.get(`/comandas/${id}`);
+      setComanda(res.data);
     } catch (err: any) {
-      setMensaje(err.message || "Error al pagar la comanda.");
+      setMensaje(
+        err.response?.data?.message ||
+          "Error al pagar la comanda. Inténtalo de nuevo."
+      );
     }
-  }
+  };
 
   if (loading) {
     return (
-      <div style={{ padding: "2rem" }}>Cargando detalles de la comanda...</div>
+      <div className={styles.message}>Cargando detalles de la comanda...</div>
     );
   }
 
-  if (error) {
-    return <div style={{ padding: "2rem" }}>Error: {error}</div>;
-  }
-
-  if (!comanda) {
+  if (error || !comanda) {
     return (
       <div style={{ padding: "2rem" }}>
-        No se encontraron detalles para esta comanda.
+        {error
+          ? `Error: ${error}`
+          : "No se encontraron detalles para esta comanda."}
       </div>
     );
   }
@@ -95,9 +102,9 @@ function ComandaDetails() {
               </p>
               <p className={styles.detalleInfo}>Cantidad: {detalle.cantidad}</p>
               <p className={styles.detalleInfo}>
-                Precio unitario: ${detalle.producto.precio.toFixed(2)}
+                Precio Unitario: ${detalle.producto.precio.toFixed(2)}
               </p>
-              <p className={styles.detalleTotal}>
+              <p className={styles.detalleInfo}>
                 Total: $
                 {(detalle.cantidad * detalle.producto.precio).toFixed(2)}
               </p>
@@ -105,12 +112,21 @@ function ComandaDetails() {
           ))}
         </ul>
       )}
+      <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
+        <Button
+          text="Editar Comanda"
+          onClick={handleEditarComanda}
+          className={styles.editarButton}
+        />
+        {comanda.estado !== "cerrada" && (
+          <Button
+            text="Pagar Comanda"
+            onClick={handlePagarComanda}
+            className={styles.pagarButton}
+          />
+        )}
+      </div>
       {mensaje && <p className={styles.message}>{mensaje}</p>}
-      {comanda.estado === "abierta" && (
-        <button className={styles.pagarButton} onClick={handlePagarComanda}>
-          Pagar Comanda
-        </button>
-      )}
     </div>
   );
 }
