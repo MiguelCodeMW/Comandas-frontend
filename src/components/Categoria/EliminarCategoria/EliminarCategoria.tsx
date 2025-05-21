@@ -1,6 +1,7 @@
 import api from "../../../api/axio";
 import { ROUTES } from "../../../utils/Constants/routes";
 import styles from "../Categoria.module.css";
+import { NAMES } from "../../../utils/Constants/text";
 
 interface EliminarCategoriaProps {
   id: number;
@@ -12,17 +13,15 @@ function EliminarCategoria({
   onCategoriaEliminada,
 }: EliminarCategoriaProps) {
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que deseas eliminar esta categoría?"
-    );
+    const confirmDelete = window.confirm(NAMES.CATEGORIA_ELIMINAR);
     if (!confirmDelete) return;
 
     try {
       await api.delete(ROUTES.CATEGORY_DETAIL.replace(":id", id.toString()));
       onCategoriaEliminada();
     } catch (error) {
-      alert("Error al eliminar la categoría. Inténtalo de nuevo.");
-      console.error("Error al eliminar la categoría:", error);
+      alert(NAMES.ALERTA_CATEGORIA);
+      console.error(NAMES.ALERTA_CATEGORIA, error);
     }
   };
 

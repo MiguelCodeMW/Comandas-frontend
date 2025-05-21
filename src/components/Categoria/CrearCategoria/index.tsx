@@ -6,6 +6,7 @@ import Button from "../../Button/Button";
 import CategoriaList from "../CategoriaList/CategoriaList";
 import styles from "../Categoria.module.css";
 import { useNavigate } from "react-router-dom";
+import { NAMES } from "../../../utils/Constants/text";
 
 function CrearCategoria() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
@@ -20,7 +21,7 @@ function CrearCategoria() {
         const response = await api.get(ROUTES.CATEGORY);
         setCategorias(response.data);
       } catch (error) {
-        console.error("Error al cargar las categorías:", error);
+        console.error(NAMES.ALERTA_CATEGORIA_CARGAR, error);
       }
     };
 
@@ -32,18 +33,18 @@ function CrearCategoria() {
     setMensaje(null);
 
     if (!nombre.trim()) {
-      setMensaje("El nombre de la categoría no puede estar vacío.");
+      setMensaje(NAMES.ALERTA_CATEGORIA_NOMBRE);
       return;
     }
 
     try {
       const response = await api.post(ROUTES.CATEGORY, { nombre });
       setCategorias((categoria) => [...categoria, response.data.categoria]);
-      setMensaje("Categoría creada con éxito.");
+      setMensaje(NAMES.CATEGORIA_EXITOSA);
       setNombre("");
     } catch (error) {
-      setMensaje("Error al guardar la categoría. Inténtalo de nuevo.");
-      console.error("Error al guardar la categoría:", error);
+      setMensaje(NAMES.ALERTA_CATEGORIA_GUARDAR);
+      console.error(NAMES.ALERTA_CATEGORIA_GUARDAR, error);
     }
   };
 
@@ -53,7 +54,7 @@ function CrearCategoria() {
 
   const handleCategoriaEditada = async (id: number, nuevoNombre: string) => {
     if (!nuevoNombre.trim()) {
-      setMensaje("El nombre no puede estar vacío.");
+      setMensaje(NAMES.ALERTA_NOMBRE);
       return;
     }
     try {
@@ -67,13 +68,12 @@ function CrearCategoria() {
             : categoria
         )
       );
-      setMensaje("Categoría actualizada con éxito.");
+      setMensaje(NAMES.CATEGORIA_ACTUALIZADA);
     } catch (error: any) {
       setMensaje(
-        error.response?.data?.message ||
-          "Error al actualizar la categoría. Inténtalo de nuevo."
+        error.response?.data?.message || NAMES.ALERTA_CATEGORIA_ACTUALIZAR
       );
-      console.error("Error al actualizar la categoría:", error);
+      console.error(NAMES.ALERTA_CATEGORIA_ACTUALIZAR, error);
     }
     setEditandoId(null);
   };
@@ -82,7 +82,7 @@ function CrearCategoria() {
     setCategorias((categorias) =>
       categorias.filter((categoria) => categoria.id !== id)
     );
-    setMensaje("Categoría eliminada con éxito.");
+    setMensaje(NAMES.CATEGORIA_ELIMAR_EXISTOSA);
   };
 
   return (
@@ -96,12 +96,12 @@ function CrearCategoria() {
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             className={styles.input}
-            placeholder="Nombre de la categoría"
+            placeholder={NAMES.PLACEHOLDER_NOMBRE}
             required
           />
         </label>
         <Button
-          text="Añadir Categoría"
+          text={NAMES.CATEGORIA_GUARDAR}
           type="submit"
           className={[styles.button, styles.save].join(" ")}
         />

@@ -1,12 +1,7 @@
 import { useState } from "react";
 import styles from "../Categoria.module.css";
-
-interface EditarCategoriaProps {
-  id: number;
-  nombreInicial: string;
-  onCategoriaEditada: (nuevoNombre: string) => void;
-  onCancelar: () => void;
-}
+import { NAMES } from "../../../utils/Constants/text";
+import { EditarCategoriaProps } from "../../../utils/Categoria/EditarCategoriaProps";
 
 function EditarCategoria({
   nombreInicial,
@@ -18,7 +13,7 @@ function EditarCategoria({
 
   const handleEdit = () => {
     if (!nombre.trim()) {
-      setMensaje("El nombre no puede estar vacío.");
+      setMensaje(NAMES.ALERTA_NOMBRE);
       return;
     }
     onCategoriaEditada(nombre);
@@ -31,7 +26,7 @@ function EditarCategoria({
         type="text"
         value={nombre}
         onChange={(e) => setNombre(e.target.value)}
-        placeholder="Nuevo nombre de la categoría"
+        placeholder={NAMES.PLACEHOLDER_NOMBRE}
         className={styles.input}
       />
       <div className={styles.buttonGroup}>
