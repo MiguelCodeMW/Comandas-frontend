@@ -60,4 +60,5 @@ export const NAMES = {
   COMANDA_NO_ENCONTRADA: "Comanda no encontrada.",
 
   ALERTA_CATEGORIA_DUPLICADA: "Ya existe una categoría con este nombre.",
+  ALERTA_PRODUCTO_DUPLICADO: "Ya existe un producto con este nombre.",
 };

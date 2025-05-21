@@ -8,6 +8,7 @@ import styles from "../Producto.module.css";
 import { useNavigate } from "react-router-dom";
 import { ProductoProps } from "../../../utils/Producto/ProductoProps";
 import { Categoria } from "../../../utils/Categoria/CategoriaProps";
+import { NAMES } from "../../../utils/Constants/text";
 
 function CrearProducto() {
   const [productos, setProductos] = useState<ProductoProps[]>([]);
@@ -33,7 +34,7 @@ function CrearProducto() {
         const productosResponse = await api.get(ROUTES.PRODUCT);
         setProductos(productosResponse.data);
       } catch (error) {
-        console.error("Error al cargar los datos:", error);
+        console.error(NAMES.ALERTA_PRODUCTO_CARGAR, error);
       }
     };
 
@@ -44,12 +45,24 @@ function CrearProducto() {
     e.preventDefault();
     setMensaje(null);
 
+    // Validar si el producto ya existe
+    const productoExistente = productos.some(
+      (producto) =>
+        producto.nombre.toLowerCase() ===
+        nuevoProducto.nombre.trim().toLowerCase()
+    );
+
+    if (productoExistente) {
+      setMensaje(NAMES.ALERTA_PRODUCTO_DUPLICADO);
+      return;
+    }
+
     if (
       !nuevoProducto.nombre.trim() ||
       nuevoProducto.precio <= 0 ||
       !nuevoProducto.categoria_id
     ) {
-      setMensaje("Todos los campos son obligatorios.");
+      setMensaje(NAMES.ALERTA_CAMPOS_VACIOS);
       return;
     }
 
@@ -63,11 +76,11 @@ function CrearProducto() {
       };
 
       setProductos((prev) => [...prev, productoCreado]);
-      setMensaje("Producto creado con éxito.");
+      setMensaje(NAMES.PRODUCTO_ACTUALIZADO);
       setNuevoProducto({ id: 0, nombre: "", precio: 0, categoria_id: 0 });
     } catch (error) {
-      setMensaje("Error al guardar el producto. Inténtalo de nuevo.");
-      console.error("Error al guardar el producto:", error);
+      setMensaje(NAMES.ALERTA_PRODUCTO_GUARDAR);
+      console.error(NAMES.ALERTA_PRODUCTO_GUARDAR, error);
     }
   };
 
@@ -84,17 +97,17 @@ function CrearProducto() {
         prod.id === productoEditado.id ? productoEditado : prod
       )
     );
-    setEditandoProducto(null); // <- Se cierra el formulario de edición
-    setMensaje("Producto actualizado con éxito.");
+    setEditandoProducto(null);
+    setMensaje(NAMES.PRODUCTO_ACTUALIZADO);
   };
 
   const handleCancelarEdicion = () => {
-    setEditandoProducto(null); // <- Botón para cancelar
+    setEditandoProducto(null);
   };
 
   const handleDeleteProducto = (id: number) => {
     setProductos((prev) => prev.filter((prod) => prod.id !== id));
-    setMensaje("Producto eliminado con éxito.");
+    setMensaje(NAMES.PRODUCTO_ELIMINAR_EXISTOSA);
   };
 
   return (
@@ -109,7 +122,7 @@ function CrearProducto() {
           categoriaIdInicial={editandoProducto.categoria_id}
           categorias={categorias}
           onProductoEditado={handleProductoEditado}
-          onCancelarEdicion={handleCancelarEdicion} // <- Nuevo
+          onCancelarEdicion={handleCancelarEdicion}
         />
       ) : (
         <>
@@ -122,7 +135,7 @@ function CrearProducto() {
                 onChange={(e) =>
                   setNuevoProducto({ ...nuevoProducto, nombre: e.target.value })
                 }
-                placeholder="Nombre del producto"
+                placeholder={NAMES.PLACEHOLDER_PRODUCTO}
                 className={styles.input}
                 required
               />
@@ -138,7 +151,7 @@ function CrearProducto() {
                     precio: Number(e.target.value),
                   })
                 }
-                placeholder="Precio del producto"
+                placeholder={NAMES.PLACEHOLDER_PRECIO}
                 className={styles.input}
                 required
               />
