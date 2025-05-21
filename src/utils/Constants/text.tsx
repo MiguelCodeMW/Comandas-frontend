@@ -58,4 +58,6 @@ export const NAMES = {
   ALERTA_COMANDA_PAGAR: "Error al pagar la comanda. Inténtalo de nuevo.",
   COMANDA_CARGANDO: "Cargando comanda...",
   COMANDA_NO_ENCONTRADA: "Comanda no encontrada.",
+
+  ALERTA_CATEGORIA_DUPLICADA: "Ya existe una categoría con este nombre.",
 };

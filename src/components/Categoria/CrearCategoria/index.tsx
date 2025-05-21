@@ -32,6 +32,17 @@ function CrearCategoria() {
     e.preventDefault();
     setMensaje(null);
 
+    // Validar si el nombre ya existe
+    const categoriaExistente = categorias.some(
+      (categoria) =>
+        categoria.nombre.toLowerCase() === nombre.trim().toLowerCase()
+    );
+
+    if (categoriaExistente) {
+      setMensaje(NAMES.ALERTA_CATEGORIA_DUPLICADA);
+      return;
+    }
+
     if (!nombre.trim()) {
       setMensaje(NAMES.ALERTA_CATEGORIA_NOMBRE);
       return;
