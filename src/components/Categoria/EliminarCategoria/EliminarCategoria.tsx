@@ -2,11 +2,8 @@ import api from "../../../api/axio";
 import { ROUTES } from "../../../utils/Constants/routes";
 import styles from "../Categoria.module.css";
 import { NAMES } from "../../../utils/Constants/text";
-
-interface EliminarCategoriaProps {
-  id: number;
-  onCategoriaEliminada: () => void;
-}
+import { EliminarCategoriaProps } from "../../../utils/Categoria/EliminarCategoriaProps";
+import Button from "../../Button/Button";
 
 function EliminarCategoria({
   id,
@@ -26,12 +23,11 @@ function EliminarCategoria({
   };
 
   return (
-    <button
+    <Button
+      text={NAMES.ELIMINAR}
       onClick={handleDelete}
       className={[styles.button, styles.delete].join(" ")}
-    >
-      Eliminar
-    </button>
+    />
   );
 }
 

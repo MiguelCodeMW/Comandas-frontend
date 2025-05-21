@@ -6,17 +6,16 @@ import EditarProducto from "../EditarProducto/EditarProducto";
 import ProductoList from "../ProductoList/ProductoList";
 import styles from "../Producto.module.css";
 import { useNavigate } from "react-router-dom";
-import { Producto } from "../../../utils/Producto";
-import { Categoria } from "../../../utils/Categoria";
+import { ProductoProps } from "../../../utils/Producto/ProductoProps";
+import { Categoria } from "../../../utils/Categoria/CategoriaProps";
 
 function CrearProducto() {
-  const [productos, setProductos] = useState<Producto[]>([]);
+  const [productos, setProductos] = useState<ProductoProps[]>([]);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-  const [editandoProducto, setEditandoProducto] = useState<Producto | null>(
-    null
-  );
+  const [editandoProducto, setEditandoProducto] =
+    useState<ProductoProps | null>(null);
   const [mensaje, setMensaje] = useState<string | null>(null);
-  const [nuevoProducto, setNuevoProducto] = useState<Producto>({
+  const [nuevoProducto, setNuevoProducto] = useState<ProductoProps>({
     id: 0,
     nombre: "",
     precio: 0,
@@ -79,7 +78,7 @@ function CrearProducto() {
     }
   };
 
-  const handleProductoEditado = (productoEditado: Producto) => {
+  const handleProductoEditado = (productoEditado: ProductoProps) => {
     setProductos((prev) =>
       prev.map((prod) =>
         prod.id === productoEditado.id ? productoEditado : prod
@@ -197,7 +196,7 @@ function CrearProducto() {
       <Button
         text="Volver"
         onClick={() => navigate(ROUTES.DASHBOARD)}
-        className={styles.dashboardButton}
+        className={styles.button}
       />
     </div>
   );

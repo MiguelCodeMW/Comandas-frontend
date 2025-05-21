@@ -1,9 +1,10 @@
 import { useState } from "react";
 import api from "../../../api/axio";
 import { ROUTES } from "../../../utils/Constants/routes";
-import { EliminarProductoProps } from "../../../utils/EliminarProductoProps";
+import { EliminarProductoProps } from "../../../utils/Producto/EliminarProductoProps";
 import styles from "../Producto.module.css";
 import Button from "../../Button/Button";
+import { NAMES } from "../../../utils/Constants/text";
 
 function EliminarProducto({
   id,
@@ -13,18 +14,16 @@ function EliminarProducto({
   const [mensaje, setMensaje] = useState<string | null>(null);
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que deseas eliminar este producto?"
-    );
+    const confirmDelete = window.confirm(NAMES.PRODUCTO_ELIMINAR);
     if (!confirmDelete) return;
 
     try {
       await api.delete(ROUTES.PRODUCT_DETAIL.replace(":id", id.toString()));
-      setMensaje("Producto eliminado con éxito.");
+      setMensaje(NAMES.PRODUCTO_ELIMINAR_EXISTOSA);
       onProductoEliminado(id);
     } catch (error) {
-      setMensaje("Error al eliminar el producto. Inténtalo de nuevo.");
-      console.error("Error al eliminar el producto:", error);
+      setMensaje(NAMES.ALERTA_PRODUCTO_ELIMINAR);
+      console.error(NAMES.ALERTA_PRODUCTO_ELIMINAR, error);
     }
   };
 

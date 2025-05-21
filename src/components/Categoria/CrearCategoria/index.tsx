@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../../../api/axio";
-import { Categoria } from "../../../utils/Categoria";
+import { Categoria } from "../../../utils/Categoria/CategoriaProps";
 import { ROUTES } from "../../../utils/Constants/routes";
 import Button from "../../Button/Button";
 import CategoriaList from "../CategoriaList/CategoriaList";

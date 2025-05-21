@@ -1,4 +1,4 @@
-import { Producto } from "./Producto";
+import { Producto } from "../Producto";
 
 export type EditarProductoProps = {
   id: number;

@@ -1,4 +1,4 @@
-import { Categoria } from "../../utils/Categoria";
+import { Categoria } from "./CategoriaProps";
 
 export type CategoriaListProps = {
   categorias: Categoria[];

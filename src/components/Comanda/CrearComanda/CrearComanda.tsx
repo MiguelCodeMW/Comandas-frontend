@@ -4,22 +4,14 @@ import api from "../../../api/axio";
 import Button from "../../Button/Button";
 import ProductoSelectorList from "../../Producto/ProductoSelectorList/ProductoSelectorList";
 import styles from "../Comandas.module.css";
+import { ProductoProps } from "../../../utils/Producto/ProductoProps";
+import { Categoria } from "../../../utils/Categoria/CategoriaProps";
+import { NAMES } from "../../../utils/Constants/text";
+import { ROUTES } from "../../../utils/Constants/routes";
 
-interface Producto {
-  id: number;
-  nombre: string;
-  precio: number;
-  categoria_id: number;
-}
-
-interface Categoria {
-  id: number;
-  nombre: string;
-}
-
-const CrearComanda = () => {
+function CrearComanda() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-  const [productos, setProductos] = useState<Producto[]>([]);
+  const [productos, setProductos] = useState<ProductoProps[]>([]);
   const [productosSeleccionados, setProductosSeleccionados] = useState<
     { id: number; nombre: string; precio: number; cantidad: number }[]
   >([]);
@@ -31,18 +23,20 @@ const CrearComanda = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userResponse = await api.get("/user");
+        const userResponse = await api.get(ROUTES.USER);
         setUserId(userResponse.data.id);
 
-        const categoriasResponse = await api.get("/categorias");
+        const categoriasResponse = await api.get(ROUTES.CATEGORY);
         setCategorias(categoriasResponse.data);
 
-        const productosResponse = await api.get("/productos");
+        const productosResponse = await api.get(ROUTES.PRODUCT);
         setProductos(productosResponse.data);
 
         if (id) {
           // Precarga la comanda para edición
-          const comandaResponse = await api.get(`/comandas/${id}`);
+          const comandaResponse = await api.get(
+            ROUTES.COMANDA_DETAIL.replace(":id", id.toString())
+          );
           const comanda = comandaResponse.data;
           setProductosSeleccionados(
             comanda.detalles.map((detalle: any) => ({
@@ -54,14 +48,14 @@ const CrearComanda = () => {
           );
         }
       } catch (error) {
-        console.error("Error al cargar los datos:", error);
+        console.error(NAMES.ERROR_CARGA, error);
       }
     };
 
     fetchData();
   }, [id]);
 
-  const handleSeleccionarProducto = (producto: Producto) => {
+  const handleSeleccionarProducto = (producto: ProductoProps) => {
     setProductosSeleccionados((prev) => {
       const productoExistente = prev.find((p) => p.id === producto.id);
       if (productoExistente) {
@@ -98,7 +92,7 @@ const CrearComanda = () => {
 
   const handleFinalizarComanda = async () => {
     if (!userId) {
-      alert("No se pudo obtener el ID del usuario. Por favor, inicia sesión.");
+      alert(NAMES.ERROR_ID);
       return;
     }
 
@@ -114,28 +108,31 @@ const CrearComanda = () => {
 
       if (id) {
         // Actualizar comanda existente
-        await api.put(`/comandas/${id}`, payload);
-        alert("Comanda actualizada con éxito");
+        await api.put(
+          ROUTES.COMANDA_DETAIL.replace(":id", id.toString()),
+          payload
+        );
+        alert(NAMES.COMANDA_EXITOSA);
       } else {
         // Crear nueva comanda
-        await api.post("/comandas", {
+        await api.post(ROUTES.COMANDA, {
           ...payload,
           fecha: new Date().toISOString(),
         });
-        alert("Comanda creada con éxito");
+        alert(NAMES.COMANDA_EXITOSA);
       }
       setProductosSeleccionados([]);
-      navigate("/dashboard");
+      navigate(ROUTES.DASHBOARD);
     } catch (error) {
-      console.error("Error al guardar la comanda:", error);
-      alert("Error al guardar la comanda. Inténtalo de nuevo.");
+      console.error(NAMES.ALERTA_COMANDA_GUARDAR, error);
+      alert(NAMES.ALERTA_COMANDA_GUARDAR);
     }
   };
 
   return (
     <div className={styles.comandaContainer}>
       <h1 className={styles.titulo}>
-        {id ? "Editar Comanda" : "Crear Comanda"}
+        {id ? NAMES.ID_COMANDA_EDITAR : NAMES.ID_COMANDA_CREAR}
       </h1>
 
       <div>
@@ -184,13 +181,13 @@ const CrearComanda = () => {
 
       <div className={styles.finalizar}>
         <Button
-          text={id ? "Actualizar Comanda" : "Finalizar Comanda"}
+          text={id ? NAMES.ID_COMANDA_ACTUALIZAR : NAMES.ID_COMANDA_FINALIZAR}
           onClick={handleFinalizarComanda}
           className={styles.botonFinalizar}
         />
       </div>
     </div>
   );
-};
+}
 
 export default CrearComanda;

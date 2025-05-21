@@ -1,5 +1,6 @@
 export const ROUTES = {
   LOGIN: "/login",
+  USER: "/user",
   REGISTER: "/register",
   DASHBOARD: "/dashboard",
   CREATE_USER: "/create",
@@ -10,5 +11,6 @@ export const ROUTES = {
   CATEGORY_DETAIL: "/categorias/:id",
   PRODUCT: "/productos",
   PRODUCT_DETAIL: "/productos/:id",
+  COMANDA: "/comandas",
   COMANDA_DETAIL: "/comandas/:id",
 };

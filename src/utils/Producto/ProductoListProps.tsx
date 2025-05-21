@@ -1,8 +1,8 @@
-import { Categoria } from "./Categoria";
-import { Producto } from "./Producto";
+import { Categoria } from "../Categoria/CategoriaProps";
+import { ProductoProps } from "./ProductoProps";
 
 export type ProductoListProps = {
-  productos: Producto[];
+  productos: ProductoProps[];
   categorias: Categoria[];
   onEditProducto: (id: number) => void;
   onDeleteProducto: (id: number) => void;

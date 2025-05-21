@@ -1,16 +1,5 @@
 import styles from "../../Comanda/Comandas.module.css";
-
-interface Producto {
-  id: number;
-  nombre: string;
-  precio: number;
-  categoria_id: number;
-}
-
-interface ProductoSelectorListProps {
-  productos: Producto[];
-  onProductoClick: (producto: Producto) => void;
-}
+import { ProductoSelectorListProps } from "../../../utils/Producto/ProductoSelectorListProps";
 
 function ProductoSelectorList({
   productos,

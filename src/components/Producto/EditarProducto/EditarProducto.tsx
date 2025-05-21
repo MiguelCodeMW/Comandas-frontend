@@ -2,13 +2,15 @@ import { useState } from "react";
 import api from "../../../api/axio";
 import { ROUTES } from "../../../utils/Constants/routes";
 import styles from "../Producto.module.css";
-import { Producto } from "../../../utils/Producto";
-import { EditarProductoProps } from "../../../utils/EditarProductoProps";
+import { ProductoProps } from "../../../utils/Producto/ProductoProps";
+import { EditarProductoProps } from "../../../utils/Producto/EditarProductoProps";
 import Button from "../../Button/Button";
+import { NAMES } from "../../../utils/Constants/text";
+
 function EditarProducto(
   props: EditarProductoProps & { onCancelarEdicion: () => void }
 ) {
-  const [producto, setProducto] = useState<Producto>({
+  const [producto, setProducto] = useState<ProductoProps>({
     id: props.id,
     nombre: props.nombreInicial,
     precio: props.precioInicial,
@@ -24,7 +26,7 @@ function EditarProducto(
       producto.precio <= 0 ||
       !producto.categoria_id
     ) {
-      setMensaje("Todos los campos son obligatorios.");
+      setMensaje(NAMES.ALERTA_CAMPOS_VACIOS);
       return;
     }
 
@@ -33,11 +35,11 @@ function EditarProducto(
         ROUTES.PRODUCT_DETAIL.replace(":id", producto.id.toString()),
         producto
       );
-      setMensaje("Producto actualizado con éxito.");
+      setMensaje(NAMES.PRODUCTO_ACTUALIZADO);
       props.onProductoEditado(producto);
     } catch (error) {
-      setMensaje("Error al actualizar el producto. Inténtalo de nuevo.");
-      console.error("Error al actualizar el producto:", error);
+      setMensaje(NAMES.ALERTA_PRODUCTO_ACTUALIZAR);
+      console.error(NAMES.ALERTA_PRODUCTO_ACTUALIZAR, error);
     }
   };
 
@@ -49,7 +51,7 @@ function EditarProducto(
         type="text"
         value={producto.nombre}
         onChange={(e) => setProducto({ ...producto, nombre: e.target.value })}
-        placeholder="Nuevo nombre del producto"
+        placeholder={NAMES.PLACEHOLDER_PRODUCTO}
         className={styles.input}
       />
       <input
@@ -58,7 +60,7 @@ function EditarProducto(
         onChange={(e) =>
           setProducto({ ...producto, precio: Number(e.target.value) })
         }
-        placeholder="Nuevo precio del producto"
+        placeholder={NAMES.PLACEHOLDER_PRECIO}
         className={styles.input}
       />
       <select
@@ -81,12 +83,12 @@ function EditarProducto(
       <div className={styles.buttonGroup}>
         <Button
           onClick={handleEdit}
-          text="Guardar"
+          text={NAMES.GUARDAR}
           className={[styles.button, styles.save].join(" ")} // Aplica las clases necesarias
         />
         <Button
           onClick={props.onCancelarEdicion}
-          text="Cancelar"
+          text={NAMES.CANCELAR}
           className={[styles.button, styles.cancel].join(" ")} // Aplica las clases necesarias
         />
       </div>

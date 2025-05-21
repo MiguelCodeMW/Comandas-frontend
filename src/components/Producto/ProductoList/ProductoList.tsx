@@ -1,7 +1,8 @@
 import styles from "../Producto.module.css";
 import EliminarProducto from "../EliminarProducto/EliminarProducto";
-import { ProductoListProps } from "../../../utils/ProductoListProps";
+import { ProductoListProps } from "../../../utils/Producto/ProductoListProps";
 import Button from "../../Button/Button";
+import { NAMES } from "../../../utils/Constants/text";
 
 function ProductoList({
   productos,
@@ -10,7 +11,7 @@ function ProductoList({
   onDeleteProducto,
 }: ProductoListProps) {
   return productos.length === 0 ? (
-    <p className={styles.message}>No hay productos disponibles.</p>
+    <p className={styles.message}>{NAMES.PRODUCTOS_NO_DISPONIBLES}</p>
   ) : (
     <ul className={styles.productList}>
       {productos.map((producto) => (
@@ -25,14 +26,14 @@ function ProductoList({
           </span>
           <div className={styles.buttonGroup}>
             <Button
-              text="Editar"
+              text={NAMES.EDITAR}
               onClick={() => onEditProducto(producto.id)}
-              className={[styles.button, styles.edit].join(" ")} // Concatenamos las clases correctamente
+              className={[styles.button, styles.edit].join(" ")}
             />
             <EliminarProducto
               id={producto.id}
               onProductoEliminado={onDeleteProducto}
-              className={styles.button} // Aseguramos que use los mismos estilos base
+              className={styles.button}
             />
           </div>
         </li>
