@@ -46,4 +46,16 @@ export const NAMES = {
   ID_COMANDA_EDITAR: "Editar Comanda",
   ID_COMANDA_ACTUALIZAR: "Actualizar Comanda",
   ID_COMANDA_FINALIZAR: "Finalizar Comanda",
+
+  DETALLES_TITULO: "Detalles:",
+  DETALLES_NO_DISPONIBLES: "No hay detalles para esta comanda.",
+  DETALLES_PRODUCTO: "Producto:",
+  DETALLES_CANTIDAD: "Cantidad:",
+  DETALLES_PRECIO_UNITARIO: "Precio Unitario:",
+  DETALLES_TOTAL: "Total:",
+  COMANDA_PAGAR: "Pagar Comanda",
+  COMANDA_PAGADA_EXITOSA: "¡Comanda pagada con éxito!",
+  ALERTA_COMANDA_PAGAR: "Error al pagar la comanda. Inténtalo de nuevo.",
+  COMANDA_CARGANDO: "Cargando comanda...",
+  COMANDA_NO_ENCONTRADA: "Comanda no encontrada.",
 };
