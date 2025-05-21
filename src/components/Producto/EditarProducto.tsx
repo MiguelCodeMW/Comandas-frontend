@@ -1,11 +1,11 @@
 import { useState } from "react";
-import api from "../../../api/axio";
-import { ROUTES } from "../../../utils/Constants/routes";
-import styles from "../Producto.module.css";
-import { ProductoProps } from "../../../utils/Producto/ProductoProps";
-import { EditarProductoProps } from "../../../utils/Producto/EditarProductoProps";
-import Button from "../../Button/Button";
-import { NAMES } from "../../../utils/Constants/text";
+import api from "../../api/axio";
+import { ROUTES } from "../../utils/Constants/routes";
+import styles from "./Producto.module.css";
+import { ProductoProps } from "../../utils/Producto/ProductoProps";
+import { EditarProductoProps } from "../../utils/Producto/EditarProductoProps";
+import Button from "../Button/Button";
+import { NAMES } from "../../utils/Constants/text";
 
 function EditarProducto(
   props: EditarProductoProps & { onCancelarEdicion: () => void }

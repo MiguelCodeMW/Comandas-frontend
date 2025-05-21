@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import api from "../../../api/axio";
-import { Categoria } from "../../../utils/Categoria/CategoriaProps";
-import { ROUTES } from "../../../utils/Constants/routes";
-import Button from "../../Button/Button";
-import CategoriaList from "../CategoriaList/CategoriaList";
-import styles from "../Categoria.module.css";
+import api from "../../api/axio";
+import { Categoria } from "../../utils/Categoria/CategoriaProps";
+import { ROUTES } from "../../utils/Constants/routes";
+import Button from "../Button/Button";
+import CategoriaList from "./CategoriaList";
+import styles from "./Categoria.module.css";
 import { useNavigate } from "react-router-dom";
-import { NAMES } from "../../../utils/Constants/text";
+import { NAMES } from "../../utils/Constants/text";
 
 function CrearCategoria() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);

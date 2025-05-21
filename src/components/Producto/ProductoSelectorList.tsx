@@ -1,5 +1,5 @@
-import styles from "../../Comanda/Comandas.module.css";
-import { ProductoSelectorListProps } from "../../../utils/Producto/ProductoSelectorListProps";
+import styles from "../Comanda/CrearComanda/Comandas.module.css";
+import { ProductoSelectorListProps } from "../../utils/Producto/ProductoSelectorListProps";
 
 function ProductoSelectorList({
   productos,

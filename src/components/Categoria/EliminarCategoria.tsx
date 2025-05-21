@@ -1,9 +1,9 @@
-import api from "../../../api/axio";
-import { ROUTES } from "../../../utils/Constants/routes";
-import styles from "../Categoria.module.css";
-import { NAMES } from "../../../utils/Constants/text";
-import { EliminarCategoriaProps } from "../../../utils/Categoria/EliminarCategoriaProps";
-import Button from "../../Button/Button";
+import api from "../../api/axio";
+import { ROUTES } from "../../utils/Constants/routes";
+import styles from "./Categoria.module.css";
+import { NAMES } from "../../utils/Constants/text";
+import { EliminarCategoriaProps } from "../../utils/Categoria/EliminarCategoriaProps";
+import Button from "../Button/Button";
 
 function EliminarCategoria({
   id,

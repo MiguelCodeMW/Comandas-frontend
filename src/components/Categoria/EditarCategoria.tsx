@@ -1,7 +1,7 @@
 import { useState } from "react";
-import styles from "../Categoria.module.css";
-import { NAMES } from "../../../utils/Constants/text";
-import { EditarCategoriaProps } from "../../../utils/Categoria/EditarCategoriaProps";
+import styles from "./Categoria.module.css";
+import { NAMES } from "../..//utils/Constants/text";
+import { EditarCategoriaProps } from "../../utils/Categoria/EditarCategoriaProps";
 
 function EditarCategoria({
   nombreInicial,

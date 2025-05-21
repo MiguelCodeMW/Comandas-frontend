@@ -1,9 +1,9 @@
-import EditarCategoria from "../EditarCategoria/EditarCategoria";
-import EliminarCategoria from "../EliminarCategoria/EliminarCategoria";
-import Button from "../../Button/Button";
-import styles from "../Categoria.module.css";
-import { CategoriaListProps } from "../../../utils/Categoria/CategoriaListProps";
-import { NAMES } from "../../../utils/Constants/text";
+import EditarCategoria from "./EditarCategoria";
+import EliminarCategoria from "./EliminarCategoria";
+import Button from "../Button/Button";
+import styles from "./Categoria.module.css";
+import { CategoriaListProps } from "../../utils/Categoria/CategoriaListProps";
+import { NAMES } from "../../utils/Constants/text";
 
 function CategoriaList({
   categorias,

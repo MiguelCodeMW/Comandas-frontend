@@ -1,8 +1,8 @@
-import styles from "../Producto.module.css";
-import EliminarProducto from "../EliminarProducto/EliminarProducto";
-import { ProductoListProps } from "../../../utils/Producto/ProductoListProps";
-import Button from "../../Button/Button";
-import { NAMES } from "../../../utils/Constants/text";
+import styles from "./Producto.module.css";
+import EliminarProducto from "./EliminarProducto";
+import { ProductoListProps } from "../../utils/Producto/ProductoListProps";
+import Button from "../Button/Button";
+import { NAMES } from "../../utils/Constants/text";
 
 function ProductoList({
   productos,

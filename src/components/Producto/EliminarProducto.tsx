@@ -1,10 +1,10 @@
 import { useState } from "react";
-import api from "../../../api/axio";
-import { ROUTES } from "../../../utils/Constants/routes";
-import { EliminarProductoProps } from "../../../utils/Producto/EliminarProductoProps";
-import styles from "../Producto.module.css";
-import Button from "../../Button/Button";
-import { NAMES } from "../../../utils/Constants/text";
+import api from "../../api/axio";
+import { ROUTES } from "../../utils/Constants/routes";
+import { EliminarProductoProps } from "../../utils/Producto/EliminarProductoProps";
+import styles from "./Producto.module.css";
+import Button from "../Button/Button";
+import { NAMES } from "../../utils/Constants/text";
 
 function EliminarProducto({
   id,

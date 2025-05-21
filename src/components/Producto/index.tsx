@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import api from "../../../api/axio";
-import { ROUTES } from "../../../utils/Constants/routes";
-import Button from "../../Button/Button";
-import EditarProducto from "../EditarProducto/EditarProducto";
-import ProductoList from "../ProductoList/ProductoList";
-import styles from "../Producto.module.css";
+import api from "../../api/axio";
+import { ROUTES } from "../../utils/Constants/routes";
+import Button from "../Button/Button";
+import EditarProducto from "./EditarProducto";
+import ProductoList from "./ProductoList";
+import styles from "./Producto.module.css";
 import { useNavigate } from "react-router-dom";
-import { ProductoProps } from "../../../utils/Producto/ProductoProps";
-import { Categoria } from "../../../utils/Categoria/CategoriaProps";
-import { NAMES } from "../../../utils/Constants/text";
+import { ProductoProps } from "../../utils/Producto/ProductoProps";
+import { Categoria } from "../../utils/Categoria/CategoriaProps";
+import { NAMES } from "../../utils/Constants/text";
 
 function CrearProducto() {
   const [productos, setProductos] = useState<ProductoProps[]>([]);
