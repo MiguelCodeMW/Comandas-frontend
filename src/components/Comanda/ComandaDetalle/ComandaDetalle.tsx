@@ -92,11 +92,15 @@ function ComandaDetails() {
         </ul>
       )}
       <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
-        <Button
-          text={NAMES.ID_COMANDA_EDITAR}
-          onClick={handleEditarComanda}
-          className={styles.editarButton}
-        />
+        {/* Mostrar el botón de editar solo si la comanda no está cerrada */}
+        {comanda.estado !== "cerrada" && (
+          <Button
+            text={NAMES.ID_COMANDA_EDITAR}
+            onClick={handleEditarComanda}
+            className={styles.editarButton}
+          />
+        )}
+        {/* Mostrar el botón de pagar solo si la comanda no está cerrada */}
         {comanda.estado !== "cerrada" && (
           <Button
             text={NAMES.COMANDA_PAGAR}
