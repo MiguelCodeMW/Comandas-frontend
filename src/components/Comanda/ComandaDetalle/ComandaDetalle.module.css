@@ -136,3 +136,21 @@
 .dashboardButton:hover {
   background: var(--primary-dark);
 }
+
+.borrarButton {
+  padding: 0.45rem 0.85rem;
+  background-color: var(--danger);
+  color: var(--white);
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.borrarButton:hover {
+  background: var(--danger-dark);
+  color: var(--white);
+}
