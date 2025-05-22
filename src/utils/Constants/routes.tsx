@@ -13,4 +13,6 @@ export const ROUTES = {
   PRODUCT_DETAIL: "/productos/:id",
   COMANDA: "/comandas",
   COMANDA_DETAIL: "/comandas/:id",
+  COMANDA_CREAR: "/comandas/crear?id=:id",
+  COMANDA_PAGAR: "/comandas/:id/pagar",
 };

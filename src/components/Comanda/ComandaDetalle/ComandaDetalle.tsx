@@ -31,14 +31,14 @@ function ComandaDetails() {
   }, [id]);
 
   const handleEditarComanda = () => {
-    navigate(`/comandas/crear?id=${id}`);
+    navigate(ROUTES.COMANDA_CREAR.replace(":id", id!));
   };
 
   const handlePagarComanda = async () => {
     try {
-      await api.put(`/comandas/${id}/pagar`);
+      await api.put(ROUTES.COMANDA_PAGAR.replace(":id", id!));
       setMensaje(NAMES.COMANDA_PAGADA_EXITOSA);
-      const res = await api.get(`/comandas/${id}`);
+      const res = await api.get(ROUTES.COMANDA_DETAIL.replace(":id", id!));
       setComanda(res.data);
     } catch (err: any) {
       setMensaje(err.response?.data?.message || NAMES.ALERTA_COMANDA_PAGAR);
