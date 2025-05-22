@@ -6,4 +6,7 @@ export type ComandaProps = {
   estado: string;
   user_id: number;
   detalles: ComandaDetalleProps[];
+  subtotal?: number;
+  iva?: number;
+  total_con_iva?: number;
 };

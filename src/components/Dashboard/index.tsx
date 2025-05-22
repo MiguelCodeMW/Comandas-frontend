@@ -16,8 +16,11 @@
 //   const [comandas, setComandas] = useState<Comanda[]>([]);
 //   const [loading, setLoading] = useState<boolean>(true);
 //   const [error, setError] = useState<string | null>(null);
-//   const [mostrarPagadas, setMostrarPagadas] = useState<boolean>(false); // Estado para alternar entre abiertas y cerradas
+//   const [mostrarPagadas, setMostrarPagadas] = useState<boolean>(false);
 //   const navigate = useNavigate();
+
+//   // Obtener usuario del localStorage (ajusta según tu lógica de autenticación)
+//   const user = JSON.parse(localStorage.getItem("user") || "null");
 
 //   useEffect(() => {
 //     async function fetchComandas() {
@@ -35,10 +38,10 @@
 
 //   const handleLogout = () => {
 //     localStorage.removeItem("token");
+//     localStorage.removeItem("user");
 //     navigate(ROUTES.LOGIN);
 //   };
 
-//   // Filtrar comandas según el estado
 //   const comandasFiltradas = mostrarPagadas
 //     ? comandas.filter((comanda) => comanda.estado === "cerrada")
 //     : comandas.filter((comanda) => comanda.estado === "abierta");
@@ -56,18 +59,18 @@
 //       <div className={styles.header}>
 //         <h1>Comandas</h1>
 //         <div className={styles.headerButtons}>
-//          {user?.role === "admin" && (
-//   <>
-//     <Button
-//       text="Añadir Categoría"
-//       onClick={() => navigate(ROUTES.CREATE_CATEGORY)}
-//     />
-//     <Button
-//       text="Gestionar Productos"
-//       onClick={() => navigate(ROUTES.CREATE_PRODUCT)}
-//     />
-//   </>
-// )}
+//           {user?.role === "admin" && (
+//             <>
+//               <Button
+//                 text="Añadir Categoría"
+//                 onClick={() => navigate(ROUTES.CREATE_CATEGORY)}
+//               />
+//               <Button
+//                 text="Gestionar Productos"
+//                 onClick={() => navigate(ROUTES.CREATE_PRODUCT)}
+//               />
+//             </>
+//           )}
 //           <Button
 //             text="Crear Comanda"
 //             onClick={() => navigate(ROUTES.CREATE_COMANDA)}
@@ -91,7 +94,7 @@
 //           {comandasFiltradas.map((comanda) => (
 //             <li
 //               key={comanda.id}
-//               className={`${styles.item} ${styles[comanda.estado]}`} // Aplica la clase según el estado
+//               className={`${styles.item} ${styles[comanda.estado]}`}
 //               onClick={() =>
 //                 navigate(
 //                   ROUTES.COMANDA_DETAIL.replace(":id", comanda.id.toString())
@@ -118,6 +121,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import { ROUTES } from "../../utils/Constants/routes";
 import styles from "./Dashboard.module.css";
+import ConfigurarIVA from "../ConfigurarIVA/ConfigurarIVA";
 
 interface Comanda {
   id: number;
@@ -131,9 +135,9 @@ function Dashboard() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [mostrarPagadas, setMostrarPagadas] = useState<boolean>(false);
+  const [showModalIva, setShowModalIva] = useState(false);
+  const [iva, setIva] = useState<number | null>(null);
   const navigate = useNavigate();
-
-  // Obtener usuario del localStorage (ajusta según tu lógica de autenticación)
   const user = JSON.parse(localStorage.getItem("user") || "null");
 
   useEffect(() => {
@@ -148,6 +152,9 @@ function Dashboard() {
       }
     }
     fetchComandas();
+    // Cargar IVA guardado
+    const ivaGuardado = localStorage.getItem("iva");
+    setIva(ivaGuardado ? Number(ivaGuardado) : null);
   }, []);
 
   const handleLogout = () => {
@@ -173,7 +180,18 @@ function Dashboard() {
       <div className={styles.header}>
         <h1>Comandas</h1>
         <div className={styles.headerButtons}>
-          {user?.role === "admin" && (
+          {user?.role === "admin" && iva === null && (
+            <>
+              <div className={styles.alert}>
+                Debes configurar el IVA antes de operar.
+              </div>
+              <Button
+                text="Configurar IVA"
+                onClick={() => setShowModalIva(true)}
+              />
+            </>
+          )}
+          {user?.role === "admin" && iva !== null && (
             <>
               <Button
                 text="Añadir Categoría"
@@ -182,6 +200,10 @@ function Dashboard() {
               <Button
                 text="Gestionar Productos"
                 onClick={() => navigate(ROUTES.CREATE_PRODUCT)}
+              />
+              <Button
+                text="Configurar IVA"
+                onClick={() => setShowModalIva(true)}
               />
             </>
           )}
@@ -196,6 +218,16 @@ function Dashboard() {
           <Button text="Cerrar Sesión" onClick={handleLogout} />
         </div>
       </div>
+
+      {showModalIva && (
+        <ConfigurarIVA
+          ivaActual={iva}
+          onGuardado={(nuevoIva) => {
+            setIva(nuevoIva);
+            setShowModalIva(false);
+          }}
+        />
+      )}
 
       {comandasFiltradas.length === 0 ? (
         <p className={styles.message}>
