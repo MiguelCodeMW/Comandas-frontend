@@ -1,4 +1,4 @@
-/* ComandaDetalle.module.css */
+/* ComandaDetalle.module.css
 
 .comandaDetalleContainer {
   padding: 1.5rem 2rem;
@@ -43,8 +43,8 @@
   grid-template-columns: repeat(
     auto-fit,
     minmax(250px, 1fr)
-  ); /* Diseño responsivo */
-  gap: 1rem; /* Espacio entre los elementos */
+  );
+  gap: 1rem;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -103,4 +103,143 @@
 .pagarButton:hover {
   background-color: #146c43;
   box-shadow: 0 4px 10px rgba(20, 108, 67, 0.4);
+} */
+
+.comandaDetalleContainer {
+  padding: 2rem;
+  font-family: var(--font);
+  background: var(--white);
+  max-width: 900px;
+  margin: 2rem auto;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+}
+
+.comandaDetalleTitulo {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+  color: #343a40;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.07);
+}
+
+.comandaDetalleInfo {
+  font-size: 1.2rem;
+  color: var(--secondary-dark);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.detallesTitulo {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--secondary-dark);
+  border-left: 5px solid var(--info);
+  padding-left: 0.75rem;
+  text-transform: capitalize;
+}
+
+.detallesLista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detalleItem {
+  background: var(--white);
+  padding: 1rem 1.25rem;
+  border: 1.5px solid #ced4da;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.detalleItem:hover {
+  background-color: #e9f5ff;
+  border-color: var(--primary);
+}
+
+.detalleInfo {
+  font-size: 1.1rem;
+  color: #212529;
+  margin-bottom: 0.5rem;
+}
+
+.detalleTotal {
+  font-weight: 700;
+  color: var(--success);
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.message {
+  font-style: italic;
+  color: var(--secondary);
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.pagarButton {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--success);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.pagarButton:hover {
+  background: var(--success-dark);
+  box-shadow: 0 4px 10px rgba(20, 108, 67, 0.4);
+}
+
+.editarButton {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #212529;
+  background: var(--warning); /* Amarillo */
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.editarButton:hover {
+  background: var(--warning-dark);
+  box-shadow: 0 4px 10px rgba(224, 168, 0, 0.4);
+}
+
+.dashboardButton {
+  padding: 0.45rem 0.85rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dashboardButton {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.dashboardButton:hover {
+  background: var(--primary-dark);
 }

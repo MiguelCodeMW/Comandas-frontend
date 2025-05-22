@@ -92,6 +92,11 @@ function ComandaDetails() {
         </ul>
       )}
       <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
+        <Button
+          text="Volver"
+          onClick={() => navigate(ROUTES.DASHBOARD)}
+          className={styles.dashboardButton}
+        />
         {/* Mostrar el botón de editar solo si la comanda no está cerrada */}
         {comanda.estado !== "cerrada" && (
           <Button

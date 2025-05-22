@@ -2,21 +2,21 @@
   padding: 2rem;
   max-width: 900px;
   margin: 2rem auto;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-family: var(--font);
 }
 
 .title {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: #343a40;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 2rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.07);
 }
 
 .form {
@@ -29,10 +29,11 @@
 
 .input {
   padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: var(--radius);
   border: 1.5px solid #ced4da;
   flex: 1;
   font-size: 1rem;
+  font-family: inherit;
 }
 
 .categoriaList {
@@ -45,20 +46,20 @@
 }
 
 .categoriaItem {
-  background: #ffffff;
+  background: var(--white);
   padding: 1rem 1.25rem;
-  border-radius: 10px;
+  border-radius: var(--radius);
   border: 1.5px solid #dee2e6;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .categoriaItem:hover {
   background-color: #f1f8ff;
-  border-color: #0d6efd;
+  border-color: var(--primary);
 }
 
 .categoriaName {
@@ -68,84 +69,89 @@
   text-transform: capitalize;
 }
 
-.controls {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.button {
-  padding: 0.45rem 0.85rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.save {
-  background-color: #198754;
-  color: white;
-  font-weight: 600;
-  box-shadow: 0 3px 10px rgba(25, 135, 84, 0.4);
-}
-
-.save:hover {
-  background-color: #146c43;
-  box-shadow: 0 5px 14px rgba(20, 108, 67, 0.5);
-}
-
-.cancel {
-  background-color: #6c757d;
-  color: white;
-  font-weight: 600;
-  box-shadow: 0 3px 10px rgba(108, 117, 125, 0.3);
-}
-
-.cancel:hover {
-  background-color: #5a6268;
-  box-shadow: 0 5px 14px rgba(90, 98, 104, 0.5);
-}
-
-.dashboardButton {
-  margin-top: 2rem;
-  background-color: #0d6efd;
-  color: white;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.dashboardButton:hover {
-  background-color: #0b5ed7;
-}
-
+.controls,
 .buttonGroup {
   display: flex;
   gap: 0.5rem;
   justify-content: center;
-  margin-top: 1rem;
   flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.button,
+.save,
+.cancel,
+.edit,
+.delete,
+.dashboardButton {
+  padding: 0.45rem 0.85rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.button,
+.dashboardButton {
+  background: var(--primary);
+  color: var(--white);
+}
+.button:hover,
+.dashboardButton:hover {
+  background: var(--primary-dark);
+}
+
+.save {
+  background: var(--success);
+  color: var(--white);
+}
+.save:hover {
+  background: var(--success-dark);
+}
+
+.cancel {
+  background: var(--secondary);
+  color: var(--white);
+}
+.cancel:hover {
+  background: var(--secondary-dark);
+}
+
+.edit {
+  background: var(--warning);
+  color: #212529;
+}
+.edit:hover {
+  background: var(--warning-dark);
+}
+
+.delete {
+  background: var(--danger);
+  color: var(--white);
+}
+.delete:hover {
+  background: var(--danger-dark);
 }
 
 .success {
-  color: #198754;
+  color: var(--success);
   background: #d1e7dd;
   padding: 0.75rem;
-  border-radius: 8px;
+  border-radius: var(--radius);
   text-align: center;
   margin-bottom: 1rem;
   font-weight: 600;
 }
 
 .error {
-  color: #dc3545;
+  color: var(--danger);
   background: #f8d7da;
   padding: 0.75rem;
-  border-radius: 8px;
+  border-radius: var(--radius);
   text-align: center;
   margin-bottom: 1rem;
   font-weight: 600;
@@ -155,30 +161,6 @@
   text-align: center;
   font-style: italic;
   font-size: 1rem;
-  color: #6c757d;
+  color: var(--secondary);
   margin-top: 1rem;
-}
-
-.edit {
-  background-color: #ffc107;
-  color: #212529;
-  font-weight: 600;
-  box-shadow: 0 3px 10px rgba(255, 193, 7, 0.4);
-}
-
-.edit:hover {
-  background-color: #e0a800;
-  box-shadow: 0 5px 14px rgba(224, 168, 0, 0.5);
-}
-
-.delete {
-  background-color: #dc3545;
-  color: white;
-  font-weight: 600;
-  box-shadow: 0 3px 10px rgba(220, 53, 69, 0.4);
-}
-
-.delete:hover {
-  background-color: #bb2d3b;
-  box-shadow: 0 5px 14px rgba(187, 45, 59, 0.5);
 }

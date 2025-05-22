@@ -1,4 +1,4 @@
-/* Comandas.module.css */
+/* Comandas.module.css
 
 .comandaContainer {
   padding: 1.5rem 2rem;
@@ -169,4 +169,191 @@
   text-align: center;
   margin-top: 1rem;
   font-size: 1rem;
+} */
+
+.comandaContainer {
+  padding: 2rem;
+  font-family: var(--font);
+  background: var(--white);
+  max-width: 900px;
+  margin: 2rem auto;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+}
+
+.comandaTitulo {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+  color: #343a40;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.07);
+}
+
+.categoriaSection {
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 1.5rem;
+}
+
+.categoriaTitulo {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--secondary-dark);
+  border-left: 5px solid var(--info);
+  padding-left: 0.75rem;
+  text-transform: capitalize;
+}
+
+.productosGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.productItem {
+  background-color: #e3f2fd;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  min-width: 120px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary);
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.15);
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+  user-select: none;
+}
+
+.productItem:hover {
+  background-color: #bbdefb;
+  box-shadow: 0 6px 14px rgba(13, 110, 253, 0.3);
+  border-color: var(--primary);
+}
+
+.productName {
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.seleccionadosContainer {
+  margin-top: 3rem;
+  background-color: var(--background);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 10px #e9ecef;
+}
+
+.seleccionadosLista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.seleccionadoItem {
+  background-color: var(--white);
+  padding: 0.75rem 1.25rem;
+  border: 1.5px solid #ced4da;
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.seleccionadoItem:hover {
+  background-color: #e9f5ff;
+  border-color: var(--primary);
+}
+
+.seleccionadoInfo {
+  flex-grow: 1;
+  font-weight: 600;
+  color: #212529;
+  font-size: 1.05rem;
+}
+
+.seleccionadoControles {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.controlBtn {
+  padding: 0.3rem 0.85rem;
+  font-size: 1.1rem;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(13, 110, 253, 0.4);
+  transition: background 0.3s, box-shadow 0.3s;
+  user-select: none;
+}
+.controlBtn:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 5px 12px rgba(8, 66, 152, 0.6);
+}
+
+.finalizarWrapper {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.botonFinalizar {
+  padding: 0.9rem 2rem;
+  font-size: 1.3rem;
+  background: var(--success);
+  border: none;
+  color: var(--white);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(25, 135, 84, 0.5);
+  transition: background 0.3s, box-shadow 0.3s;
+  user-select: none;
+}
+.botonFinalizar:hover {
+  background: var(--success-dark);
+  box-shadow: 0 7px 20px rgba(20, 108, 67, 0.7);
+}
+
+.message {
+  font-style: italic;
+  color: var(--secondary);
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+.dashboardButton {
+  padding: 0.45rem 0.85rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dashboardButton {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.dashboardButton:hover {
+  background: var(--primary-dark);
 }

@@ -185,6 +185,11 @@ function CrearComanda() {
           onClick={handleFinalizarComanda}
           className={styles.botonFinalizar}
         />
+        <Button
+          text="Volver"
+          onClick={() => navigate(ROUTES.DASHBOARD)}
+          className={styles.dashboardButton}
+        />
       </div>
     </div>
   );

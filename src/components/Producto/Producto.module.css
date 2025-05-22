@@ -1,98 +1,4 @@
-/* Contenedor principal */
-.container {
-  max-width: 90%;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* Título */
-.title {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #333;
-}
-
-/* Formulario */
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.input {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 18px;
-}
-
-.select {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 18px;
-  background-color: #fff;
-}
-
-/* Botones */
-.button {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background-color: #2563eb;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: 500;
-  width: 150px; /* Tamaño consistente */
-  text-align: center;
-  font-size: 16px;
-  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
-}
-
-.button:hover {
-  background-color: #1d4ed8;
-}
-
-.save {
-  background-color: #16a34a;
-}
-
-.save:hover {
-  background-color: #15803d;
-}
-
-.cancel {
-  background-color: #6b7280;
-}
-
-.cancel:hover {
-  background-color: #4b5563;
-}
-
-.delete {
-  background-color: #dc2626;
-}
-
-.delete:hover {
-  background-color: #b91c1c;
-}
-
-.edit {
-  background-color: #f59e0b;
-}
-
-.edit:hover {
-  background-color: #d97706;
-}
-
-/* Lista de productos */
+/* Ya existentes */
 .productList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -108,18 +14,27 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  border-radius: 10px;
-  background-color: #f9fafb;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-  transition: background-color 0.3s;
+  border-radius: var(--radius);
+  background: var(--background);
+  box-shadow: var(--shadow);
+  transition: background 0.3s, border-color 0.2s;
   min-height: 120px;
   text-align: center;
+  font-family: var(--font);
+  border: 1px solid transparent;
+}
+
+.productItem:hover {
+  background: #e3f2fd;
+  border-color: var(--primary);
 }
 
 .productName {
   font-weight: 600;
   font-size: 18px;
   margin-bottom: 10px;
+  color: var(--primary-dark);
+  font-family: var(--font);
 }
 
 .buttonGroup {
@@ -128,15 +43,93 @@
   justify-content: center;
 }
 
-/* Mensajes */
 .success {
-  color: green;
+  color: var(--success-dark);
+  background: #d1e7dd;
   text-align: center;
   font-size: 16px;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-family: var(--font);
 }
 
 .error {
-  color: red;
+  color: var(--danger-dark);
+  background: #f8d7da;
   text-align: center;
   font-size: 16px;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-family: var(--font);
+}
+
+/* --- NUEVOS ESTILOS DE BOTONES --- */
+.button,
+.save,
+.cancel,
+.edit,
+.delete,
+.dashboardButton {
+  padding: 0.45rem 0.85rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  font-family: var(--font);
+}
+
+.button,
+.dashboardButton {
+  background: var(--primary);
+  color: var(--white);
+}
+.button:hover,
+.dashboardButton:hover {
+  background: var(--primary-dark);
+}
+
+.save {
+  background: var(--success);
+  color: var(--white);
+}
+.save:hover {
+  background: var(--success-dark);
+}
+
+.cancel {
+  background: var(--secondary);
+  color: var(--white);
+}
+.cancel:hover {
+  background: var(--secondary-dark);
+}
+
+.edit {
+  background: var(--warning);
+  color: #212529;
+}
+.edit:hover {
+  background: var(--warning-dark);
+}
+
+.delete {
+  background: var(--danger);
+  color: var(--white);
+}
+.delete:hover {
+  background: var(--danger-dark);
+}
+
+.message {
+  text-align: center;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--secondary);
+  margin-top: 1rem;
 }
