@@ -37,7 +37,7 @@ function CrearComanda() {
           const comandaResponse = await api.get(
             ROUTES.COMANDA_DETAIL.replace(":id", id.toString())
           );
-          const comanda = comandaResponse.data;
+          const comanda = comandaResponse.data.comanda;
           setProductosSeleccionados(
             comanda.detalles.map((detalle: any) => ({
               id: detalle.producto.id,
