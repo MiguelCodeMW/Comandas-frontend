@@ -227,6 +227,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem; /* Espacio entre productos */
+  list-style: none; /* AÑADIR ESTA LÍNEA */
+  padding: 0; /* También es buena práctica resetear el padding */
+  margin: 0; /* Y el margin */
 }
 
 .productItem {
