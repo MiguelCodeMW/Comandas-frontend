@@ -223,10 +223,12 @@
 }
 
 .productosGrid {
-  /* Lista de productos clickables por categoría */
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem; /* Espacio entre productos */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .productItem {
@@ -394,4 +396,27 @@
 .dashboardButton:hover {
   background: var(--secondary-dark);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.buscadorContainer {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.buscador {
+  width: 100%;
+  max-width: 350px;
+  padding: 0.7rem 1.1rem;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border-color);
+  font-size: 1.1rem;
+  background: var(--light);
+  color: var(--dark);
+  transition: border-color 0.2s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+.buscador:focus {
+  border-color: var(--primary);
+  outline: none;
 }

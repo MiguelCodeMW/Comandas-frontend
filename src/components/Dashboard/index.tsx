@@ -7,6 +7,7 @@ import Button from "../Button/Button";
 import styles from "./Dashboard.module.css";
 import { NAMES } from "../../utils/Constants/text";
 import { ROUTES } from "../../utils/Constants/routes";
+import DashboardComandasList from "./DashboardComandasList";
 
 function Dashboard() {
   const {
@@ -125,34 +126,10 @@ function Dashboard() {
             ? NAMES.DASHBOARD_VER_PAGADAS
             : NAMES.DASHBOARD_VER_PENDIENTES}
         </h2>
-        {comandasFiltradas.length > 0 ? (
-          comandasFiltradas.map((comanda) => (
-            <div
-              key={comanda.id}
-              className={`${styles.item} ${styles[comanda.estado] || ""}`}
-            >
-              <p className={styles.itemTitle}>
-                ID: {comanda.id} - Fecha:{" "}
-                {new Date(comanda.fecha).toLocaleString()}
-              </p>
-              <p className={styles.itemText}>Estado: {comanda.estado}</p>
-              <Button
-                navigateTo={ROUTES.COMANDA_DETAIL.replace(
-                  ":id",
-                  comanda.id.toString()
-                )}
-                text={NAMES.EDITAR}
-                className={styles.headerButton}
-              />
-            </div>
-          ))
-        ) : (
-          <p className={styles.message}>
-            {mostrarPagadas
-              ? NAMES.DASHBOARD_NO_COMANDAS_PAGADAS
-              : NAMES.DASHBOARD_NO_COMANDAS_PENDIENTES}
-          </p>
-        )}
+        <DashboardComandasList
+          comandas={comandasFiltradas}
+          mostrarPagadas={mostrarPagadas}
+        />
       </div>
       {error && comandasFiltradas.length > 0 && (
         <p className={styles.inlineError}>{error}</p>
