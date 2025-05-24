@@ -1,22 +1,73 @@
 .modal {
-  background: #fff;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-  max-width: 350px;
-  margin: 2rem auto;
+  background: var(--white);
+  border-radius: var(--radius-lg); /* Más redondeado */
+  padding: 2.5rem; /* Más padding */
+  box-shadow: var(--shadow-lg); /* Sombra más pronunciada para modales */
+  max-width: 400px; /* Ancho máximo */
+  margin: 3rem auto; /* Centrado con más margen */
   text-align: center;
+  font-family: var(--font);
 }
+.modal h2 {
+  /* Título del modal */
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0 0 1.5rem 0; /* Espacio debajo del título */
+}
+
 .input {
-  margin: 1rem 0;
-  padding: 0.5rem;
-  width: 80%;
-  font-size: 1.1rem;
+  margin: 0 0 1.5rem 0; /* Espacio debajo del input, antes del botón */
+  padding: 0.85rem 1.1rem;
+  width: 100%; /* Ocupa todo el ancho */
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  text-align: center; /* Centrar el número del IVA */
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary), 0.1);
+}
+
 .button {
-  margin-top: 1rem;
+  /* Botón de guardar */
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.1s;
+  width: 100%; /* Ocupa todo el ancho */
 }
+.button:hover {
+  background: var(--primary-dark);
+}
+.button:active {
+  transform: translateY(1px);
+}
+
 .message {
-  margin-top: 1rem;
-  color: green;
+  /* Mensaje de éxito o error */
+  margin-top: 1.5rem; /* Espacio arriba del mensaje */
+  font-size: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+}
+/* Estilos específicos para mensajes de éxito/error si es necesario */
+.message.success {
+  color: var(--success-dark);
+  background: #d1e7dd;
+  border: 1px solid var(--success);
+}
+.message.error {
+  color: var(--danger-dark);
+  background: #f8d7da;
+  border: 1px solid var(--danger);
 }

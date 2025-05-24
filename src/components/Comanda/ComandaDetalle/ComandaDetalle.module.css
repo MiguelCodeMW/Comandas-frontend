@@ -2,155 +2,171 @@
   padding: 2rem;
   font-family: var(--font);
   background: var(--white);
-  max-width: 900px;
-  margin: 2rem auto;
-  box-shadow: var(--shadow);
-  border-radius: var(--radius);
+  max-width: 800px; /* Ligeramente más estrecho para mejor lectura */
+  margin: 2.5rem auto; /* Más margen superior/inferior */
+  box-shadow: var(--shadow-lg); /* Sombra más pronunciada */
+  border-radius: var(--radius-lg);
 }
 
 .comandaDetalleTitulo {
-  font-size: 2.2rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.8rem; /* Ajustado */
+  margin-bottom: 2rem; /* Más espacio */
   text-align: center;
-  font-weight: 700;
-  color: #343a40;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.07);
+  font-weight: 600;
+  color: var(--dark);
 }
 
 .comandaDetalleInfo {
-  font-size: 1.2rem;
+  font-size: 1.1rem; /* Ajustado */
   color: var(--secondary-dark);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem; /* Menos espacio si son varios seguidos */
   line-height: 1.6;
 }
 
 .detallesTitulo {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
+  font-size: 1.5rem; /* Ajustado */
+  margin-top: 2rem; /* Espacio antes de los detalles */
+  margin-bottom: 1.25rem;
   font-weight: 600;
-  color: var(--secondary-dark);
-  border-left: 5px solid var(--info);
-  padding-left: 0.75rem;
-  text-transform: capitalize;
+  color: var(--dark);
+  border-left: 4px solid var(--primary); /* Usar primary para consistencia */
+  padding-left: 1rem;
 }
 
 .detallesLista {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Ajustado */
+  gap: 1.25rem; /* Ajustado */
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 2rem 0; /* Espacio después de la lista */
 }
 
 .detalleItem {
-  background: var(--white);
-  padding: 1rem 1.25rem;
-  border: 1.5px solid #ced4da;
+  background: var(--light); /* Fondo ligeramente diferente */
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: background 0.2s, border-color 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); /* Sombra muy sutil */
+  transition: border-color 0.2s, transform 0.2s;
 }
 
 .detalleItem:hover {
-  background-color: #e9f5ff;
   border-color: var(--primary);
+  transform: translateY(-2px);
 }
 
 .detalleInfo {
-  font-size: 1.1rem;
-  color: #212529;
+  /* Para p dentro de detalleItem y totalesBox */
+  font-size: 1rem;
+  color: var(--secondary-dark);
   margin-bottom: 0.5rem;
+}
+.detalleInfo strong {
+  /* Para el "Total con IVA" */
+  color: var(--dark);
+  font-weight: 600;
 }
 
 .detalleTotal {
-  font-weight: 700;
+  /* Si se usa específicamente para el total del item, si no, usar .detalleInfo */
+  font-weight: 600;
   color: var(--success);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-top: 0.5rem;
+}
+
+.totalesBox {
+  /* Contenedor para Subtotal, IVA, Total con IVA */
+  background-color: var(--light);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  margin-top: 2rem;
+  border: 1px solid var(--border-color);
+}
+.totalesBox .detalleInfo {
+  /* Estilo específico para los p dentro de totalesBox */
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.05rem;
+}
+.totalesBox .detalleInfo:last-child {
+  margin-bottom: 0;
+}
+.totalesBox .detalleInfo strong {
+  font-size: 1.15rem;
 }
 
 .message {
   font-style: italic;
-  color: var(--secondary);
+  color: var(--secondary-dark);
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   font-size: 1rem;
+  padding: 1rem;
+  background-color: var(--light);
+  border-radius: var(--radius);
+}
+
+/* --- Botones Unificados --- */
+.pagarButton,
+.editarButton,
+.dashboardButton,
+.borrarButton {
+  padding: 0.7rem 1.4rem; /* Padding unificado */
+  font-size: 0.95rem; /* Tamaño de fuente unificado */
+  font-weight: 500; /* Peso unificado */
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+  text-transform: capitalize;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+}
+.pagarButton:hover,
+.editarButton:hover,
+.dashboardButton:hover,
+.borrarButton:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+.pagarButton:active,
+.editarButton:active,
+.dashboardButton:active,
+.borrarButton:active {
+  transform: translateY(0px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .pagarButton {
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.2rem;
-  font-weight: 600;
   color: var(--white);
   background: var(--success);
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: background 0.3s, box-shadow 0.3s;
 }
 .pagarButton:hover {
   background: var(--success-dark);
-  box-shadow: 0 4px 10px rgba(20, 108, 67, 0.4);
 }
 
 .editarButton {
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #212529;
-  background: var(--warning); /* Amarillo */
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: background 0.3s, box-shadow 0.3s;
+  color: var(--dark); /* Texto oscuro para mejor contraste en amarillo */
+  background: var(--warning);
 }
 .editarButton:hover {
   background: var(--warning-dark);
-  box-shadow: 0 4px 10px rgba(224, 168, 0, 0.4);
 }
 
 .dashboardButton {
-  padding: 0.45rem 0.85rem;
-  font-size: 1rem;
-  border-radius: var(--radius);
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  user-select: none;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.dashboardButton {
+  /* Este ya estaba bien, solo ajustes menores si es necesario */
   background: var(--primary);
   color: var(--white);
 }
-
 .dashboardButton:hover {
   background: var(--primary-dark);
 }
 
 .borrarButton {
-  padding: 0.45rem 0.85rem;
-  background-color: var(--danger);
+  background: var(--danger);
   color: var(--white);
-  font-size: 1rem;
-  border-radius: var(--radius);
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  user-select: none;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 .borrarButton:hover {
   background: var(--danger-dark);
-  color: var(--white);
 }

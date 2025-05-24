@@ -1,4 +1,4 @@
-.container {
+/* .container {
   padding: 2rem;
   font-family: var(--font);
   background: var(--background);
@@ -97,4 +97,125 @@
 .filterButtons {
   margin: 1.5rem 0;
   text-align: center;
+} */
+.container {
+  padding: 2rem;
+  font-family: var(--font);
+  background: var(--background);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem; /* Aumentado para más espacio */
+  margin-bottom: 2.5rem; /* Aumentado */
+  padding-bottom: 1.5rem; /* Aumentado */
+  border-bottom: 1px solid var(--border-color); /* Borde más sutil */
+}
+
+.header h1 {
+  /* Estilo para el título del dashboard */
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0;
+}
+
+.headerButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem; /* Espacio entre botones */
+}
+
+/* Estilo general para botones en el header del dashboard, si no usan la clase Button global */
+.header button {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  background-color: var(--primary);
+  color: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.header button:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(320px, 1fr)
+  ); /* Ajustado para tarjetas más grandes */
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.item {
+  cursor: pointer;
+  background: var(--white);
+  padding: 1.5rem; /* Más padding interno */
+  border-radius: var(--radius-lg); /* Bordes más redondeados */
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  border-left: 4px solid transparent; /* Borde inicial transparente */
+}
+
+.item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.item.abierta {
+  border-left-color: var(--warning); /* Amarillo para abiertas */
+}
+
+.item.cerrada {
+  border-left-color: var(--success); /* Verde para cerradas */
+}
+
+.itemTitle {
+  margin: 0 0 0.5rem 0; /* Espacio debajo del título */
+  font-size: 1.25rem; /* Ligeramente más grande */
+  font-weight: 600; /* Más peso */
+  color: var(--dark);
+}
+
+.itemText {
+  margin: 0.25rem 0;
+  color: var(--secondary-dark);
+  font-size: 0.9rem;
+}
+
+.message {
+  /* Mensajes de "no hay comandas", etc. */
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--secondary-dark);
+  background-color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-top: 2rem;
+}
+
+.alert {
+  /* Para el aviso de configurar IVA */
+  padding: 1rem;
+  background-color: var(--warning);
+  color: var(--dark);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
 }

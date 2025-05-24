@@ -1,4 +1,4 @@
-.container {
+/* .container {
   padding: 2rem;
   max-width: 900px;
   margin: 2rem auto;
@@ -163,4 +163,201 @@
   font-size: 1rem;
   color: var(--secondary);
   margin-top: 1rem;
+} */
+.container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 2.5rem auto;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font);
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--dark);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap; /* Permite que el botón pase abajo en pantallas pequeñas */
+  align-items: center;
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  flex-grow: 1; /* Para que ocupe el espacio disponible */
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary), 0.1);
+}
+
+.categoriaList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid; /* CAMBIO A GRID */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(250px, 1fr)
+  ); /* Ajusta minmax según necesites */
+  gap: 1.25rem;
+}
+
+.categoriaItem {
+  background: var(--light);
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  display: flex; /* Mantenemos flex para alinear contenido interno */
+  flex-direction: column; /* Para que los controles queden abajo */
+  justify-content: space-between; /* Para empujar controles abajo */
+  gap: 0.75rem; /* Espacio entre nombre y controles */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.categoriaItem:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.categoriaName {
+  font-weight: 500; /* Ligeramente menos peso */
+  font-size: 1.1rem;
+  color: var(--dark);
+  text-transform: capitalize;
+  word-break: break-word; /* Para nombres largos */
+}
+
+.controls {
+  /* Contenedor de botones dentro del item */
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start; /* Alinea botones a la izquierda */
+  flex-wrap: wrap; /* Si hay muchos botones */
+  margin-top: auto; /* Empuja los controles al final si el item es más alto */
+}
+
+/* --- Botones Unificados (ya estaban bien definidos aquí, solo asegurar consistencia) --- */
+.button,
+.save,
+.cancel,
+.edit,
+.delete,
+.dashboardButton {
+  padding: 0.5rem 1rem; /* Ajustado */
+  font-size: 0.9rem; /* Ajustado */
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+  text-transform: capitalize;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+}
+.button:hover,
+.save:hover,
+.cancel:hover,
+.edit:hover,
+.delete:hover,
+.dashboardButton:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+.button:active,
+.save:active,
+.cancel:active,
+.edit:active,
+.delete:active,
+.dashboardButton:active {
+  transform: translateY(0px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.button, /* Botón principal del formulario de añadir */
+.dashboardButton {
+  background: var(--primary);
+  color: var(--white);
+}
+.button:hover,
+.dashboardButton:hover {
+  background: var(--primary-dark);
+}
+
+.save {
+  background: var(--success);
+  color: var(--white);
+}
+.save:hover {
+  background: var(--success-dark);
+}
+
+.cancel {
+  background: var(--secondary);
+  color: var(--white);
+}
+.cancel:hover {
+  background: var(--secondary-dark);
+}
+
+.edit {
+  background: var(--warning);
+  color: var(--dark);
+}
+.edit:hover {
+  background: var(--warning-dark);
+}
+
+.delete {
+  background: var(--danger);
+  color: var(--white);
+}
+.delete:hover {
+  background: var(--danger-dark);
+}
+
+/* --- Mensajes Unificados --- */
+.success,
+.error,
+.message {
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.success {
+  color: var(--success-dark);
+  background: #d1e7dd; /* Mantener colores distintivos */
+  border: 1px solid var(--success);
+}
+
+.error {
+  color: var(--danger-dark);
+  background: #f8d7da;
+  border: 1px solid var(--danger);
+}
+
+.message {
+  /* Mensaje genérico/informativo */
+  color: var(--secondary-dark);
+  background: var(--light);
+  border: 1px solid var(--border-color);
+  margin-top: 1.5rem;
 }

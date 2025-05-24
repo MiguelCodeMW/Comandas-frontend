@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --primary: #0d6efd;
   --primary-dark: #0b5ed7;
   --secondary: #6c757d;
@@ -14,5 +14,28 @@
   --white: #fff;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   --radius: 10px;
+  --font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+} */
+:root {
+  --primary: #0d6efd;
+  --primary-dark: #0b5ed7;
+  --secondary: #6c757d;
+  --secondary-dark: #495057;
+  --success: #198754;
+  --success-dark: #146c43;
+  --danger: #dc3545;
+  --danger-dark: #bb2d3b;
+  --warning: #ffc107;
+  --warning-dark: #e0a800;
+  --info: #398894; /* Ajustado para un tono moderno */
+  --light: #f8f9fa; /* Añadido para fondos claros */
+  --dark: #212529; /* Añadido para texto oscuro */
+  --border-color: #dee2e6; /* Color de borde estándar */
+  --background: #f4f7f9; /* Un fondo global ligeramente más suave */
+  --white: #fff;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra un poco más suave */
+  --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada para modales, etc. */
+  --radius: 8px; /* Radio de borde estándar */
+  --radius-lg: 12px; /* Radio de borde más grande */
   --font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
