@@ -5,9 +5,14 @@ import Button from "../Button/Button";
 interface ConfigurarIVAProps {
   onGuardado: (iva: number) => void;
   ivaActual: number | null;
+  onCancelar: () => void; // Añadir esta línea
 }
 
-function ConfigurarIVA({ onGuardado, ivaActual }: ConfigurarIVAProps) {
+function ConfigurarIVA({
+  onGuardado,
+  ivaActual,
+  onCancelar,
+}: ConfigurarIVAProps) {
   const [iva, setIva] = useState<number>(ivaActual ?? 0.21);
   const [mensaje, setMensaje] = useState<string | null>(null);
 
@@ -38,6 +43,11 @@ function ConfigurarIVA({ onGuardado, ivaActual }: ConfigurarIVAProps) {
         text="Guardar IVA"
         onClick={handleGuardar}
         className={styles.button}
+      />
+      <Button
+        text="Cancelar"
+        onClick={onCancelar} // Llamar a la función onCancelar pasada por props
+        className={`${styles.button} ${styles.cancelButton}`} // Puedes añadir estilos específicos para el botón cancelar
       />
       {mensaje && <p className={styles.message}>{mensaje}</p>}
     </div>
