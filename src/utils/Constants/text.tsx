@@ -1,64 +1,133 @@
 export const NAMES = {
+  // --- Generales ---
+  GUARDAR: "Guardar",
   EDITAR: "Editar",
   ELIMINAR: "Eliminar",
-  CREAR: "Crear",
   CANCELAR: "Cancelar",
-  GUARDAR: "Guardar",
   VOLVER: "Volver",
+  ACEPTAR: "Aceptar",
+  CREAR: "Crear",
+  ACTUALIZAR: "Actualizar",
+  GUARDAR_CAMBIOS: "Guardar Cambios",
+  CARGANDO: "Cargando...",
+  ERROR_INESPERADO: "Ocurrió un error inesperado.",
   ERROR_CARGA: "Error al cargar los datos.",
-  ERROR_ID: "Error al obtener el ID. Por favor, inicia sesión.",
-  ALERTA_NOMBRE: "El nombre no puede estar vacío.",
-  ALERTA_CAMPOS_VACIOS: "Todos los campos son obligatorios.",
-  //CATEGORIA
-  PLACEHOLDER_NOMBRE: "Nombre de la categoría",
+  ERROR_ID: "Error: ID de usuario no encontrado.",
+  ALERTA_CAMPOS_VACIOS: "Por favor, completa todos los campos requeridos.",
+  ALERTA_NOMBRE: "El nombre no puede estar vacío.", // Usado genéricamente, ej. para categorías
+
+  // --- IVA ---
+  GUARDAR_IVA: "Guardar IVA",
+  CONFIGURAR_IVA: "Configurar IVA", // Usado en el botón del Dashboard
+  IVA_ACTUAL: "IVA Actual",
+  IVA_EXITO: "IVA configurado con éxito.",
+  ALERTA_IVA_INVALIDO:
+    "El valor del IVA debe ser un número entre 0 y 1 (ej: 0.21).",
+  CONFIGURAR_IVA_TITLE: "Configurar IVA Global", // Usado en el modal ConfigurarIVA
+  IVA_LABEL: "Valor del IVA", // Usado en el modal ConfigurarIVA
+
+  // --- Categorías ---
+  CATEGORIA_TITULO: "Gestión de Categorías",
+  CATEGORIA_NUEVA: "Nueva Categoría",
+  CATEGORIA_EDITAR: "Editar Categoría",
+  CATEGORIA_ELIMINAR: "Eliminar Categoría",
+  CATEGORIA_GUARDAR: "Guardar Categoría", // Para el botón de crear
+  CATEGORIA_NOMBRE: "Nombre de la Categoría",
+  PLACEHOLDER_NOMBRE: "Ej: Bebidas", // Para input de nombre de categoría
   CATEGORIA_EXITOSA: "Categoría creada con éxito.",
   CATEGORIA_ACTUALIZADA: "Categoría actualizada con éxito.",
-  CATEGORIA_ELIMINAR: "¿Estás seguro de que deseas eliminar esta categoría?",
-  CATEGORIA_GUARDAR: "Añadir categoría",
-  CATEGORIA_ELIMAR_EXISTOSA: "Categoría eliminada con éxito.",
-  ALERTA_CATEGORIA: "Error al eliminar la categoría. Inténtalo de nuevo.",
+  CATEGORIA_ELIMINAR_EXITOSA: "Categoría eliminada con éxito.",
+  CATEGORIA_ELIMINAR_CONFIRMACION:
+    "¿Estás seguro de que deseas eliminar esta categoría?",
   ALERTA_CATEGORIA_NOMBRE: "El nombre de la categoría no puede estar vacío.",
-  ALERTA_CATEGORIA_GUARDAR:
-    "Error al guardar la categoría. Inténtalo de nuevo.",
-  ALERTA_CATEGORIA_ACTUALIZAR:
-    "Error al actualizar la categoría. Inténtalo de nuevo.",
+  ALERTA_CATEGORIA: "ALERTA_CATEGORIA",
+  ALERTA_CATEGORIA_DUPLICADA: "Ya existe una categoría con ese nombre.",
+  ALERTA_CATEGORIA_CARGAR: "Error al cargar las categorías.",
+  ALERTA_CATEGORIA_GUARDAR: "Error al guardar la categoría.",
+  ALERTA_CATEGORIA_ACTUALIZAR: "Error al actualizar la categoría.",
   ALERTA_CATEGORIA_ELIMINAR:
-    "Error al eliminar la categoría. Inténtalo de nuevo.",
-  ALERTA_CATEGORIA_CARGAR:
-    "Error al cargar las categorías. Inténtalo de nuevo.",
-  //PRODUCTO
-  PRODUCTOS_NO_DISPONIBLES: "No hay productos disponibles.",
-  PLACEHOLDER_PRODUCTO: "Nombre del producto",
-  PLACEHOLDER_PRECIO: "Precio del producto",
-  PRODUCTO_ACTUALIZADO: "Producto actualizado con éxito.",
-  ALERTA_PRODUCTO_ACTUALIZAR:
-    "Error al actualizar el producto. Inténtalo de nuevo.",
-  ALERTA_PRODUCTO_GUARDAR: "Error al guardar el producto. Inténtalo de nuevo.",
-  ALERTA_PRODUCTO_ELIMINAR:
-    "Error al eliminar el producto. Inténtalo de nuevo.",
-  ALERTA_PRODUCTO_CARGAR: "Error al cargar los productos. Inténtalo de nuevo.",
-  PRODUCTO_ELIMINAR: "¿Estás seguro de que deseas eliminar este producto?",
-  PRODUCTO_ELIMINAR_EXISTOSA: "Producto eliminado con éxito.",
-  //COMANDA
-  COMANDA_EXITOSA: "Comanda creada con éxito.",
-  ALERTA_COMANDA_GUARDAR: "Error al guardar la comanda. Inténtalo de nuevo.",
-  ID_COMANDA_CREAR: "Crear Comanda",
-  ID_COMANDA_EDITAR: "Editar Comanda",
-  ID_COMANDA_ACTUALIZAR: "Actualizar Comanda",
-  ID_COMANDA_FINALIZAR: "Finalizar Comanda",
+    "Error al eliminar la categoría. Asegúrate de que no tenga productos asociados.",
 
-  DETALLES_TITULO: "Detalles:",
+  // --- Productos ---
+  PRODUCTO_TITULO: "Gestión de Productos",
+  PRODUCTO_NUEVO: "Añadir Producto", // Título del formulario de creación
+  PRODUCTO_EDITAR: "Editar Producto",
+  PRODUCTO_GUARDAR: "Añadir Producto", // Para el botón de crear producto
+  PRODUCTO_NOMBRE: "Nombre del Producto",
+  PLACEHOLDER_PRODUCTO: "Ej: Coca-Cola",
+  PLACEHOLDER_PRECIO: "Ej: 2.50",
+  PRODUCTO_PRECIO: "Precio",
+  PRODUCTO_CATEGORIA: "Categoría",
+  PRODUCTO_SELECCIONAR_CATEGORIA: "Selecciona una categoría",
+  PRODUCTO_EXITOSO: "Producto creado con éxito.",
+  PRODUCTO_ACTUALIZADO: "Producto actualizado con éxito.",
+  PRODUCTO_ELIMINAR_EXITOSA: "Producto eliminado con éxito.",
+  PRODUCTO_ELIMINAR_CONFIRMACION:
+    "¿Estás seguro de que deseas eliminar este producto?",
+  PRODUCTOS_NO_DISPONIBLES: "No hay productos disponibles.",
+  ALERTA_PRODUCTO_CAMPOS_REQUERIDOS:
+    "Nombre, precio y categoría son requeridos.",
+  ALERTA_PRODUCTO_DUPLICADO: "Ya existe un producto con ese nombre.",
+  ALERTA_PRODUCTO_CARGAR: "Error al cargar los productos.",
+  ALERTA_PRODUCTO_GUARDAR: "Error al guardar el producto.",
+  ALERTA_PRODUCTO_ACTUALIZAR: "Error al actualizar el producto.",
+  ALERTA_PRODUCTO_ELIMINAR: "Error al eliminar el producto.",
+
+  // --- Comandas ---
+  COMANDA_TITULO: "Comandas",
+  ID_COMANDA_TITULO: "Comanda", // Para "Comanda #X" en detalles
+  ID_COMANDA_CREAR: "Nueva Comanda", // Título de la página de creación
+  ID_COMANDA_EDITAR: "Editar Comanda", // Título de la página de edición
+  ID_COMANDA_ACTUALIZAR: "Actualizar Comanda", // Botón en edición
+  ID_COMANDA_FINALIZAR: "Finalizar Comanda", // Botón en creación
+  COMANDA_PRODUCTOS_SELECCIONADOS: "Productos Seleccionados",
+  COMANDA_SIN_PRODUCTOS: "La comanda no tiene productos seleccionados.",
+  COMANDA_EXITOSA: "Comanda creada con éxito.",
+  COMANDA_ACTUALIZADA_EXITO: "Comanda actualizada con éxito.",
+  COMANDA_PAGADA_EXITOSA: "Comanda pagada con éxito.",
+  COMANDA_BORRADA_EXITO: "Comanda borrada con éxito.",
+  COMANDA_PAGAR: "Pagar Comanda",
+  COMANDA_BORRAR_CONFIRMACION:
+    "¿Estás seguro de que deseas borrar esta comanda?",
+  COMANDA_CARGANDO: "Cargando detalles de la comanda...",
+  CARGANDO_DATOS_COMANDA: "Cargando datos para la comanda...", // Para la página de crear/editar comanda
+  COMANDA_NO_ENCONTRADA: "Comanda no encontrada.",
+  ALERTA_COMANDA_CARGAR_DETALLE: "Error al cargar los detalles de la comanda.",
+  ALERTA_COMANDA_GUARDAR: "Error al guardar la comanda.",
+  ALERTA_COMANDA_PAGAR: "Error al pagar la comanda.",
+  ALERTA_COMANDA_BORRAR: "Error al borrar la comanda.",
+
+  // --- Detalles de Comanda (Items) ---
+  DETALLES_TITULO: "Detalles de la Comanda",
   DETALLES_NO_DISPONIBLES: "No hay detalles para esta comanda.",
   DETALLES_PRODUCTO: "Producto:",
   DETALLES_CANTIDAD: "Cantidad:",
   DETALLES_PRECIO_UNITARIO: "Precio Unitario:",
-  DETALLES_TOTAL: "Total:",
-  COMANDA_PAGAR: "Pagar Comanda",
-  COMANDA_PAGADA_EXITOSA: "¡Comanda pagada con éxito!",
-  ALERTA_COMANDA_PAGAR: "Error al pagar la comanda. Inténtalo de nuevo.",
-  COMANDA_CARGANDO: "Cargando comanda...",
-  COMANDA_NO_ENCONTRADA: "Comanda no encontrada.",
+  DETALLES_TOTAL: "Total Producto:", // Total por línea de producto
+  SUBTOTAL: "Subtotal:",
+  IVA_APLICADO: "IVA Aplicado:", // Podría ser IVA (XX%)
+  TOTAL_CON_IVA: "Total con IVA:",
 
-  ALERTA_CATEGORIA_DUPLICADA: "Ya existe una categoría con este nombre.",
-  ALERTA_PRODUCTO_DUPLICADO: "Ya existe un producto con este nombre.",
+  // --- Dashboard ---
+  DASHBOARD_TITULO: "Panel de Control",
+  DASHBOARD_VER_PENDIENTES: "Ver Pendientes",
+  DASHBOARD_VER_PAGADAS: "Ver Pagadas",
+  DASHBOARD_NO_COMANDAS_PENDIENTES: "No hay comandas pendientes de pago.",
+  DASHBOARD_NO_COMANDAS_PAGADAS: "No hay comandas pagadas.",
+  DASHBOARD_CONFIGURAR_IVA_ALERTA: "Debes configurar el IVA antes de operar.",
+  CREAR_COMANDA: "Crear Comanda",
+
+  // --- User / Auth ---
+  LOGIN_TITULO: "Iniciar Sesión",
+  LOGIN_EMAIL: "Correo Electrónico",
+  LOGIN_PASSWORD: "Contraseña",
+  LOGIN_BOTON: "Iniciar Sesión",
+  LOGIN_EXITOSO: "Inicio de sesión exitoso.",
+  LOGIN_ERROR: "Error al iniciar sesión. Verifica tus credenciales.",
+  LOGOUT_BOTON: "Cerrar Sesión",
+  REGISTRO_TITULO: "Crear Usuario",
+  REGISTRO_NOMBRE: "Nombre",
+  REGISTRO_BOTON: "Registrarse",
+  REGISTRO_EXITOSO: "Usuario creado exitosamente.",
+  REGISTRO_ERROR: "Error al crear usuario.",
 };

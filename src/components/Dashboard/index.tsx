@@ -1,260 +1,161 @@
-// import React, { useEffect, useState } from "react";
-// import api from "../../api/axio";
-// import { useNavigate } from "react-router-dom";
-// import Button from "../Button/Button";
-// import { ROUTES } from "../../utils/Constants/routes";
-// import styles from "./Dashboard.module.css";
-
-// interface Comanda {
-//   id: number;
-//   fecha: string;
-//   estado: string;
-//   user_id: number;
-// }
-
-// function Dashboard() {
-//   const [comandas, setComandas] = useState<Comanda[]>([]);
-//   const [loading, setLoading] = useState<boolean>(true);
-//   const [error, setError] = useState<string | null>(null);
-//   const [mostrarPagadas, setMostrarPagadas] = useState<boolean>(false);
-//   const navigate = useNavigate();
-
-//   // Obtener usuario del localStorage (ajusta según tu lógica de autenticación)
-//   const user = JSON.parse(localStorage.getItem("user") || "null");
-
-//   useEffect(() => {
-//     async function fetchComandas() {
-//       try {
-//         const res = await api.get(ROUTES.DASHBOARD);
-//         setComandas(res.data.comandas);
-//       } catch (err: any) {
-//         setError(err.message || "Error al cargar comandas");
-//       } finally {
-//         setLoading(false);
-//       }
-//     }
-//     fetchComandas();
-//   }, []);
-
-//   const handleLogout = () => {
-//     localStorage.removeItem("token");
-//     localStorage.removeItem("user");
-//     navigate(ROUTES.LOGIN);
-//   };
-
-//   const comandasFiltradas = mostrarPagadas
-//     ? comandas.filter((comanda) => comanda.estado === "cerrada")
-//     : comandas.filter((comanda) => comanda.estado === "abierta");
-
-//   if (loading) {
-//     return <div className={styles.message}>Cargando comandas...</div>;
-//   }
-
-//   if (error) {
-//     return <div className={styles.message}>Error: {error}</div>;
-//   }
-
-//   return (
-//     <div className={styles.container}>
-//       <div className={styles.header}>
-//         <h1>Comandas</h1>
-//         <div className={styles.headerButtons}>
-//           {user?.role === "admin" && (
-//             <>
-//               <Button
-//                 text="Añadir Categoría"
-//                 onClick={() => navigate(ROUTES.CREATE_CATEGORY)}
-//               />
-//               <Button
-//                 text="Gestionar Productos"
-//                 onClick={() => navigate(ROUTES.CREATE_PRODUCT)}
-//               />
-//             </>
-//           )}
-//           <Button
-//             text="Crear Comanda"
-//             onClick={() => navigate(ROUTES.CREATE_COMANDA)}
-//           />
-//           <Button
-//             text={mostrarPagadas ? "Ver Pendientes" : "Ver Pagadas"}
-//             onClick={() => setMostrarPagadas(!mostrarPagadas)}
-//           />
-//           <Button text="Cerrar Sesión" onClick={handleLogout} />
-//         </div>
-//       </div>
-
-//       {comandasFiltradas.length === 0 ? (
-//         <p className={styles.message}>
-//           {mostrarPagadas
-//             ? "No hay comandas pagadas."
-//             : "No hay comandas pendientes de pago."}
-//         </p>
-//       ) : (
-//         <ul className={styles.list}>
-//           {comandasFiltradas.map((comanda) => (
-//             <li
-//               key={comanda.id}
-//               className={`${styles.item} ${styles[comanda.estado]}`}
-//               onClick={() =>
-//                 navigate(
-//                   ROUTES.COMANDA_DETAIL.replace(":id", comanda.id.toString())
-//                 )
-//               }
-//             >
-//               <h3 className={styles.itemTitle}>Comanda #{comanda.id}</h3>
-//               <p className={styles.itemText}>Estado: {comanda.estado}</p>
-//               <p className={styles.itemText}>
-//                 Fecha: {new Date(comanda.fecha).toLocaleString()}
-//               </p>
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Dashboard;
-import React, { useEffect, useState } from "react";
-import api from "../../api/axio";
-import { useNavigate } from "react-router-dom";
-import Button from "../Button/Button";
-import { ROUTES } from "../../utils/Constants/routes";
-import styles from "./Dashboard.module.css";
+import React, { useEffect } from "react";
+import { useDashboard } from "../../hooks/useDashboard";
 import ConfigurarIVA from "../ConfigurarIVA/ConfigurarIVA";
-
-interface Comanda {
-  id: number;
-  fecha: string;
-  estado: string;
-  user_id: number;
-}
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Button from "../Button/Button";
+import styles from "./Dashboard.module.css";
+import { NAMES } from "../../utils/Constants/text";
+import { ROUTES } from "../../utils/Constants/routes";
 
 function Dashboard() {
-  const [comandas, setComandas] = useState<Comanda[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [mostrarPagadas, setMostrarPagadas] = useState<boolean>(false);
-  const [showModalIva, setShowModalIva] = useState(false);
-  const [iva, setIva] = useState<number | null>(null);
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user") || "null");
+  const {
+    comandasFiltradas,
+    loading,
+    error,
+    errorIva,
+    mostrarPagadas,
+    setMostrarPagadas,
+    showModalIva,
+    setShowModalIva,
+    iva,
+    user,
+    handleLogout,
+    handleIvaGuardado,
+  } = useDashboard();
 
   useEffect(() => {
-    async function fetchComandas() {
-      try {
-        const res = await api.get(ROUTES.DASHBOARD);
-        setComandas(res.data.comandas);
-      } catch (err: any) {
-        setError(err.message || "Error al cargar comandas");
-      } finally {
-        setLoading(false);
-      }
+    if (user?.role === "admin" && iva === null && !loading && !errorIva) {
+      setShowModalIva(true);
     }
-    fetchComandas();
-    // Cargar IVA guardado
-    const ivaGuardado = localStorage.getItem("iva");
-    setIva(ivaGuardado ? Number(ivaGuardado) : null);
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate(ROUTES.LOGIN);
-  };
-
-  const comandasFiltradas = mostrarPagadas
-    ? comandas.filter((comanda) => comanda.estado === "cerrada")
-    : comandas.filter((comanda) => comanda.estado === "abierta");
+  }, [user, iva, loading, setShowModalIva, errorIva]);
 
   if (loading) {
-    return <div className={styles.message}>Cargando comandas...</div>;
+    return <LoadingSpinner />;
   }
 
-  if (error) {
-    return <div className={styles.message}>Error: {error}</div>;
+  if (error && !comandasFiltradas.length && !loading) {
+    return (
+      <ErrorMessage
+        message={error || NAMES.ERROR_CARGA}
+        onRetry={() => window.location.reload()}
+      />
+    );
   }
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <h1>Comandas</h1>
-        <div className={styles.headerButtons}>
-          {user?.role === "admin" && iva === null && (
-            <>
-              <div className={styles.alert}>
-                Debes configurar el IVA antes de operar.
-              </div>
-              <Button
-                text="Configurar IVA"
-                onClick={() => setShowModalIva(true)}
-              />
-            </>
-          )}
-          {user?.role === "admin" && iva !== null && (
-            <>
-              <Button
-                text="Añadir Categoría"
-                onClick={() => navigate(ROUTES.CREATE_CATEGORY)}
-              />
-              <Button
-                text="Gestionar Productos"
-                onClick={() => navigate(ROUTES.CREATE_PRODUCT)}
-              />
-              <Button
-                text="Configurar IVA"
-                onClick={() => setShowModalIva(true)}
-              />
-            </>
+      <header className={styles.header}>
+        <h1>{NAMES.DASHBOARD_TITULO}</h1>
+        <div>
+          {user && (
+            <span className={styles.userInfo}>
+              Hola, {user.name} ({user.role})
+            </span>
           )}
           <Button
-            text="Crear Comanda"
-            onClick={() => navigate(ROUTES.CREATE_COMANDA)}
+            onClick={handleLogout}
+            text={NAMES.LOGOUT_BOTON}
+            className={styles.logoutButton}
           />
-          <Button
-            text={mostrarPagadas ? "Ver Pendientes" : "Ver Pagadas"}
-            onClick={() => setMostrarPagadas(!mostrarPagadas)}
-          />
-          <Button text="Cerrar Sesión" onClick={handleLogout} />
         </div>
-      </div>
+      </header>
 
-      {showModalIva && (
+      {user?.role === "admin" && (
+        <div className={styles.headerButtons}>
+          <Button
+            onClick={() => setShowModalIva(true)}
+            text={`${NAMES.CONFIGURAR_IVA} (Actual: ${
+              iva !== null ? `${(iva * 100).toFixed(0)}%` : "No configurado"
+            })`}
+            className={styles.headerButton}
+          />
+          <Button
+            navigateTo={ROUTES.CATEGORY}
+            text="Gestionar Categorías"
+            className={styles.headerButton}
+          />
+          <Button
+            navigateTo={ROUTES.PRODUCT}
+            text="Gestionar Productos"
+            className={styles.headerButton}
+          />
+          {errorIva && !showModalIva && (
+            <p className={styles.inlineError}>{errorIva}</p>
+          )}
+          {iva === null && !errorIva && !loading && (
+            <p className={styles.alert}>
+              {NAMES.DASHBOARD_CONFIGURAR_IVA_ALERTA}
+            </p>
+          )}
+        </div>
+      )}
+
+      {showModalIva && user?.role === "admin" && (
         <ConfigurarIVA
+          onGuardado={handleIvaGuardado}
           ivaActual={iva}
-          onGuardado={(nuevoIva) => {
-            setIva(nuevoIva);
+          onCancelar={() => {
             setShowModalIva(false);
           }}
+          errorExterno={errorIva}
         />
       )}
 
-      {comandasFiltradas.length === 0 ? (
-        <p className={styles.message}>
+      <div className={styles.headerButtons}>
+        <Button
+          onClick={() => setMostrarPagadas(!mostrarPagadas)}
+          text={
+            mostrarPagadas
+              ? NAMES.DASHBOARD_VER_PENDIENTES
+              : NAMES.DASHBOARD_VER_PAGADAS
+          }
+          className={styles.headerButton}
+        />
+        <Button
+          navigateTo={ROUTES.CREATE_COMANDA}
+          text={NAMES.CREAR_COMANDA}
+          className={styles.headerButton}
+        />
+      </div>
+
+      <div className={styles.list}>
+        <h2>
           {mostrarPagadas
-            ? "No hay comandas pagadas."
-            : "No hay comandas pendientes de pago."}
-        </p>
-      ) : (
-        <ul className={styles.list}>
-          {comandasFiltradas.map((comanda) => (
-            <li
+            ? NAMES.DASHBOARD_VER_PAGADAS
+            : NAMES.DASHBOARD_VER_PENDIENTES}
+        </h2>
+        {comandasFiltradas.length > 0 ? (
+          comandasFiltradas.map((comanda) => (
+            <div
               key={comanda.id}
-              className={`${styles.item} ${styles[comanda.estado]}`}
-              onClick={() =>
-                navigate(
-                  ROUTES.COMANDA_DETAIL.replace(":id", comanda.id.toString())
-                )
-              }
+              className={`${styles.item} ${styles[comanda.estado] || ""}`}
             >
-              <h3 className={styles.itemTitle}>Comanda #{comanda.id}</h3>
-              <p className={styles.itemText}>Estado: {comanda.estado}</p>
-              <p className={styles.itemText}>
-                Fecha: {new Date(comanda.fecha).toLocaleString()}
+              <p className={styles.itemTitle}>
+                ID: {comanda.id} - Fecha:{" "}
+                {new Date(comanda.fecha).toLocaleString()}
               </p>
-            </li>
-          ))}
-        </ul>
+              <p className={styles.itemText}>Estado: {comanda.estado}</p>
+              <Button
+                navigateTo={ROUTES.COMANDA_DETAIL.replace(
+                  ":id",
+                  comanda.id.toString()
+                )}
+                text={NAMES.EDITAR}
+                className={styles.headerButton}
+              />
+            </div>
+          ))
+        ) : (
+          <p className={styles.message}>
+            {mostrarPagadas
+              ? NAMES.DASHBOARD_NO_COMANDAS_PAGADAS
+              : NAMES.DASHBOARD_NO_COMANDAS_PENDIENTES}
+          </p>
+        )}
+      </div>
+      {error && comandasFiltradas.length > 0 && (
+        <p className={styles.inlineError}>{error}</p>
       )}
     </div>
   );

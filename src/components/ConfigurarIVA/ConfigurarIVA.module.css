@@ -71,3 +71,18 @@
   background: #f8d7da;
   border: 1px solid var(--danger);
 }
+
+.headerButton {
+  background: #e0e7ff;
+  color: #222;
+  border: 1px solid #b6b6b6;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.headerButton:last-child {
+  margin-right: 0;
+}

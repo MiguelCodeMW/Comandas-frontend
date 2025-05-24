@@ -1,43 +1,46 @@
-import React, { useEffect } from "react";
-import CreateUserForm from "./components/User/CreateUserForm";
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
+
+import CreateUserForm from "./components/User/CreateUserForm";
 import LoginForm from "./components/User/LoginForm";
 import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./utils/PrivateRoute";
 import ComandaDetails from "./components/Comanda/ComandaDetalle/ComandaDetalle";
-import CrearCategoria from "./components/Categoria";
-import CrearProducto from "./components/Producto";
 import CrearComanda from "./components/Comanda/CrearComanda/CrearComanda";
 
-// Importa el componente de ruta privada
-// Importa el formulario de usuario
+// Componentes para Categorías
+import GestionCategoriasPage from "./components/Categoria/GestionCategoriasPage";
+import FormularioCategoria from "./components/Categoria/FormularioCategoria";
+
+// Componentes para Productos
+import GestionProductosPage from "./components/Producto";
+import FormularioProducto from "./components/Producto/FormularioProducto";
+
+import { ROUTES } from "./utils/Constants/routes";
 
 function App() {
-  // useEffect(() => {
-  //   // Elimina el token al iniciar la aplicación
-  //   localStorage.removeItem("token");
-  // }, []);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/create" element={<CreateUserForm />} />
+        <Route path="/" element={<Navigate to={ROUTES.LOGIN} />} />
+        <Route path={ROUTES.LOGIN} element={<LoginForm />} />
+        <Route path={ROUTES.CREATE_USER} element={<CreateUserForm />} />
+
         <Route
-          path="/dashboard"
+          path={ROUTES.DASHBOARD}
           element={
             <PrivateRoute>
               <Dashboard />
             </PrivateRoute>
           }
-        />{" "}
+        />
         <Route
-          path="/comandas/:id"
+          path={ROUTES.COMANDA_DETAIL}
           element={
             <PrivateRoute>
               <ComandaDetails />
@@ -45,26 +48,46 @@ function App() {
           }
         />
         <Route
-          path="/categorias/crear"
-          element={
-            <PrivateRoute>
-              <CrearCategoria />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/productos/crear"
-          element={
-            <PrivateRoute>
-              <CrearProducto />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/comandas/crear"
+          path={ROUTES.CREATE_COMANDA}
           element={
             <PrivateRoute>
               <CrearComanda />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Rutas para Categorías */}
+        <Route
+          path={ROUTES.CATEGORY}
+          element={
+            <PrivateRoute>
+              <GestionCategoriasPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.CREATE_CATEGORY}
+          element={
+            <PrivateRoute>
+              <FormularioCategoria />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Rutas para Productos */}
+        <Route
+          path={ROUTES.PRODUCT}
+          element={
+            <PrivateRoute>
+              <GestionProductosPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.CREATE_PRODUCT}
+          element={
+            <PrivateRoute>
+              <FormularioProducto />
             </PrivateRoute>
           }
         />

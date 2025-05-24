@@ -1,4 +1,5 @@
 export type EliminarCategoriaProps = {
   id: number;
-  onCategoriaEliminada: () => void;
+  onCategoriaEliminada: (id: number, errorMessage: string | null) => void;
+  className?: string;
 };
