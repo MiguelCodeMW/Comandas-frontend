@@ -183,7 +183,7 @@ function ComandaAccionesButtons({
           className={`${styles.button} ${styles.pagarButton}`}
         />
       )}
-      {user?.role === "admin" && (
+      {user?.role === "admin" && comanda.estado !== "cerrada" && (
         <Button
           text="Borrar Comanda"
           onClick={onBorrar}
