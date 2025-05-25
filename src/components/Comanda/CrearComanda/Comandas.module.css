@@ -1,307 +1,143 @@
-/* .comandaContainer {
-  padding: 2rem;
-  font-family: var(--font);
-  background: var(--white);
-  max-width: 900px;
-  margin: 2rem auto;
-  box-shadow: var(--shadow);
-  border-radius: var(--radius);
-}
-
-.comandaTitulo {
-  font-size: 2.2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 700;
-  color: #343a40;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.07);
-}
-
-.categoriaSection {
-  margin-bottom: 2.5rem;
-  border-bottom: 2px solid #dee2e6;
-  padding-bottom: 1.5rem;
-}
-
-.categoriaTitulo {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  color: var(--secondary-dark);
-  border-left: 5px solid var(--info);
-  padding-left: 0.75rem;
-  text-transform: capitalize;
-}
-
-.productosGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  align-items: stretch;
-  justify-content: flex-start;
-}
-
-.productItem {
-  background-color: #e3f2fd;
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--radius);
-  min-width: 120px;
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--primary);
-  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.15);
-  border: 2px solid transparent;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
-  user-select: none;
-}
-
-.productItem:hover {
-  background-color: #bbdefb;
-  box-shadow: 0 6px 14px rgba(13, 110, 253, 0.3);
-  border-color: var(--primary);
-}
-
-.productName {
-  font-weight: 700;
-  color: var(--primary-dark);
-}
-
-.seleccionadosContainer {
-  margin-top: 3rem;
-  background-color: var(--background);
-  padding: 1.5rem;
-  border-radius: var(--radius);
-  box-shadow: inset 0 0 10px #e9ecef;
-}
-
-.seleccionadosLista {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.seleccionadoItem {
-  background-color: var(--white);
-  padding: 0.75rem 1.25rem;
-  border: 1.5px solid #ced4da;
-  border-radius: var(--radius);
-  margin-bottom: 0.75rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.seleccionadoItem:hover {
-  background-color: #e9f5ff;
-  border-color: var(--primary);
-}
-
-.seleccionadoInfo {
-  flex-grow: 1;
-  font-weight: 600;
-  color: #212529;
-  font-size: 1.05rem;
-}
-
-.seleccionadoControles {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.controlBtn {
-  padding: 0.3rem 0.85rem;
-  font-size: 1.1rem;
-  background: var(--primary);
-  color: var(--white);
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  box-shadow: 0 3px 6px rgba(13, 110, 253, 0.4);
-  transition: background 0.3s, box-shadow 0.3s;
-  user-select: none;
-}
-.controlBtn:hover {
-  background: var(--primary-dark);
-  box-shadow: 0 5px 12px rgba(8, 66, 152, 0.6);
-}
-
-.finalizarWrapper {
-  margin-top: 3rem;
-  text-align: center;
-}
-
-.botonFinalizar {
-  padding: 0.9rem 2rem;
-  font-size: 1.3rem;
-  background: var(--success);
-  border: none;
-  color: var(--white);
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-weight: 700;
-  box-shadow: 0 5px 15px rgba(25, 135, 84, 0.5);
-  transition: background 0.3s, box-shadow 0.3s;
-  user-select: none;
-}
-.botonFinalizar:hover {
-  background: var(--success-dark);
-  box-shadow: 0 7px 20px rgba(20, 108, 67, 0.7);
-}
-
-.message {
-  font-style: italic;
-  color: var(--secondary);
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 1rem;
-}
-.dashboardButton {
-  padding: 0.45rem 0.85rem;
-  font-size: 1rem;
-  border-radius: var(--radius);
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  user-select: none;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.dashboardButton {
-  background: var(--primary);
-  color: var(--white);
-}
-
-.dashboardButton:hover {
-  background: var(--primary-dark);
-} */
+/* Contenedor principal */
 .comandaContainer {
-  padding: 2rem;
+  padding: var(--spacing-lg);
   font-family: var(--font);
   background: var(--white);
-  max-width: 900px; /* Consistente */
-  margin: 2.5rem auto;
+  max-width: 980px;
+  margin: var(--spacing-xl) auto;
   box-shadow: var(--shadow-lg);
   border-radius: var(--radius-lg);
 }
 
 .comandaTitulo {
-  font-size: 1.8rem;
-  margin-bottom: 2.5rem;
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
   text-align: center;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--dark);
+}
+
+/* Buscador */
+.buscadorContainer {
+  margin-bottom: var(--spacing-lg);
+}
+
+.buscador {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--spacing-md);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  background: var(--white);
+  color: var(--dark);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.buscador:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+}
+
+/* Lista de productos */
+.selectorProductosContainer {
+  margin-top: var(--spacing-lg);
 }
 
 .categoriaSection {
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-color); /* Borde más sutil */
-}
-.categoriaSection:last-of-type {
-  /* Quitar borde del último */
-  border-bottom: none;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-lg);
 }
 
 .categoriaTitulo {
-  font-size: 1.3rem; /* Ligeramente más pequeño que el título principal */
-  margin-bottom: 1.25rem;
+  font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--dark);
-  border-left: 4px solid var(--primary);
-  padding-left: 1rem;
+  margin-bottom: var(--spacing-md);
 }
 
-.productosGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
+.productosLista {
+  list-style: none; /* Elimina los puntos del listado */
   padding: 0;
   margin: 0;
-  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-md);
 }
 
-.productItem {
-  /* Estilo de cada producto clickable */
-  background-color: var(--light);
-  padding: 0.6rem 1rem; /* Padding ajustado */
-  border-radius: var(--radius);
-  text-align: center;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--primary-dark);
+.productoItem {
+  background-color: var(--white);
+  padding: var(--spacing-md);
   border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
-  user-select: none;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
-.productItem:hover {
-  background-color: var(--primary);
-  color: var(--white);
-  border-color: var(--primary-dark);
-  transform: translateY(-1px);
+.productoItem:hover {
+  background-color: var(--highlight);
+  border-color: var(--highlight-border);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
-.productName {
-  /* Si necesitas un estilo específico para el nombre dentro del item */
-  font-weight: 500; /* Ya está en .productItem */
-}
-
-.seleccionadosContainer {
-  margin-top: 2.5rem;
-  background-color: var(--light);
-  padding: 1.5rem;
-  border-radius: var(--radius-lg); /* Más redondeado */
-  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
-}
-.seleccionadosContainer h3 {
-  /* Título para "Productos Seleccionados" */
-  font-size: 1.3rem;
+.productoInfo {
+  font-size: var(--font-size-md);
+  font-weight: 500;
   color: var(--dark);
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
+  margin-right: var(
+    --spacing-sm
+  ); /* Añade un espacio a la derecha del nombre */
+}
+
+.productoPrecio {
+  font-size: var(--font-size-sm);
+  color: var(--secondary-dark);
+  margin-top: var(--spacing-xs);
+}
+
+/* Productos seleccionados */
+.seleccionadosContainer {
+  margin-top: var(--spacing-lg);
+  background-color: var(--light);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
 }
 
 .seleccionadosLista {
-  list-style: none;
+  list-style: none; /* Elimina los puntos del listado */
   padding: 0;
   margin: 0;
-  display: grid; /* CAMBIO A GRID */
-  grid-template-columns: 1fr; /* Una columna por defecto */
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
 }
-/* Para más de un item, podríamos considerar 2 columnas si hay espacio */
-/* @media (min-width: 768px) {
-  .seleccionadosLista {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-} */
 
 .seleccionadoItem {
+  /* Se mantiene la estructura y estilos base, el contenedor clickable se agregará dentro */
   background-color: var(--white);
-  padding: 1rem 1.25rem;
-  border: 1px solid var(--border-color);
   border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Nuevo contenedor envolvente para indicar que es selectable */
+.selectableWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: var(--shadow);
-  transition: border-color 0.2s;
+  padding: var(--spacing-md);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
-.seleccionadoItem:hover {
+
+.selectableWrapper:hover {
   border-color: var(--primary);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
 .seleccionadoInfo {
@@ -309,114 +145,76 @@
   font-weight: 500;
   color: var(--dark);
   font-size: 1rem;
-  padding-right: 1rem; /* Espacio antes de los controles */
-}
-.seleccionadoInfo span {
-  /* Para cantidad o precio si se añade */
-  color: var(--secondary-dark);
-  font-size: 0.9rem;
-  margin-left: 0.5rem;
+  padding-right: var(--spacing-md);
 }
 
 .seleccionadoControles {
   display: flex;
-  gap: 0.5rem; /* Espacio entre botones + y - */
+  gap: var(--spacing-sm);
   align-items: center;
 }
 
 .controlBtn {
-  /* Botones + y - */
-  padding: 0.4rem 0.8rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   font-size: 1rem;
   background: var(--primary);
   color: var(--white);
   border: none;
   border-radius: var(--radius);
   cursor: pointer;
-  line-height: 1; /* Para mejor alineación vertical del texto */
-  transition: background-color 0.2s;
-  user-select: none;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 .controlBtn:hover {
   background: var(--primary-dark);
+  box-shadow: var(--shadow-lg);
 }
 
+/* Finalizar */
 .finalizarWrapper {
-  margin-top: 2.5rem;
+  margin-top: var(--spacing-lg);
   text-align: center;
-  padding-top: 1.5rem;
+  padding-top: var(--spacing-md);
   border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 
 .botonFinalizar {
-  padding: 0.8rem 1.8rem; /* Ajustado */
-  font-size: 1.1rem; /* Ajustado */
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 1.1rem;
   background: var(--success);
   border: none;
   color: var(--white);
   border-radius: var(--radius);
   cursor: pointer;
-  font-weight: 600; /* Más peso */
+  font-weight: 600;
   box-shadow: var(--shadow);
-  transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
-  user-select: none;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.15s ease;
 }
 .botonFinalizar:hover {
   background: var(--success-dark);
   box-shadow: var(--shadow-lg);
   transform: translateY(-2px);
 }
-
+.botonFinalizar:disabled {
+  background-color: var(--secondary);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
 .message {
-  /* Consistente con otros mensajes */
-  padding: 1rem;
-  border-radius: var(--radius);
+  font-size: var(--font-size-md);
   text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.95rem;
-  color: var(--secondary-dark);
-  background: var(--light);
-  border: 1px solid var(--border-color);
+  margin-top: var(--spacing-md);
 }
 
-.dashboardButton {
-  /* Botón para volver al dashboard */
-  padding: 0.6rem 1.2rem;
-  font-size: 0.95rem;
-  border-radius: var(--radius);
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s, box-shadow 0.2s;
-  background: var(--secondary); /* Color secundario para "Volver" */
-  color: var(--white);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  margin-top: 1.5rem; /* Espacio si se usa fuera de un flex container */
-}
-.dashboardButton:hover {
-  background: var(--secondary-dark);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.error {
+  color: var(--danger);
 }
 
-.buscadorContainer {
-  margin-bottom: 2rem;
-  display: flex;
-  justify-content: center;
-}
-
-.buscador {
-  width: 100%;
-  max-width: 350px;
-  padding: 0.7rem 1.1rem;
-  border-radius: var(--radius);
-  border: 1.5px solid var(--border-color);
-  font-size: 1.1rem;
-  background: var(--light);
-  color: var(--dark);
-  transition: border-color 0.2s;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-}
-.buscador:focus {
-  border-color: var(--primary);
-  outline: none;
+.success {
+  color: var(--success);
 }

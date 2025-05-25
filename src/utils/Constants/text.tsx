@@ -130,4 +130,8 @@ export const NAMES = {
   REGISTRO_BOTON: "Registrarse",
   REGISTRO_EXITOSO: "Usuario creado exitosamente.",
   REGISTRO_ERROR: "Error al crear usuario.",
+
+  CATEGORIA_DESCONOCIDA: "Categoría Desconocida", // Usado para productos sin categoría asignada
+  DASHBOARD_COMANDAS_PAGADAS: "Comandas Pagadas",
+  DASHBOARD_COMANDAS_PENDIENTES: "Comandas Pendientes",
 };

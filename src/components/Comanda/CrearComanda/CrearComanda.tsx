@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../Button/Button";
-import ProductoSelectorList from "../../Producto/ProductoSelectorList";
+import ProductoSelectorList from "../../Producto/ProductoSelectorList"; // ProductoSelectorList incluido correctamente
 import ProductosSeleccionadosList from "./ProductosSeleccionadosList";
 import styles from "./Comandas.module.css";
 import { NAMES } from "../../../utils/Constants/text";
@@ -24,7 +24,6 @@ function CrearComanda() {
   } = useCrearComanda();
   const navigate = useNavigate();
 
-  // Estado para el buscador
   const [busqueda, setBusqueda] = useState("");
 
   if (loading) {
@@ -33,7 +32,7 @@ function CrearComanda() {
 
   return (
     <div className={styles.comandaContainer}>
-      <h1 className={styles.titulo}>
+      <h1 className={styles.comandaTitulo}>
         {comandaIdParaEditar ? NAMES.ID_COMANDA_EDITAR : NAMES.ID_COMANDA_CREAR}
         {comandaIdParaEditar ? ` #${comandaIdParaEditar}` : ""}
       </h1>
@@ -43,14 +42,13 @@ function CrearComanda() {
         <p className={`${styles.message} ${styles.success}`}>{mensaje}</p>
       )}
 
-      {/* Buscador de productos */}
       <div className={styles.buscadorContainer}>
         <input
           type="text"
           placeholder="Buscar producto..."
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
-          className={styles.buscador}
+          className="input"
         />
       </div>
 
@@ -58,7 +56,6 @@ function CrearComanda() {
         <>
           <div className={styles.selectorProductosContainer}>
             {categorias.map((categoria) => {
-              // Filtrar productos por categoría y búsqueda
               const productosFiltrados = productos
                 .filter((p) => p.categoria_id === categoria.id)
                 .filter((p) =>
@@ -68,6 +65,7 @@ function CrearComanda() {
               return (
                 <div key={categoria.id} className={styles.categoriaSection}>
                   <h2 className={styles.categoriaTitulo}>{categoria.nombre}</h2>
+                  {/* ProductoSelectorList incluido aquí */}
                   <ProductoSelectorList
                     productos={productosFiltrados}
                     onProductoClick={handleSeleccionarProducto}
@@ -88,7 +86,7 @@ function CrearComanda() {
         </>
       )}
 
-      <div className={styles.finalizar}>
+      <div className={styles.finalizarWrapper}>
         <Button
           text={
             comandaIdParaEditar
@@ -102,7 +100,7 @@ function CrearComanda() {
         <Button
           text="Volver"
           onClick={() => navigate(ROUTES.DASHBOARD)}
-          className={styles.dashboardButton}
+          className="btn"
         />
       </div>
     </div>

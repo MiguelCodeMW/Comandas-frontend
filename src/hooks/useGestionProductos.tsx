@@ -156,7 +156,7 @@ export function useGestionProductos() {
       setError(errorMessage);
     } else {
       setProductos((prev) => prev.filter((p) => p.id !== id));
-      setMensaje(NAMES.PRODUCTO_ELIMINAR_EXISTOSA);
+      setMensaje(NAMES.PRODUCTO_ELIMINAR_EXITOSA);
     }
   };
 

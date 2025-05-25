@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Button from "../Button/Button";
-import styles from "./Categoria.module.css";
+import Button from "../Button/Button"; // Asumo que Button.tsx usa la clase global .btn
+import styles from "./Categoria.module.css"; // Importa los estilos CSS Modules
 import { NAMES } from "../../utils/Constants/text";
 import { Categoria } from "../../utils/Categoria/CategoriaProps";
 
@@ -50,6 +50,7 @@ function FormularioCategoria({
     <form onSubmit={handleSubmit} className={styles.form}>
       <label>
         Nombre:
+        {/* Aquí se usa styles.input del CSS Module */}
         <input
           type="text"
           value={nombre}
@@ -63,14 +64,16 @@ function FormularioCategoria({
         <Button
           text={textoBotonSubmit}
           type="submit"
-          className={[styles.button, styles.save].join(" ")}
+          // Aquí se usa styles.button y styles.save del CSS Module
+          className={`${styles.button} ${styles.save}`}
         />
         {onCancel && (
           <Button
             text={NAMES.CANCELAR}
             onClick={onCancel}
             type="button"
-            className={[styles.button, styles.cancel].join(" ")}
+            // Aquí se usa styles.button y styles.cancel del CSS Module
+            className={`${styles.button} ${styles.cancel}`}
           />
         )}
       </div>

@@ -10,16 +10,17 @@ function ProductoSelectorList({
   }
 
   return (
-    <ul className={styles.productosGrid}>
+    <ul className={styles.productosLista}>
       {productos.map((producto) => (
         <li
           key={producto.id}
-          className={styles.productItem}
+          className={styles.productoItem}
           onClick={() => onProductoClick(producto)}
         >
-          <span className={styles.productName}>
-            {producto.nombre} - ${producto.precio.toFixed(2)}
-          </span>
+          <div className={styles.productoInfo}>{producto.nombre}</div>
+          <div className={styles.productoPrecio}>
+            ${producto.precio.toFixed(2)}
+          </div>
         </li>
       ))}
     </ul>

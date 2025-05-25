@@ -1,54 +1,85 @@
-.container {
-  /* Añadir un contenedor si es necesario para la página de productos */
-  padding: 2rem;
+/* components/Producto/Producto.module.css */
+
+/* Contenedor principal para la gestión de productos */
+.gestionProductosContainer {
+  padding: var(--spacing-xl); /* Usar variable de espaciado */
   font-family: var(--font);
   background: var(--background);
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: var(--spacing-xl) auto;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-lg);
 }
-.title {
-  /* Título para la página de productos */
-  font-size: 1.8rem;
-  font-weight: 600;
+
+/* Títulos generales de la página */
+.pageTitle {
+  font-size: var(--font-size-xxl); /* Usar variable para tamaño de fuente */
+  font-weight: 700;
   color: var(--dark);
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--spacing-xl);
 }
-.form {
-  /* Formulario para añadir/editar producto */
+
+/* Formularios (añadir/editar producto) */
+.formContainer {
   display: flex;
-  flex-direction: column; /* O flex-wrap si es horizontal */
-  gap: 1rem;
-  margin-bottom: 2.5rem;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
   background-color: var(--white);
-  padding: 1.5rem;
+  padding: var(--spacing-lg);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-  max-width: 600px; /* Limitar ancho del formulario */
+  box-shadow: var(--shadow-lg);
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
-.form .input {
-  /* Estilo para inputs dentro del form */
-  padding: 0.75rem 1rem;
+.formContainer label {
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+  color: var(--secondary-dark);
+  font-size: var(--font-size-md);
+  display: block; /* Para que el input vaya en la siguiente línea */
+}
+.formContainer .input,
+.formContainer .select {
+  padding: var(--spacing-md);
   border-radius: var(--radius);
   border: 1px solid var(--border-color);
-  font-size: 1rem;
+  font-size: var(--font-size-md);
   font-family: inherit;
   transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
 }
-.form .input:focus {
+.formContainer .input:focus,
+.formContainer .select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(var(--primary), 0.1);
-}
-.form .buttonGroup {
-  /* Para alinear botones del formulario */
-  justify-content: flex-start;
+  box-shadow: 0 0 0 3px rgba(var(--primary), 0.2);
 }
 
+/* Títulos de sección (Añadir Producto, Lista de Productos) */
+.sectionTitle {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--dark);
+  text-align: left;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--border-color);
+}
+.sectionTitle:first-of-type {
+  margin-top: 0;
+}
+
+/* Lista de productos */
 .productList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Ajustado */
-  gap: 1.5rem; /* Ajustado */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
   padding: 0;
   margin: 0;
   list-style: none;
@@ -57,151 +88,133 @@
 .productItem {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Para que los botones queden abajo */
-  padding: 1.5rem; /* Más padding */
-  border-radius: var(--radius-lg); /* Más redondeado */
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
   background: var(--white);
   box-shadow: var(--shadow);
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  text-align: left; /* Mejor para info de producto */
-  border: 1px solid var(--border-color); /* Borde sutil */
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  text-align: left;
+  border: 1px solid var(--border-color);
 }
-
 .productItem:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--primary); /* Resaltar al hacer hover */
+  border-color: var(--primary);
 }
 
 .productName {
   font-weight: 600;
-  font-size: 1.15rem; /* Ajustado */
-  margin-bottom: 0.5rem; /* Espacio antes del precio/categoría */
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-sm);
   color: var(--dark);
 }
-.productInfo {
-  /* Para precio, categoría, etc. */
-  font-size: 0.9rem;
+.productInfoText {
+  font-size: var(--font-size-md);
   color: var(--secondary-dark);
-  margin-bottom: 1rem; /* Espacio antes de los botones */
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+.productInfoText div {
+  margin-bottom: var(--spacing-xs);
 }
 
 .buttonGroup {
-  /* Contenedor de botones en cada item */
   display: flex;
-  gap: 0.75rem; /* Espacio entre botones */
-  justify-content: flex-start; /* Alinea botones a la izquierda */
-  margin-top: auto; /* Empuja los botones al final de la tarjeta */
-  width: 100%; /* Para que los botones se distribuyan bien si son varios */
+  gap: var(--spacing-sm);
+  justify-content: flex-end;
+  margin-top: auto;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
-/* --- Botones Unificados (ya estaban bien definidos aquí) --- */
-.button,
-.save,
-.cancel,
-.edit,
-.delete,
-.dashboardButton {
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
+/* Estilos base para todos los botones de acción dentro de este módulo */
+.button {
+  /* <-- ¡NUEVA CLASE BASE EN PRODUCTO.MODULE.CSS! */
+  padding: 0.8rem 1.6rem;
   border-radius: var(--radius);
   border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  box-shadow: var(--shadow);
   text-transform: capitalize;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
-  flex-grow: 1; /* Para que los botones en grupo ocupen espacio similar */
-  text-align: center;
+  flex-shrink: 0;
+  display: flex; /* Para centrar contenido si es necesario */
+  align-items: center;
+  justify-content: center;
+  min-width: 80px; /* Para que los botones pequeños no sean demasiado chicos */
 }
-.button:hover,
-.save:hover,
-.cancel:hover,
-.edit:hover,
-.delete:hover,
-.dashboardButton:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transform: translateY(-1px);
-}
-.button:active,
-.save:active,
-.cancel:active,
-.edit:active,
-.delete:active,
-.dashboardButton:active {
-  transform: translateY(0px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+.button:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
-.button,
-.dashboardButton {
-  background: var(--primary);
-  color: var(--white);
-}
-.button:hover,
-.dashboardButton:hover {
-  background: var(--primary-dark);
-}
-
-.save {
-  background: var(--success);
-  color: var(--white);
-}
-.save:hover {
-  background: var(--success-dark);
-}
-
-.cancel {
-  background: var(--secondary);
-  color: var(--white);
-}
-.cancel:hover {
-  background: var(--secondary-dark);
-}
-
-.edit {
+/* Botones específicos de producto - Ahora solo definen color y se combinan con .button */
+.editButton {
   background: var(--warning);
-  color: var(--dark);
+  color: var(--dark); /* Texto oscuro para contraste en amarillo */
 }
-.edit:hover {
+.editButton:hover {
   background: var(--warning-dark);
 }
-
-.delete {
+.deleteButton {
   background: var(--danger);
   color: var(--white);
 }
-.delete:hover {
+.deleteButton:hover {
   background: var(--danger-dark);
 }
+.saveButton {
+  /* Para el botón de guardar en el formulario (Añadir/Editar) */
+  background: var(--success);
+  color: var(--white);
+}
+.saveButton:hover {
+  background: var(--success-dark);
+}
+.cancelButton {
+  /* Para el botón de cancelar en el formulario */
+  background: var(--secondary);
+  color: var(--white);
+}
+.cancelButton:hover {
+  background: var(--secondary-dark);
+}
+/* Nuevo botón para el "Volver" específico de Producto, si no usa dashboardButton de Categoría */
+.backButton {
+  background: var(--secondary); /* O primary si quieres que sea azul */
+  color: var(--white);
+}
+.backButton:hover {
+  background: var(--secondary-dark);
+}
 
-/* --- Mensajes Unificados --- */
-.success,
-.error,
+/* Mensajes (éxito, error, informativo) */
 .message {
-  padding: 0.85rem 1.25rem;
+  padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--radius);
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-lg);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: var(--font-size-md);
+  border-width: 1px;
+  border-style: solid;
 }
-
-.success {
+.successMessage {
   color: var(--success-dark);
-  background: #d1e7dd;
-  border: 1px solid var(--success);
+  background: var(--success-light);
+  border-color: var(--success);
 }
-
-.error {
+.errorMessage {
   color: var(--danger-dark);
-  background: #f8d7da;
-  border: 1px solid var(--danger);
+  background: var(--danger-light);
+  border-color: var(--danger);
 }
-
-.message {
+.infoMessage {
   color: var(--secondary-dark);
   background: var(--light);
-  border: 1px solid var(--border-color);
-  margin-top: 1.5rem;
+  border-color: var(--border-color);
+  margin-top: var(--spacing-md);
 }

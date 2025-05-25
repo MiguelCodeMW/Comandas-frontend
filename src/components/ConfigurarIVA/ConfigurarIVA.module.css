@@ -1,88 +1,139 @@
-.modal {
+/* Estilos para el backdrop (fondo oscuro/transparente) */
+.modalBackdrop {
+  position: fixed; /* Fija el modal en la pantalla */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Ocupa todo el ancho de la ventana */
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
+  display: flex; /* Para centrar el contenido del modal */
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+/* Estilos para el contenido del modal */
+.modalContent {
   background: var(--white);
-  border-radius: var(--radius-lg); /* Más redondeado */
-  padding: 2.5rem; /* Más padding */
-  box-shadow: var(--shadow-lg); /* Sombra más pronunciada para modales */
-  max-width: 400px; /* Ancho máximo */
-  margin: 3rem auto; /* Centrado con más margen */
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  max-width: 480px;
+  width: 90%; /* Ancho responsivo */
+  margin: auto; /* Para asegurar el centrado si no es flex */
   text-align: center;
   font-family: var(--font);
+  position: relative; /* Necesario para posicionamiento de elementos internos */
+  z-index: 1001; /* Ligeramente por encima del backdrop */
 }
-.modal h2 {
-  /* Título del modal */
-  font-size: 1.5rem;
-  font-weight: 600;
+
+.modalContent h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
   color: var(--dark);
-  margin: 0 0 1.5rem 0; /* Espacio debajo del título */
+  margin: 0 0 2rem 0;
+}
+
+/* Grupo de entrada (label + input) */
+.inputGroup {
+  margin-bottom: 1.5rem; /* Espacio debajo del grupo de input */
+  text-align: left; /* Alinea el label a la izquierda */
+}
+
+.inputGroup label {
+  display: block; /* Cada label en su propia línea */
+  font-size: var(--font-size-md);
+  color: var(--secondary-dark);
+  margin-bottom: 0.5rem; /* Espacio entre label y input */
+  font-weight: 500;
 }
 
 .input {
-  margin: 0 0 1.5rem 0; /* Espacio debajo del input, antes del botón */
-  padding: 0.85rem 1.1rem;
-  width: 100%; /* Ocupa todo el ancho */
-  font-size: 1rem;
+  padding: 0.9rem 1.2rem;
+  width: 100%;
+  font-size: 1.05rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   box-sizing: border-box;
-  text-align: center; /* Centrar el número del IVA */
-  transition: border-color 0.2s, box-shadow 0.2s;
+  text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(var(--primary), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--primary), 0.2);
 }
 
+/* Grupo de botones */
+.buttonGroup {
+  display: flex; /* Usa flexbox para los botones */
+  gap: var(--spacing-md); /* Espacio entre los botones */
+  justify-content: center; /* Centra los botones */
+  margin-top: 2rem; /* Espacio encima del grupo de botones */
+}
+
+/* Botón unificado - aplicado al Button.tsx a través de className */
 .button {
-  /* Botón de guardar */
   background: var(--primary);
   color: var(--white);
   border: none;
-  padding: 0.85rem 1.1rem;
+  padding: 0.9rem 1.2rem;
   border-radius: var(--radius);
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: background-color 0.2s, transform 0.1s;
-  width: 100%; /* Ocupa todo el ancho */
+  font-size: 1.05rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.15s ease,
+    box-shadow 0.2s ease;
+  flex: 1; /* Permite que los botones se expandan y tomen el espacio disponible */
+  max-width: 180px; /* Limita el ancho máximo para que no sean demasiado grandes */
+  box-shadow: var(--shadow);
+  text-transform: capitalize;
 }
 .button:hover {
   background: var(--primary-dark);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
-.button:active {
-  transform: translateY(1px);
+.button:disabled {
+  background-color: var(--secondary);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
-.message {
-  /* Mensaje de éxito o error */
-  margin-top: 1.5rem; /* Espacio arriba del mensaje */
-  font-size: 0.9rem;
-  padding: 0.85rem 1rem;
+.cancelButton {
+  background-color: var(--danger); /* Color rojo para cancelar */
+}
+
+.cancelButton:hover {
+  background-color: var(--danger-dark);
+}
+
+/* Mensajes unificados */
+.errorMessage,
+.successMessage {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  padding: 0.8rem 1.2rem;
   border-radius: var(--radius);
-}
-/* Estilos específicos para mensajes de éxito/error si es necesario */
-.message.success {
-  color: var(--success-dark);
-  background: #d1e7dd;
-  border: 1px solid var(--success);
-}
-.message.error {
-  color: var(--danger-dark);
-  background: #f8d7da;
-  border: 1px solid var(--danger);
+  font-weight: 500;
+  border-width: 1px;
+  border-style: solid;
+  text-align: center;
 }
 
-.headerButton {
-  background: #e0e7ff;
-  color: #222;
-  border: 1px solid #b6b6b6;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-weight: 500;
-  margin-right: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
+.successMessage {
+  color: var(--success-dark);
+  background: var(
+    --success-light
+  ); /* Usar variable si existe, sino un color claro */
+  border-color: var(--success);
 }
-.headerButton:last-child {
-  margin-right: 0;
+
+.errorMessage {
+  color: var(--danger-dark);
+  background: var(
+    --danger-light
+  ); /* Usar variable si existe, sino un color claro */
+  border-color: var(--danger);
 }

@@ -3,18 +3,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  color: #555;
+  padding: 2rem;
+  color: var(--secondary-dark); /* Usar variable para el color del texto */
+  font-family: var(--font); /* Usar fuente global */
+  font-size: 1.1rem;
 }
 
 .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 36px;
-  height: 36px;
+  border: 4px solid rgba(var(--primary), 0.2); /* Usar primary con opacidad */
+  width: 40px; /* Ligeramente más grande */
+  height: 40px;
   border-radius: 50%;
-  border-left-color: #09f; /* O tu color primario */
-  animation: spin 1s ease infinite;
-  margin-bottom: 10px;
+  border-top-color: var(--primary); /* La parte que gira, primary */
+  animation: spin 1s ease-in-out infinite; /* Animación más suave */
+  margin-bottom: 1.5rem; /* Más espacio */
 }
 
 @keyframes spin {

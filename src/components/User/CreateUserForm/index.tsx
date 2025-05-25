@@ -13,7 +13,7 @@ function CreateUserForm() {
     password: "",
   });
   const [message, setMessage] = useState<string | null>(null);
-  const navigate = useNavigate(); // Hook para manejar la navegación
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,12 +23,12 @@ function CreateUserForm() {
     e.preventDefault();
 
     try {
-      const res = await api.post(ROUTES.CREATE_USER, formData); // Usa la instancia de Axios
+      const res = await api.post(ROUTES.CREATE_USER, formData);
       setMessage("Usuario creado exitosamente!");
       console.log(res.data);
 
-      // Redirige al usuario a la página principal o al login
-      navigate(ROUTES.LOGIN); // Cambia "/dashboard" por la ruta deseada
+      // Redirige al usuario al login
+      navigate(ROUTES.LOGIN);
     } catch (error: any) {
       setMessage("Error al crear usuario");
       console.error(error.response?.data || error.message);
@@ -37,15 +37,15 @@ function CreateUserForm() {
 
   return (
     <div className={styles.formContainer}>
-      <h1>Crear Usuario</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <h1>Crear Usuario</h1>
         <input
           type="text"
           name="name"
           placeholder="Nombre"
           onChange={handleChange}
           value={formData.name}
-          className={styles.input}
+          className="input" // Clase global
         />
         <input
           type="email"
@@ -53,7 +53,7 @@ function CreateUserForm() {
           placeholder="Email"
           onChange={handleChange}
           value={formData.email}
-          className={styles.input}
+          className="input" // Clase global
         />
         <input
           type="password"
@@ -61,22 +61,22 @@ function CreateUserForm() {
           placeholder="Contraseña"
           onChange={handleChange}
           value={formData.password}
-          className={styles.input}
+          className="input" // Clase global
         />
         <Button
           text="Registrarse"
           type="submit"
-          className={[styles.button, styles.padded].join(" ")}
+          className="btn padded" // Clases globales
         />
         <Button
           text="Volver"
           onClick={() => navigate(ROUTES.LOGIN)}
-          className={[styles.button, styles.padded].join(" ")}
+          className="btn padded" // Clases globales
         />
       </form>
-
-      {message && <p className={styles.message}>{message}</p>}
+      {message && <p className="message">{message}</p>} {/* Clase global */}
     </div>
   );
 }
+
 export default CreateUserForm;

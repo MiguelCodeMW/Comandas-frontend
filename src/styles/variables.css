@@ -1,41 +1,50 @@
-/* :root {
+/* src/styles/variables.css */
+:root {
+  /* Colores principales */
   --primary: #0d6efd;
   --primary-dark: #0b5ed7;
   --secondary: #6c757d;
   --secondary-dark: #495057;
   --success: #198754;
   --success-dark: #146c43;
+  --success-light: #d1e7dd; /* Un color más claro para fondos de mensajes de éxito */
   --danger: #dc3545;
   --danger-dark: #bb2d3b;
-  --warning: #ffc107;
+  --danger-light: #f8d7da; /* Un color más claro para fondos de mensajes de error */
+  --warning: #ffc107; /* Amarillo */
   --warning-dark: #e0a800;
   --info: #398894;
-  --background: #f8f9fa;
-  --white: #fff;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  --radius: 10px;
+  --light: #f8f9fa; /* Para fondos claros de mensajes informativos */
+
+  /* Colores de texto y fondo */
+  --dark: #212529;
+  --white: #ffffff;
+  --background: #f4f7f9; /* Fondo general de la página */
+  --border-color: #dee2e6; /* Borde general */
+  --border-color-light: #e9ecef; /* Borde más claro */
+  --highlight: #e6f7ff; /* Para items al pasar el mouse */
+  --highlight-border: #9dd8ff; /* Borde para highlight */
+
+  /* Espaciado */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2.5rem;
+
+  /* Radios de borde */
+  --radius: 0.375rem;
+  --radius-lg: 0.5rem;
+
+  /* Sombras */
+  --shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+  /* Fuentes */
   --font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-} */
-:root {
-  --primary: #0d6efd;
-  --primary-dark: #0b5ed7;
-  --secondary: #6c757d;
-  --secondary-dark: #495057;
-  --success: #198754;
-  --success-dark: #146c43;
-  --danger: #dc3545;
-  --danger-dark: #bb2d3b;
-  --warning: #ffc107;
-  --warning-dark: #e0a800;
-  --info: #398894; /* Ajustado para un tono moderno */
-  --light: #f8f9fa; /* Añadido para fondos claros */
-  --dark: #212529; /* Añadido para texto oscuro */
-  --border-color: #dee2e6; /* Color de borde estándar */
-  --background: #f4f7f9; /* Un fondo global ligeramente más suave */
-  --white: #fff;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra un poco más suave */
-  --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada para modales, etc. */
-  --radius: 8px; /* Radio de borde estándar */
-  --radius-lg: 12px; /* Radio de borde más grande */
-  --font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-sm: 0.8rem;
+  --font-size-md: 0.95rem;
+  --font-size-lg: 1.2rem;
+  --font-size-xl: 1.6rem;
+  --font-size-xxl: 2rem;
 }
