@@ -26,7 +26,7 @@ function GestionCategoriasPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Gestionar Categorías</h1>
+      <h1 className={styles.title}>{NAMES.CATEGORIAS_BUTTON}</h1>
 
       {/* Mensajes globales del hook */}
       {mensaje && (
@@ -37,7 +37,7 @@ function GestionCategoriasPage() {
       {/* Formulario para crear nueva categoría (solo si no se está editando) */}
       {!editandoId && (
         <>
-          <h2 className={styles.titleForm}>Nueva Categoría</h2>
+          <h2 className={styles.titleForm}>{NAMES.CATEGORIA_NUEVA}</h2>
           <FormularioCategoria
             onSubmit={async (nombreInput) => {
               const success = await handleCrearCategoria(nombreInput);
@@ -61,7 +61,6 @@ function GestionCategoriasPage() {
         onEliminarCallback={handleEliminarCategoriaCallback}
         limpiarMensajesAlCambiar={limpiarMensajes}
       />
-      {/* Nuevo contenedor flex para el botón Volver */}
       <div
         style={{
           display: "flex",
@@ -70,7 +69,7 @@ function GestionCategoriasPage() {
         }}
       >
         <Button
-          text="Volver"
+          text={NAMES.VOLVER}
           onClick={() => navigate(ROUTES.DASHBOARD)}
           className={styles.dashboardButton}
         />

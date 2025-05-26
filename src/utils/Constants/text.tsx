@@ -17,6 +17,7 @@ export const NAMES = {
   ALERTA_NOMBRE: "El nombre no puede estar vacío.",
   PLACEHOLDER_PASSWORD: "Contraseña",
   TOKEN: "token",
+  TOKEN_ERROR: "Error de autenticación: No se encontró token.",
   USER: "user",
   ROL_ADMIN: "admin",
 

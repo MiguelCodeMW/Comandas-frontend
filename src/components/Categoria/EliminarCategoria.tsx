@@ -15,12 +15,9 @@ function EliminarCategoria({
     if (!confirmDelete) return;
 
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem(NAMES.TOKEN);
       if (!token) {
-        onCategoriaEliminada(
-          id,
-          "Error de autenticación: No se encontró token."
-        );
+        onCategoriaEliminada(id, NAMES.TOKEN_ERROR);
         return;
       }
 
@@ -46,7 +43,6 @@ function EliminarCategoria({
     <Button
       text={NAMES.ELIMINAR}
       onClick={handleDelete}
-      // Aquí se usa styles.button y styles.delete del CSS Module
       className={`${styles.button} ${styles.delete}`}
     />
   );

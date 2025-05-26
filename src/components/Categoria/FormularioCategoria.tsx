@@ -17,7 +17,7 @@ function FormularioCategoria({
   onSubmit = async () => true,
   onCancel,
   categoriaInicial,
-  textoBotonSubmit = "Guardar",
+  textoBotonSubmit = NAMES.GUARDAR,
   placeholder = NAMES.PLACEHOLDER_NOMBRE,
   limpiarMensajesAlCambiar,
 }: FormularioCategoriaProps = {}) {
@@ -50,7 +50,6 @@ function FormularioCategoria({
     <form onSubmit={handleSubmit} className={styles.form}>
       <label>
         Nombre:
-        {/* Aquí se usa styles.input del CSS Module */}
         <input
           type="text"
           value={nombre}
@@ -64,7 +63,6 @@ function FormularioCategoria({
         <Button
           text={textoBotonSubmit}
           type="submit"
-          // Aquí se usa styles.button y styles.save del CSS Module
           className={`${styles.button} ${styles.save}`}
         />
         {onCancel && (
@@ -72,7 +70,6 @@ function FormularioCategoria({
             text={NAMES.CANCELAR}
             onClick={onCancel}
             type="button"
-            // Aquí se usa styles.button y styles.cancel del CSS Module
             className={`${styles.button} ${styles.cancel}`}
           />
         )}

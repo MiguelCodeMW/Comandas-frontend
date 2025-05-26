@@ -1,7 +1,7 @@
 import EliminarCategoria from "./EliminarCategoria";
-import Button from "../Button/Button"; // Asumo que Button.tsx usa la clase global .btn
+import Button from "../Button/Button";
 import FormularioCategoria from "./FormularioCategoria";
-import styles from "./Categoria.module.css"; // Importa los estilos CSS Modules
+import styles from "./Categoria.module.css";
 import { Categoria } from "../../utils/Categoria/CategoriaProps";
 import { NAMES } from "../../utils/Constants/text";
 
@@ -47,13 +47,11 @@ function CategoriaList({
                 <Button
                   text={NAMES.EDITAR}
                   onClick={() => onEdit(categoria.id)}
-                  // Aquí se usa styles.button y styles.edit del CSS Module
                   className={`${styles.button} ${styles.edit}`}
                 />
                 <EliminarCategoria
                   id={categoria.id}
                   onCategoriaEliminada={onEliminarCallback}
-                  // Aquí se usa styles.button y styles.delete del CSS Module
                   className={`${styles.button} ${styles.delete}`}
                 />
               </div>
