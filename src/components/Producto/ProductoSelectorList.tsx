@@ -1,12 +1,13 @@
 import styles from "../Comanda/CrearComanda/Comandas.module.css";
 import { ProductoSelectorListProps } from "../../utils/Producto/ProductoSelectorListProps";
+import { NAMES } from "../../utils/Constants/text";
 
 function ProductoSelectorList({
   productos,
   onProductoClick,
 }: ProductoSelectorListProps) {
   if (productos.length === 0) {
-    return <p className={styles.message}>No hay productos disponibles.</p>;
+    return <p className={styles.message}>{NAMES.PRODUCTOS_NO_DISPONIBLES}</p>;
   }
 
   return (

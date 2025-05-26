@@ -79,6 +79,7 @@ export const NAMES = {
   ALERTA_PRODUCTO_GUARDAR: "Error al guardar el producto.",
   ALERTA_PRODUCTO_ACTUALIZAR: "Error al actualizar el producto.",
   ALERTA_PRODUCTO_ELIMINAR: "Error al eliminar el producto.",
+  PRODUCTOS_LISTA: "Lista de Productos",
 
   //Comandas
   COMANDA_TITULO: "Comandas",

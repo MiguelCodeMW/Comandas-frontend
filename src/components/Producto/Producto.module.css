@@ -1,8 +1,6 @@
-/* components/Producto/Producto.module.css */
-
 /* Contenedor principal para la gestión de productos */
 .gestionProductosContainer {
-  padding: var(--spacing-xl); /* Usar variable de espaciado */
+  padding: var(--spacing-xl);
   font-family: var(--font);
   background: var(--background);
   min-height: 100vh;
@@ -14,7 +12,7 @@
 
 /* Títulos generales de la página */
 .pageTitle {
-  font-size: var(--font-size-xxl); /* Usar variable para tamaño de fuente */
+  font-size: var(--font-size-xxl);
   font-weight: 700;
   color: var(--dark);
   text-align: center;
@@ -40,7 +38,7 @@
   margin-bottom: var(--spacing-xs);
   color: var(--secondary-dark);
   font-size: var(--font-size-md);
-  display: block; /* Para que el input vaya en la siguiente línea */
+  display: block;
 }
 .formContainer .input,
 .formContainer .select {
@@ -130,7 +128,6 @@
 
 /* Estilos base para todos los botones de acción dentro de este módulo */
 .button {
-  /* <-- ¡NUEVA CLASE BASE EN PRODUCTO.MODULE.CSS! */
   padding: 0.8rem 1.6rem;
   border-radius: var(--radius);
   border: none;
@@ -141,10 +138,10 @@
   box-shadow: var(--shadow);
   text-transform: capitalize;
   flex-shrink: 0;
-  display: flex; /* Para centrar contenido si es necesario */
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 80px; /* Para que los botones pequeños no sean demasiado chicos */
+  min-width: 80px;
 }
 .button:hover {
   box-shadow: var(--shadow-lg);
@@ -154,7 +151,7 @@
 /* Botones específicos de producto - Ahora solo definen color y se combinan con .button */
 .editButton {
   background: var(--warning);
-  color: var(--dark); /* Texto oscuro para contraste en amarillo */
+  color: var(--dark);
 }
 .editButton:hover {
   background: var(--warning-dark);
@@ -184,7 +181,7 @@
 }
 /* Nuevo botón para el "Volver" específico de Producto, si no usa dashboardButton de Categoría */
 .backButton {
-  background: var(--secondary); /* O primary si quieres que sea azul */
+  background: var(--secondary);
   color: var(--white);
 }
 .backButton:hover {
