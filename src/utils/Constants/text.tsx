@@ -105,6 +105,7 @@ export const NAMES = {
   ALERTA_COMANDA_PAGAR: "Error al pagar la comanda.",
   ALERTA_COMANDA_BORRAR: "Error al borrar la comanda.",
   COMANDA_BUSCAR_PRODUCTOS: "Buscar Producto...",
+  COMANDA_BUTTON_BORRAR: "Borrar Comanda",
 
   COMANDA_BUSCAR_ERROR:
     "No hay productos en esta categoría o que coincidan con la búsqueda.",
