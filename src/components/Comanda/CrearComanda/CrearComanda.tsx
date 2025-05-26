@@ -38,20 +38,22 @@ function CrearComanda() {
     }
   }, [categorias, categoriaSeleccionadaId]);
 
-  // Filtramos los productos basándonos en la categoría seleccionada Y la búsqueda
   const productosMostrados = productos.filter((p) => {
-    // Si no hay categoría seleccionada (lo cual no debería pasar con el useEffect)
-    // o la categoría del producto coincide con la seleccionada
-    const esDeCategoriaSeleccionada =
-      categoriaSeleccionadaId === null ||
-      p.categoria_id === categoriaSeleccionadaId;
-
-    // Si la búsqueda está vacía o el nombre del producto incluye la búsqueda
     const coincideConBusqueda = p.nombre
       .toLowerCase()
       .includes(busqueda.toLowerCase());
 
-    return esDeCategoriaSeleccionada && coincideConBusqueda;
+    // Si hay texto en la búsqueda, filtramos por búsqueda en todos los productos
+    if (busqueda.trim() !== "") {
+      return coincideConBusqueda;
+    }
+
+    // Si no hay búsqueda, filtramos por la categoría seleccionada
+    const esDeCategoriaSeleccionada =
+      categoriaSeleccionadaId === null || // Debería estar seleccionada por defecto
+      p.categoria_id === categoriaSeleccionadaId;
+
+    return esDeCategoriaSeleccionada;
   });
 
   if (loading) {
