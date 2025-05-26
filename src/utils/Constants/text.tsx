@@ -153,4 +153,8 @@ export const NAMES = {
   CATEGORIA_DESCONOCIDA: "Categoría Desconocida",
   DASHBOARD_COMANDAS_PAGADAS: "Comandas Pagadas",
   DASHBOARD_COMANDAS_PENDIENTES: "Comandas Pendientes",
+  REINTENTAR: "Reintentar",
+  IVA_VALOR:
+    "El valor del IVA debe ser un número entre 0 y 1 (ej: 0.21 para 21%).",
+  IVA_ERROR: "Error en onGuardado desde ConfigurarIVA",
 };

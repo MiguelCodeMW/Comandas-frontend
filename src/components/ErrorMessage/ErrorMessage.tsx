@@ -1,19 +1,17 @@
-import React from "react";
-import Button from "../Button/Button"; // Asumiendo que tienes tu componente Button
-import styles from "./ErrorMessage.module.css"; // Crearemos este archivo de estilos
+import Button from "../Button/Button";
+import styles from "./ErrorMessage.module.css";
+import { NAMES } from "../../utils/Constants/text";
 
 interface ErrorMessageProps {
   message: string;
   onRetry?: () => void;
 }
 
-const ErrorMessage: React.FC<ErrorMessageProps> = ({ message, onRetry }) => {
+const ErrorMessage = ({ message, onRetry }: ErrorMessageProps) => {
   return (
     <div className={styles.errorContainer}>
-      <p className={styles.errorMessage}>
-        {message || "Ha ocurrido un error inesperado."}
-      </p>
-      {onRetry && <Button onClick={onRetry} text="Reintentar" />}
+      <p className={styles.errorMessage}>{message}</p>
+      {onRetry && <Button onClick={onRetry} text={NAMES.REINTENTAR} />}
     </div>
   );
 };

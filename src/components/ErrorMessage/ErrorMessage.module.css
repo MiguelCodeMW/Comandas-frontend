@@ -4,18 +4,18 @@
   align-items: center;
   justify-content: center;
   padding: 2rem; /* Más padding */
-  border: 1px solid var(--danger); /* Usar variable danger */
-  background-color: #f8d7da; /* Color de fondo de error */
-  border-radius: var(--radius); /* Usar variable radius */
-  margin: 2rem; /* Más margen */
-  font-family: var(--font); /* Usar fuente global */
-  box-shadow: var(--shadow); /* Sombra suave */
+  border: 1px solid var(--danger);
+  background-color: #f8d7da;
+  border-radius: var(--radius);
+  margin: 2rem;
+  font-family: var(--font);
+  box-shadow: var(--shadow);
 }
 
 .errorMessage {
-  color: var(--danger-dark); /* Color de texto más oscuro para el error */
-  margin-bottom: 1.5rem; /* Más espacio */
+  color: var(--danger-dark);
+  margin-bottom: 1.5rem;
   text-align: center;
-  font-size: 1.1rem; /* Fuente un poco más grande */
+  font-size: 1.1rem;
   font-weight: 500;
 }

@@ -1,11 +1,11 @@
-import React from "react";
-import styles from "./LoadingSpinner.module.css"; // Crearemos este archivo de estilos también
+import styles from "./LoadingSpinner.module.css";
+import { NAMES } from "../../utils/Constants/text";
 
-const LoadingSpinner: React.FC = () => {
+const LoadingSpinner = () => {
   return (
     <div className={styles.spinnerContainer}>
       <div className={styles.spinner}></div>
-      <p>Cargando...</p>
+      <p>{NAMES.CARGANDO}</p>
     </div>
   );
 };

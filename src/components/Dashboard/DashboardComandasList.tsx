@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Dashboard.module.css";
 import { ComandaDashboard } from "../../hooks/useDashboard";
