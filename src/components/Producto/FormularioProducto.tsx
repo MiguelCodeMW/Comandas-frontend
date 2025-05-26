@@ -60,7 +60,7 @@ function FormularioProducto({
   return (
     <form onSubmit={handleSubmit} className={styles.formContainer}>
       <label>
-        Nombre:
+        {NAMES.LABEL_NOMBRE}
         <input
           type="text"
           name="nombre"
@@ -72,7 +72,7 @@ function FormularioProducto({
         />
       </label>
       <label>
-        Precio:
+        {NAMES.PRODUCTO_PRECIO}{" "}
         <input
           type="number"
           name="precio"
@@ -86,7 +86,7 @@ function FormularioProducto({
         />
       </label>
       <label>
-        Categoría:
+        {NAMES.LABEL_CATEGORIA}
         <select
           name="categoria_id"
           value={formData.categoria_id || ""}

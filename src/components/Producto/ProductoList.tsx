@@ -62,9 +62,12 @@ function ProductoList({
             <>
               <div className={styles.productInfoText}>
                 <span className={styles.productName}>{producto.nombre}</span>
-                <div>Precio: ${producto.precio.toFixed(2)}</div>
                 <div>
-                  Categoría: {getCategoriaNombre(producto.categoria_id)}
+                  {NAMES.LABEL_PRECIO} ${producto.precio.toFixed(2)}
+                </div>
+                <div>
+                  {NAMES.LABEL_CATEGORIA}{" "}
+                  {getCategoriaNombre(producto.categoria_id)}
                 </div>
               </div>
               <div className={styles.buttonGroup}>
