@@ -31,7 +31,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  flex-wrap: wrap; /* Para que se envuelva en pantallas pequeñas */
+  flex-wrap: wrap;
 }
 
 .userInfo {
@@ -100,13 +100,13 @@
   color: var(--dark);
   margin-top: var(--spacing-xl);
   margin-bottom: var(--spacing-lg);
-  text-align: left; /* Alineado a la izquierda */
+  text-align: left;
   border-bottom: 2px solid var(--primary); /* Una línea debajo del título */
   padding-bottom: var(--spacing-sm);
   width: fit-content; /* Para que la línea se ajuste al texto */
 }
 
-/* Lista de comandas - ¡CAMBIO CLAVE AQUÍ PARA EL GRID! */
+/* Lista de comandas*/
 .list {
   display: grid;
   /* Ajusta las columnas para que se ajusten automáticamente, con un mínimo de 320px por columna */

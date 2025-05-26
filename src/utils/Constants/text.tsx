@@ -18,6 +18,7 @@ export const NAMES = {
   PLACEHOLDER_PASSWORD: "Contraseña",
   TOKEN: "token",
   USER: "user",
+  ROL_ADMIN: "admin",
 
   //IVA
   GUARDAR_IVA: "Guardar IVA",
@@ -30,6 +31,8 @@ export const NAMES = {
   IVA_LABEL: "Valor del IVA",
 
   //Categorías
+  CATEGORIAS_BUTTON: "Gestionar Categorías",
+  CATEGORIAS_PRODUCTOS: "Gestionar Productos",
   CATEGORIA_TITULO: "Gestión de Categorías",
   CATEGORIA_NUEVA: "Nueva Categoría",
   CATEGORIA_EDITAR: "Editar Categoría",
