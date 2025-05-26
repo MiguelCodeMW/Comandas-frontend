@@ -5,6 +5,7 @@ import { User } from "../../../utils/User";
 import Button from "../../Button/Button";
 import styles from "../LoginForm/LoginForm.module.css"; // Importa los estilos CSS
 import { ROUTES } from "../../../utils/Constants/routes";
+import { NAMES } from "../../../utils/Constants/text";
 
 function CreateUserForm() {
   const [formData, setFormData] = useState<User>({
@@ -24,13 +25,13 @@ function CreateUserForm() {
 
     try {
       const res = await api.post(ROUTES.CREATE_USER, formData);
-      setMessage("Usuario creado exitosamente!");
+      setMessage(NAMES.REGISTRO_EXITOSO);
       console.log(res.data);
 
       // Redirige al usuario al login
       navigate(ROUTES.LOGIN);
     } catch (error: any) {
-      setMessage("Error al crear usuario");
+      setMessage(NAMES.REGISTRO_ERROR);
       console.error(error.response?.data || error.message);
     }
   };
@@ -42,39 +43,39 @@ function CreateUserForm() {
         <input
           type="text"
           name="name"
-          placeholder="Nombre"
+          placeholder={NAMES.PLACEHOLDER_NOMBRE_REGISTRO}
           onChange={handleChange}
           value={formData.name}
-          className="input" // Clase global
+          className="input"
         />
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder={NAMES.PLACEHOLDER_EMAIL}
           onChange={handleChange}
           value={formData.email}
-          className="input" // Clase global
+          className="input"
         />
         <input
           type="password"
           name="password"
-          placeholder="Contraseña"
+          placeholder={NAMES.PLACEHOLDER_PASSWORD}
           onChange={handleChange}
           value={formData.password}
-          className="input" // Clase global
+          className="input"
         />
         <Button
-          text="Registrarse"
+          text={NAMES.REGISTRO_BOTON}
           type="submit"
-          className="btn padded" // Clases globales
+          className="btn padded"
         />
         <Button
-          text="Volver"
+          text={NAMES.VOLVER}
           onClick={() => navigate(ROUTES.LOGIN)}
-          className="btn padded" // Clases globales
+          className="btn padded"
         />
       </form>
-      {message && <p className="message">{message}</p>} {/* Clase global */}
+      {message && <p className="message">{message}</p>}
     </div>
   );
 }

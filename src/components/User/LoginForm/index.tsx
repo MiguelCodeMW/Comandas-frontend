@@ -4,6 +4,7 @@ import api from "../../../api/axio";
 import Button from "../../Button/Button";
 import styles from "./LoginForm.module.css";
 import { ROUTES } from "../../../utils/Constants/routes";
+import { NAMES } from "../../../utils/Constants/text";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -23,18 +24,18 @@ function LoginForm() {
     try {
       const res = await api.post(ROUTES.LOGIN, formData);
       const token = res.data.token;
-      localStorage.setItem("token", token);
+      localStorage.setItem(NAMES.TOKEN, token);
 
       // Obtener datos del usuario autenticado y guardarlos en localStorage
-      const userRes = await api.get("/user", {
+      const userRes = await api.get(ROUTES.USER, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      localStorage.setItem("user", JSON.stringify(userRes.data));
+      localStorage.setItem(NAMES.USER, JSON.stringify(userRes.data));
 
-      setMessage("Inicio de sesión exitoso!");
+      setMessage(NAMES.LOGIN_EXITOSO);
       navigate(ROUTES.DASHBOARD);
     } catch (error: any) {
-      setMessage("Error al iniciar sesión");
+      setMessage(NAMES.LOGIN_ERROR);
       console.error(error.response?.data || error.message);
     }
   };
@@ -46,7 +47,7 @@ function LoginForm() {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder={NAMES.PLACEHOLDER_EMAIL}
           onChange={handleChange}
           value={formData.email}
           className="input"
@@ -54,14 +55,18 @@ function LoginForm() {
         <input
           type="password"
           name="password"
-          placeholder="Contraseña"
+          placeholder={NAMES.PLACEHOLDER_PASSWORD}
           onChange={handleChange}
           value={formData.password}
           className="input"
         />
-        <Button text="Iniciar Sesión" type="submit" className="btn padded" />
         <Button
-          text="Crear Usuario"
+          text={NAMES.LOGIN_TITULO}
+          type="submit"
+          className="btn padded"
+        />
+        <Button
+          text={NAMES.REGISTRO_TITULO}
           onClick={() => navigate("/create")}
           className="btn padded"
         />

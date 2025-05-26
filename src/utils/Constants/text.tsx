@@ -14,26 +14,29 @@ export const NAMES = {
   ERROR_CARGA: "Error al cargar los datos.",
   ERROR_ID: "Error: ID de usuario no encontrado.",
   ALERTA_CAMPOS_VACIOS: "Por favor, completa todos los campos requeridos.",
-  ALERTA_NOMBRE: "El nombre no puede estar vacío.", // Usado genéricamente, ej. para categorías
+  ALERTA_NOMBRE: "El nombre no puede estar vacío.",
+  PLACEHOLDER_PASSWORD: "Contraseña",
+  TOKEN: "token",
+  USER: "user",
 
-  // --- IVA ---
+  //IVA
   GUARDAR_IVA: "Guardar IVA",
-  CONFIGURAR_IVA: "Configurar IVA", // Usado en el botón del Dashboard
+  CONFIGURAR_IVA: "Configurar IVA",
   IVA_ACTUAL: "IVA Actual",
   IVA_EXITO: "IVA configurado con éxito.",
   ALERTA_IVA_INVALIDO:
     "El valor del IVA debe ser un número entre 0 y 1 (ej: 0.21).",
-  CONFIGURAR_IVA_TITLE: "Configurar IVA Global", // Usado en el modal ConfigurarIVA
-  IVA_LABEL: "Valor del IVA", // Usado en el modal ConfigurarIVA
+  CONFIGURAR_IVA_TITLE: "Configurar IVA Global",
+  IVA_LABEL: "Valor del IVA",
 
-  // --- Categorías ---
+  //Categorías
   CATEGORIA_TITULO: "Gestión de Categorías",
   CATEGORIA_NUEVA: "Nueva Categoría",
   CATEGORIA_EDITAR: "Editar Categoría",
   CATEGORIA_ELIMINAR: "Eliminar Categoría",
-  CATEGORIA_GUARDAR: "Guardar Categoría", // Para el botón de crear
+  CATEGORIA_GUARDAR: "Guardar Categoría",
   CATEGORIA_NOMBRE: "Nombre de la Categoría",
-  PLACEHOLDER_NOMBRE: "Ej: Bebidas", // Para input de nombre de categoría
+  PLACEHOLDER_NOMBRE: "Ej: Bebidas",
   CATEGORIA_EXITOSA: "Categoría creada con éxito.",
   CATEGORIA_ACTUALIZADA: "Categoría actualizada con éxito.",
   CATEGORIA_ELIMINAR_EXITOSA: "Categoría eliminada con éxito.",
@@ -48,11 +51,11 @@ export const NAMES = {
   ALERTA_CATEGORIA_ELIMINAR:
     "Error al eliminar la categoría. Asegúrate de que no tenga productos asociados.",
 
-  // --- Productos ---
+  //Productos
   PRODUCTO_TITULO: "Gestión de Productos",
-  PRODUCTO_NUEVO: "Añadir Producto", // Título del formulario de creación
+  PRODUCTO_NUEVO: "Añadir Producto",
   PRODUCTO_EDITAR: "Editar Producto",
-  PRODUCTO_GUARDAR: "Añadir Producto", // Para el botón de crear producto
+  PRODUCTO_GUARDAR: "Añadir Producto",
   PRODUCTO_NOMBRE: "Nombre del Producto",
   PLACEHOLDER_PRODUCTO: "Ej: Coca-Cola",
   PLACEHOLDER_PRECIO: "Ej: 2.50",
@@ -73,13 +76,13 @@ export const NAMES = {
   ALERTA_PRODUCTO_ACTUALIZAR: "Error al actualizar el producto.",
   ALERTA_PRODUCTO_ELIMINAR: "Error al eliminar el producto.",
 
-  // --- Comandas ---
+  //Comandas
   COMANDA_TITULO: "Comandas",
-  ID_COMANDA_TITULO: "Comanda", // Para "Comanda #X" en detalles
-  ID_COMANDA_CREAR: "Nueva Comanda", // Título de la página de creación
-  ID_COMANDA_EDITAR: "Editar Comanda", // Título de la página de edición
-  ID_COMANDA_ACTUALIZAR: "Actualizar Comanda", // Botón en edición
-  ID_COMANDA_FINALIZAR: "Finalizar Comanda", // Botón en creación
+  ID_COMANDA_TITULO: "Comanda",
+  ID_COMANDA_CREAR: "Nueva Comanda",
+  ID_COMANDA_EDITAR: "Editar Comanda",
+  ID_COMANDA_ACTUALIZAR: "Actualizar Comanda",
+  ID_COMANDA_FINALIZAR: "Finalizar Comanda",
   COMANDA_PRODUCTOS_SELECCIONADOS: "Productos Seleccionados",
   COMANDA_SIN_PRODUCTOS: "La comanda no tiene productos seleccionados.",
   COMANDA_EXITOSA: "Comanda creada con éxito.",
@@ -90,14 +93,14 @@ export const NAMES = {
   COMANDA_BORRAR_CONFIRMACION:
     "¿Estás seguro de que deseas borrar esta comanda?",
   COMANDA_CARGANDO: "Cargando detalles de la comanda...",
-  CARGANDO_DATOS_COMANDA: "Cargando datos para la comanda...", // Para la página de crear/editar comanda
+  CARGANDO_DATOS_COMANDA: "Cargando datos para la comanda...",
   COMANDA_NO_ENCONTRADA: "Comanda no encontrada.",
   ALERTA_COMANDA_CARGAR_DETALLE: "Error al cargar los detalles de la comanda.",
   ALERTA_COMANDA_GUARDAR: "Error al guardar la comanda.",
   ALERTA_COMANDA_PAGAR: "Error al pagar la comanda.",
   ALERTA_COMANDA_BORRAR: "Error al borrar la comanda.",
 
-  // --- Detalles de Comanda (Items) ---
+  //Detalles de Comanda (Items)
   DETALLES_TITULO: "Detalles de la Comanda",
   DETALLES_NO_DISPONIBLES: "No hay detalles para esta comanda.",
   DETALLES_PRODUCTO: "Producto:",
@@ -108,7 +111,7 @@ export const NAMES = {
   IVA_APLICADO: "IVA Aplicado:", // Podría ser IVA (XX%)
   TOTAL_CON_IVA: "Total con IVA:",
 
-  // --- Dashboard ---
+  //Dashboard
   DASHBOARD_TITULO: "Panel de Control",
   DASHBOARD_VER_PENDIENTES: "Ver Pendientes",
   DASHBOARD_VER_PAGADAS: "Ver Pagadas",
@@ -117,7 +120,7 @@ export const NAMES = {
   DASHBOARD_CONFIGURAR_IVA_ALERTA: "Debes configurar el IVA antes de operar.",
   CREAR_COMANDA: "Crear Comanda",
 
-  // --- User / Auth ---
+  //User / Auth
   LOGIN_TITULO: "Iniciar Sesión",
   LOGIN_EMAIL: "Correo Electrónico",
   LOGIN_PASSWORD: "Contraseña",
@@ -125,13 +128,16 @@ export const NAMES = {
   LOGIN_EXITOSO: "Inicio de sesión exitoso.",
   LOGIN_ERROR: "Error al iniciar sesión. Verifica tus credenciales.",
   LOGOUT_BOTON: "Cerrar Sesión",
+  LOGIN_ERROR_CREDENCIALES: "Credenciales incorrectas. Inténtalo de nuevo.",
   REGISTRO_TITULO: "Crear Usuario",
   REGISTRO_NOMBRE: "Nombre",
   REGISTRO_BOTON: "Registrarse",
   REGISTRO_EXITOSO: "Usuario creado exitosamente.",
   REGISTRO_ERROR: "Error al crear usuario.",
+  PLACEHOLDER_EMAIL: "Email",
+  PLACEHOLDER_NOMBRE_REGISTRO: "Nombre",
 
-  CATEGORIA_DESCONOCIDA: "Categoría Desconocida", // Usado para productos sin categoría asignada
+  CATEGORIA_DESCONOCIDA: "Categoría Desconocida",
   DASHBOARD_COMANDAS_PAGADAS: "Comandas Pagadas",
   DASHBOARD_COMANDAS_PENDIENTES: "Comandas Pendientes",
 };

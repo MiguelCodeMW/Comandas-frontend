@@ -1,5 +1,4 @@
-/* Contenedor principal */
-.comandaContainer {
+Contenedor principal .comandaContainer {
   padding: var(--spacing-lg);
   font-family: var(--font);
   background: var(--white);
@@ -217,4 +216,308 @@
 
 .success {
   color: var(--success);
+}
+/* Contenedor principal de la comanda */
+.comandaContainer {
+  padding: var(--spacing-lg);
+  font-family: var(--font);
+  background: var(--background);
+  min-height: 100vh;
+  box-sizing: border-box;
+  max-width: 1200px; /* Limita el ancho para centrar mejor */
+  margin: 0 auto; /* Centra el contenedor principal */
+}
+
+.comandaTitulo {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+/* Mensajes de éxito y error */
+.message {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius);
+  text-align: center;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  font-weight: 500;
+  font-size: var(--font-size-md);
+  border-width: 1px;
+  border-style: solid;
+}
+.success {
+  color: var(--success-dark);
+  background: var(--success-light);
+  border-color: var(--success);
+}
+.error {
+  color: var(--danger-dark);
+  background: var(--danger-light);
+  border-color: var(--danger);
+}
+
+/* Contenedor de la barra de categorías */
+.categoriasBar {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+  gap: var(--spacing-sm); /* Espacio entre los botones de categoría */
+  margin-bottom: var(--spacing-lg);
+  justify-content: center; /* Centra los botones de categoría */
+  border-bottom: 1px solid var(--border-color); /* Línea divisoria */
+  padding-bottom: var(--spacing-md);
+}
+
+.categoriaButton {
+  background-color: var(--secondary); /* Color base para botones de categoría */
+  color: var(--white);
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s;
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap; /* Evita que el texto del botón se rompa */
+}
+
+.categoriaButton:hover {
+  background-color: var(--secondary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.categoriaButtonActive {
+  background-color: var(--primary); /* Color para la categoría activa */
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px); /* Un ligero lift para la activa */
+}
+.categoriaButtonActive:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Contenedor del buscador */
+.buscadorContainer {
+  margin-bottom: var(--spacing-lg);
+  text-align: center; /* Centra el input de búsqueda */
+}
+
+.input {
+  /* Estilo para el input de búsqueda */
+  padding: 0.8rem 1.2rem;
+  width: 100%;
+  max-width: 400px; /* Limita el ancho del input */
+  font-size: 1.05rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary), 0.2);
+}
+
+/* Contenedor de la lista de productos seleccionables */
+.selectorProductosContainer {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+/* No necesitamos .categoriaSection ni .categoriaTitulo aquí, ya que la lógica cambia */
+
+/* Lista de productos seleccionables - Ajustes para el grid */
+/* Esta clase .productosLista ya debería existir en ProductoSelectorList.module.css
+   Pero si quieres sobrescribir, hazlo aquí o en el módulo de ProductoSelectorList */
+.productosLista {
+  /* Asegúrate que esta clase exista y sea aplicada en ProductoSelectorList */
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(180px, 1fr)
+  ); /* Ajusta el tamaño de los ítems de producto */
+  gap: var(--spacing-md); /* Espacio entre los productos */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.productoItem {
+  /* Estilos para cada item de producto en ProductoSelectorList */
+  background: var(--light);
+  padding: var(--spacing-md);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  text-align: center;
+}
+
+.productoItem:hover {
+  background-color: var(--highlight);
+  border-color: var(--highlight-border);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.productoInfo {
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.productoPrecio {
+  font-size: var(--font-size-sm);
+  color: var(--secondary-dark);
+}
+
+/* Contenedor de productos seleccionados */
+.seleccionadosContainer {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+.seleccionadosContainer h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+/* Estilos para la lista de productos seleccionados (ProductosSeleccionadosList) */
+/* Asegúrate que estas clases estén en el CSS de ProductosSeleccionadosList
+   O si quieres sobrescribirlas globalmente, aquí */
+.productosSeleccionadosLista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.productoSeleccionadoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.productoSeleccionadoNombre {
+  font-weight: 600;
+  color: var(--dark);
+  flex-grow: 1;
+}
+
+.productoSeleccionadoPrecio {
+  font-size: var(--font-size-sm);
+  color: var(--secondary-dark);
+  margin-left: var(--spacing-md);
+  white-space: nowrap;
+}
+
+.cantidadControl {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-left: var(--spacing-md);
+}
+
+.cantidadButton {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 50%; /* Botones redondos */
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cantidadButton:hover {
+  background-color: var(--primary-dark);
+}
+
+.cantidadButton:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+.cantidadDisplay {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+/* Wrapper para los botones de finalizar/volver */
+.finalizarWrapper {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.botonFinalizar {
+  background-color: var(--success);
+  color: var(--white);
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 600;
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  box-shadow: var(--shadow);
+  text-transform: capitalize;
+}
+.botonFinalizar:hover {
+  background-color: var(--success-dark);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+.botonFinalizar:disabled {
+  background-color: var(--secondary);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.volverButton {
+  /* Clase específica para el botón "Volver" */
+  background-color: var(--secondary);
+  color: var(--white);
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 600;
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  box-shadow: var(--shadow);
+  text-transform: capitalize;
+}
+.volverButton:hover {
+  background-color: var(--secondary-dark);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
