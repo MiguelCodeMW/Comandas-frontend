@@ -182,3 +182,28 @@
   width: 100%;
   margin-top: var(--spacing-md);
 }
+
+.adminSectionContainer {
+  /* Nuevo o modificado para añadir margen inferior */
+  display: flex;
+  flex-direction: column; /* Para que el botón de Ajustes y el contenedor de botones de admin estén uno encima del otro */
+  gap: var(
+    --spacing-md
+  ); /* Espacio entre el botón "Ajustes" y los botones de admin si se muestran */
+  margin-bottom: var(
+    --spacing-lg
+  ); /* Espacio debajo de toda la sección de admin */
+}
+
+.comandaActionButtonsContainer {
+  /* ... (mantener estilos existentes, incluyendo margin-bottom si es para separar de la lista) ... */
+  /* Por ejemplo, si ya tenías: */
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.settingsButton {
+  align-self: flex-start; /* Evita que el botón se estire al ancho completo */
+  /* Puedes añadir width: fit-content; si prefieres que se ajuste al contenido exacto */
+}
