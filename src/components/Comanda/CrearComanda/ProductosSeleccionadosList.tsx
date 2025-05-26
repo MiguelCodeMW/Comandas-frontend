@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Comandas.module.css";
 import { ProductoSeleccionado } from "../../../hooks/useCrearComanda";
 

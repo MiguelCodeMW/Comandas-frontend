@@ -105,7 +105,7 @@ Contenedor principal .comandaContainer {
 }
 
 .seleccionadosLista {
-  list-style: none; /* Elimina los puntos del listado */
+  list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
@@ -114,7 +114,6 @@ Contenedor principal .comandaContainer {
 }
 
 .seleccionadoItem {
-  /* Se mantiene la estructura y estilos base, el contenedor clickable se agregará dentro */
   background-color: var(--white);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -331,18 +330,9 @@ Contenedor principal .comandaContainer {
   box-shadow: var(--shadow);
 }
 
-/* No necesitamos .categoriaSection ni .categoriaTitulo aquí, ya que la lógica cambia */
-
-/* Lista de productos seleccionables - Ajustes para el grid */
-/* Esta clase .productosLista ya debería existir en ProductoSelectorList.module.css
-   Pero si quieres sobrescribir, hazlo aquí o en el módulo de ProductoSelectorList */
 .productosLista {
-  /* Asegúrate que esta clase exista y sea aplicada en ProductoSelectorList */
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(180px, 1fr)
-  ); /* Ajusta el tamaño de los ítems de producto */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: var(--spacing-md); /* Espacio entre los productos */
   list-style: none;
   padding: 0;
@@ -396,8 +386,6 @@ Contenedor principal .comandaContainer {
 }
 
 /* Estilos para la lista de productos seleccionados (ProductosSeleccionadosList) */
-/* Asegúrate que estas clases estén en el CSS de ProductosSeleccionadosList
-   O si quieres sobrescribirlas globalmente, aquí */
 .productosSeleccionadosLista {
   list-style: none;
   padding: 0;
