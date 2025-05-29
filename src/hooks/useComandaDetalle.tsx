@@ -20,6 +20,7 @@ export interface ComandaData {
   estado: string;
   user_id: number;
   detalles: DetalleComanda[];
+  moneda_aplicada?: string;
 }
 
 export function useComandaDetalle() {

@@ -5,6 +5,7 @@ import { NAMES } from "../../utils/Constants/text";
 import { ProductoProps } from "../../utils/Producto/ProductoProps";
 import { Categoria } from "../../utils/Categoria/CategoriaProps";
 import { NuevoProductoData } from "../../hooks/useGestionProductos";
+import { useDashboard } from "../../hooks/useDashboard"; // Importa useDashboard
 
 interface FormularioProductoProps {
   onSubmit?: (data: NuevoProductoData | ProductoProps) => Promise<boolean>;
@@ -26,6 +27,8 @@ function FormularioProducto({
   const [formData, setFormData] = useState<NuevoProductoData | ProductoProps>(
     productoInicial || { nombre: "", precio: 0, categoria_id: 0 }
   );
+
+  const { moneda } = useDashboard(); // Obtén la moneda del hook
 
   useEffect(() => {
     if (productoInicial) {
@@ -73,6 +76,8 @@ function FormularioProducto({
       </label>
       <label>
         {NAMES.PRODUCTO_PRECIO}{" "}
+        <span className={styles.currencySymbol}>{moneda || "$"}</span>{" "}
+        {/* Muestra la moneda o un '$' por defecto */}
         <input
           type="number"
           name="precio"

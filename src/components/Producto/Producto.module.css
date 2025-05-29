@@ -215,3 +215,8 @@
   border-color: var(--border-color);
   margin-top: var(--spacing-md);
 }
+.currencySymbol {
+  margin-right: 5px; /* Espacio entre el símbolo y el input */
+  font-weight: bold;
+  color: var(--secondary-dark); /* Color del texto para el símbolo */
+}

@@ -1,5 +1,6 @@
 import styles from "./Comandas.module.css";
 import { ProductoSeleccionado } from "../../../hooks/useCrearComanda";
+import { useDashboard } from "../../../hooks/useDashboard"; // Importa useDashboard
 
 interface ProductosSeleccionadosListProps {
   productos: ProductoSeleccionado[];
@@ -12,6 +13,8 @@ function ProductosSeleccionadosList({
   onAumentar,
   onDisminuir,
 }: ProductosSeleccionadosListProps) {
+  const { moneda } = useDashboard(); // Obtén la moneda del hook
+
   if (productos.length === 0) {
     return <p className={styles.message}>No hay productos seleccionados.</p>;
   }
@@ -23,7 +26,10 @@ function ProductosSeleccionadosList({
           <div className={styles.selectableWrapper}>
             <span className={styles.seleccionadoInfo}>
               {producto.nombre} - Cantidad: {producto.cantidad} - Precio Total:
-              ${(producto.precio * producto.cantidad).toFixed(2)}
+              {producto.nombre} - Cantidad: {producto.cantidad} - Precio Total:{" "}
+              {moneda || "$"}
+              {(producto.precio * producto.cantidad).toFixed(2)}{" "}
+              {/* Usa la moneda */}{" "}
             </span>
             <div className={styles.seleccionadoControles}>
               <button

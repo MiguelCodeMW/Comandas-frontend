@@ -5,6 +5,7 @@ import styles from "./Producto.module.css";
 import { ProductoProps } from "../../utils/Producto/ProductoProps";
 import { Categoria } from "../../utils/Categoria/CategoriaProps";
 import { NAMES } from "../../utils/Constants/text";
+import { useDashboard } from "../../hooks/useDashboard"; // Importa useDashboard
 
 interface ProductoListProps {
   productos: ProductoProps[];
@@ -29,6 +30,8 @@ function ProductoList({
   onCancelarEdicion,
   limpiarMensajesAlCambiar,
 }: ProductoListProps) {
+  const { moneda } = useDashboard(); // Obtén la moneda del hook
+
   const getCategoriaNombre = (categoriaId: number) => {
     const categoria = categorias.find((cat) => cat.id === categoriaId);
     return categoria ? categoria.nombre : NAMES.CATEGORIA_DESCONOCIDA;
@@ -63,7 +66,8 @@ function ProductoList({
               <div className={styles.productInfoText}>
                 <span className={styles.productName}>{producto.nombre}</span>
                 <div>
-                  {NAMES.LABEL_PRECIO} ${producto.precio.toFixed(2)}
+                  {NAMES.LABEL_PRECIO} {moneda || "$"}
+                  {producto.precio.toFixed(2)} {/* Usa la moneda */}
                 </div>
                 <div>
                   {NAMES.LABEL_CATEGORIA}{" "}

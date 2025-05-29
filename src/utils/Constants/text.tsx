@@ -157,4 +157,17 @@ export const NAMES = {
   IVA_VALOR:
     "El valor del IVA debe ser un número entre 0 y 1 (ej: 0.21 para 21%).",
   IVA_ERROR: "Error en onGuardado desde ConfigurarIVA",
+  IVA_NO_CONFIGURADO: "IVA no configurado",
+
+  // Moneda
+  CONFIGURAR_MONEDA: "Configurar Moneda",
+  MONEDA_LABEL: "Configuración de Moneda",
+  MONEDA_APLICADA: "Código de Moneda (ej: EUR, USD)",
+  MONEDA_VALOR_INVALIDO:
+    "Por favor, introduce un código de moneda ISO de 3 letras válido.",
+  MONEDA_ERROR: "Error al guardar la moneda.",
+  MONEDA_GUARDADA_EXITO: "Moneda guardada con éxito.",
+  MONEDA_NO_CONFIGURADA: "No configurada",
+  CARGANDO_MONEDA: "Cargando Moneda...",
+  GUARDAR_MONEDA: "Guardar Moneda",
 };

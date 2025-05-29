@@ -1,158 +1,7 @@
-// import { useEffect } from "react";
-// import { useDashboard } from "../../hooks/useDashboard";
-// import ConfigurarIVA from "../ConfigurarIVA/ConfigurarIVA";
-// import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-// import ErrorMessage from "../ErrorMessage/ErrorMessage";
-// import Button from "../Button/Button";
-// import styles from "./Dashboard.module.css";
-// import { NAMES } from "../../utils/Constants/text";
-// import { ROUTES } from "../../utils/Constants/routes";
-// import DashboardComandasList from "./DashboardComandasList";
-
-// function Dashboard() {
-//   const {
-//     comandasFiltradas,
-//     loading,
-//     error,
-//     errorIva,
-//     mostrarPagadas,
-//     setMostrarPagadas,
-//     showModalIva,
-//     setShowModalIva,
-//     iva,
-//     user,
-//     handleLogout,
-//     handleIvaGuardado,
-//   } = useDashboard();
-
-//   useEffect(() => {
-//     if (
-//       user?.role === NAMES.ROL_ADMIN &&
-//       iva === null &&
-//       !loading &&
-//       !errorIva
-//     ) {
-//       setShowModalIva(true);
-//     }
-//   }, [user, iva, loading, setShowModalIva, errorIva]);
-
-//   if (loading) {
-//     return <LoadingSpinner />;
-//   }
-
-//   if (error && !comandasFiltradas.length && !loading) {
-//     return (
-//       <ErrorMessage
-//         message={error || NAMES.ERROR_CARGA}
-//         onRetry={() => window.location.reload()}
-//       />
-//     );
-//   }
-
-//   return (
-//     <div className={styles.container}>
-//       <header className={styles.header}>
-//         <h1>{NAMES.DASHBOARD_TITULO}</h1>
-//         <div className={styles.userInfoContainer}>
-//           {" "}
-//           {/* Contenedor para info y logout */}
-//           {user && (
-//             <span className={styles.userInfo}>
-//               Hola, {user.name} ({user.role})
-//             </span>
-//           )}
-//           <Button
-//             onClick={handleLogout}
-//             text={NAMES.LOGOUT_BOTON}
-//             className={styles.logoutButton}
-//           />
-//         </div>
-//       </header>
-
-//       {user?.role === NAMES.ROL_ADMIN && (
-//         <div className={styles.adminButtonsContainer}>
-//           {" "}
-//           {/* Contenedor para botones de admin */}
-//           <Button
-//             onClick={() => setShowModalIva(true)}
-//             text={`${NAMES.CONFIGURAR_IVA} (Actual: ${
-//               iva !== null ? `${(iva * 100).toFixed(0)}%` : "No configurado"
-//             })`}
-//             className={styles.headerButton}
-//           />
-//           <Button
-//             navigateTo={ROUTES.CATEGORY}
-//             text={NAMES.CATEGORIAS_BUTTON}
-//             className={styles.headerButton}
-//           />
-//           <Button
-//             navigateTo={ROUTES.PRODUCT}
-//             text={NAMES.CATEGORIAS_PRODUCTOS}
-//             className={styles.headerButton}
-//           />
-//           {errorIva && !showModalIva && (
-//             <p className={styles.inlineError}>{errorIva}</p>
-//           )}
-//           {iva === null && !errorIva && !loading && (
-//             <p className={styles.alert}>
-//               {NAMES.DASHBOARD_CONFIGURAR_IVA_ALERTA}
-//             </p>
-//           )}
-//         </div>
-//       )}
-
-//       {showModalIva && user?.role === NAMES.ROL_ADMIN && (
-//         <ConfigurarIVA
-//           onGuardado={handleIvaGuardado}
-//           ivaActual={iva}
-//           onCancelar={() => {
-//             setShowModalIva(false);
-//           }}
-//           errorExterno={errorIva}
-//         />
-//       )}
-
-//       <div className={styles.comandaActionButtonsContainer}>
-//         {" "}
-//         <Button
-//           onClick={() => setMostrarPagadas(!mostrarPagadas)}
-//           text={
-//             mostrarPagadas
-//               ? NAMES.DASHBOARD_VER_PENDIENTES
-//               : NAMES.DASHBOARD_VER_PAGADAS
-//           }
-//           className={styles.headerButton}
-//         />
-//         <Button
-//           navigateTo={ROUTES.CREATE_COMANDA}
-//           text={NAMES.CREAR_COMANDA}
-//           className={styles.headerButton}
-//         />
-//       </div>
-
-//       <h2 className={styles.listTitle}>
-//         {" "}
-//         {/* Título de la lista de comandas */}
-//         {mostrarPagadas
-//           ? NAMES.DASHBOARD_COMANDAS_PAGADAS
-//           : NAMES.DASHBOARD_COMANDAS_PENDIENTES}
-//       </h2>
-
-//       <DashboardComandasList
-//         comandas={comandasFiltradas}
-//         mostrarPagadas={mostrarPagadas}
-//       />
-//       {error && comandasFiltradas.length > 0 && (
-//         <p className={styles.inlineError}>{error}</p>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Dashboard;
 import { useEffect, useState } from "react";
 import { useDashboard } from "../../hooks/useDashboard";
 import ConfigurarIVA from "../ConfigurarIVA/ConfigurarIVA";
+import ConfigurarMoneda from "../ConfigurarMoneda/ConfigurarMoneda"; // Importa el nuevo componente
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Button from "../Button/Button";
@@ -167,29 +16,49 @@ function Dashboard() {
     loading,
     error,
     errorIva,
+    errorMoneda, // Nuevo error de moneda
     mostrarPagadas,
     setMostrarPagadas,
     showModalIva,
     setShowModalIva,
+    showModalMoneda, // Nuevo estado para modal de moneda
+    setShowModalMoneda, // Nuevo setter para modal de moneda
     iva,
+    moneda, // Nuevo estado para la moneda
     user,
     handleLogout,
     handleIvaGuardado,
+    handleMonedaGuardado, // Nueva función para guardar moneda
   } = useDashboard();
 
   const [showAdminSettings, setShowAdminSettings] = useState(false);
 
   useEffect(() => {
+    // Si es admin y no hay IVA ni moneda configurados, muestra el modal de IVA.
+    // Solo si no hay errores de carga ni otros modales activos.
     if (
       user?.role === NAMES.ROL_ADMIN &&
       iva === null &&
+      moneda === null &&
       !loading &&
       !errorIva &&
-      !showModalIva
+      !errorMoneda &&
+      !showModalIva &&
+      !showModalMoneda
     ) {
       setShowModalIva(true);
     }
-  }, [user, iva, loading, setShowModalIva, errorIva, showModalIva]);
+  }, [
+    user,
+    iva,
+    moneda,
+    loading,
+    setShowModalIva,
+    errorIva,
+    errorMoneda,
+    showModalIva,
+    showModalMoneda,
+  ]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -234,7 +103,16 @@ function Dashboard() {
               <Button
                 onClick={() => setShowModalIva(true)}
                 text={`${NAMES.CONFIGURAR_IVA} (Actual: ${
-                  iva !== null ? `${(iva * 100).toFixed(0)}%` : "No configurado"
+                  iva !== null
+                    ? `${(iva * 100).toFixed(0)}%`
+                    : NAMES.IVA_NO_CONFIGURADO
+                })`}
+                className={styles.headerButton}
+              />
+              <Button
+                onClick={() => setShowModalMoneda(true)}
+                text={`${NAMES.CONFIGURAR_MONEDA} (Actual: ${
+                  moneda !== null ? moneda : NAMES.MONEDA_NO_CONFIGURADA
                 })`}
                 className={styles.headerButton}
               />
@@ -251,6 +129,9 @@ function Dashboard() {
               {errorIva && !showModalIva && (
                 <p className={styles.inlineError}>{errorIva}</p>
               )}
+              {errorMoneda && !showModalMoneda && (
+                <p className={styles.inlineError}>{errorMoneda}</p>
+              )}
             </div>
           )}
         </div>
@@ -260,13 +141,25 @@ function Dashboard() {
         <ConfigurarIVA
           onGuardado={async (nuevoIva) => {
             await handleIvaGuardado(nuevoIva);
-            // setShowModalIva(false) se llama dentro de handleIvaGuardado si tiene éxito
           }}
           ivaActual={iva}
           onCancelar={() => {
             setShowModalIva(false);
           }}
           errorExterno={errorIva}
+        />
+      )}
+
+      {showModalMoneda && user?.role === NAMES.ROL_ADMIN && (
+        <ConfigurarMoneda
+          onGuardado={async (nuevaMoneda) => {
+            await handleMonedaGuardado(nuevaMoneda);
+          }}
+          monedaActual={moneda}
+          onCancelar={() => {
+            setShowModalMoneda(false);
+          }}
+          errorExterno={errorMoneda}
         />
       )}
 
