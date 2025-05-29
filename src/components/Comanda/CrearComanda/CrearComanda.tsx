@@ -8,7 +8,7 @@ import styles from "./Comandas.module.css";
 import { NAMES } from "../../../utils/Constants/text";
 import { ROUTES } from "../../../utils/Constants/routes";
 import { useCrearComanda } from "../../../hooks/useCrearComanda";
-import { Categoria } from "../../../utils/Categoria/CategoriaProps"; // Asegúrate de que esta importación sea correcta
+import { CategoriaProps } from "../../../utils/Categoria/CategoriaProps";
 
 function CrearComanda() {
   const {
@@ -74,7 +74,7 @@ function CrearComanda() {
 
       {/* Contenedor de la barra de categorías */}
       <div className={styles.categoriasBar}>
-        {categorias.map((categoria: Categoria) => (
+        {categorias.map((categoria: CategoriaProps) => (
           <Button
             key={categoria.id}
             text={categoria.nombre}

@@ -2,16 +2,8 @@ import React, { useState, useEffect } from "react";
 import Button from "../Button/Button"; // Asumo que Button.tsx usa la clase global .btn
 import styles from "./Categoria.module.css"; // Importa los estilos CSS Modules
 import { NAMES } from "../../utils/Constants/text";
-import { Categoria } from "../../utils/Categoria/CategoriaProps";
-
-interface FormularioCategoriaProps {
-  onSubmit?: (nombre: string) => Promise<boolean>;
-  onCancel?: () => void;
-  categoriaInicial?: Categoria | null;
-  textoBotonSubmit?: string;
-  placeholder?: string;
-  limpiarMensajesAlCambiar?: () => void;
-}
+// import { CategoriaProps } from "../../utils/Categoria/CategoriaProps";
+import { FormularioCategoriaProps } from "../../utils/Categoria/FormularioCategoriasProps";
 
 function FormularioCategoria({
   onSubmit = async () => true,
@@ -49,7 +41,7 @@ function FormularioCategoria({
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <label>
-        Nombre:
+        {NAMES.LABEL_NOMBRE}
         <input
           type="text"
           value={nombre}

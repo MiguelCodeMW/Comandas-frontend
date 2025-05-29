@@ -95,7 +95,9 @@ function Dashboard() {
         <div className={styles.adminSectionContainer}>
           <Button
             onClick={() => setShowAdminSettings(!showAdminSettings)}
-            text={showAdminSettings ? "Ocultar Ajustes" : "Ajustes"}
+            text={
+              showAdminSettings ? NAMES.OCULTAR_AJUSTES : NAMES.MOSTRAR_AJUSTES
+            }
             className={`${styles.headerButton} ${styles.settingsButton}`}
           />
           {showAdminSettings && (

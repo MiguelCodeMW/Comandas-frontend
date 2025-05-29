@@ -1,18 +1,18 @@
 import { useState, useEffect, useCallback } from "react";
 import api from "../api/axio"; // Tu instancia de Axios
-import { Categoria } from "../utils/Categoria/CategoriaProps";
+import { CategoriaProps } from "../utils/Categoria/CategoriaProps";
 import { ROUTES } from "../utils/Constants/routes";
 import { NAMES } from "../utils/Constants/text";
 import axios, { AxiosError } from "axios"; // Importar AxiosError y axios para isAxiosError
 
 export function useGestionCategorias() {
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [categorias, setCategorias] = useState<CategoriaProps[]>([]);
   const [nombreNuevaCategoria, setNombreNuevaCategoria] = useState<string>(""); // Manteniendo este estado como en tu archivo original
   const [mensaje, setMensaje] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [editandoId, setEditandoId] = useState<number | null>(null);
   const [categoriaEnEdicion, setCategoriaEnEdicion] =
-    useState<Categoria | null>(null);
+    useState<CategoriaProps | null>(null);
 
   const fetchCategorias = useCallback(async () => {
     try {

@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import styles from "./ConfigurarMoneda.module.css";
 import Button from "../Button/Button";
 import { NAMES } from "../../utils/Constants/text";
+import { ConfigurarMonedaProps } from "../../utils/ConfigurarMonedaProps";
 
-interface ConfigurarMonedaProps {
-  onGuardado: (nuevaMoneda: string) => Promise<void>;
-  monedaActual: string | null;
-  onCancelar: () => void;
-  errorExterno?: string | null;
-}
+// interface ConfigurarMonedaProps {
+//   onGuardado: (nuevaMoneda: string) => Promise<void>;
+//   monedaActual: string | null;
+//   onCancelar: () => void;
+//   errorExterno?: string | null;
+// }
 
 function ConfigurarMoneda({
   onGuardado,

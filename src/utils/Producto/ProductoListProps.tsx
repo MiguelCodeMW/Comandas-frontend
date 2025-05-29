@@ -1,4 +1,4 @@
-import { Categoria } from "../Categoria/CategoriaProps";
+import { CategoriaProps } from "../Categoria/CategoriaProps";
 import { ProductoProps } from "./ProductoProps";
 
 export type ProductoListProps = {
@@ -7,7 +7,7 @@ export type ProductoListProps = {
   // onEditProducto: (id: number) => void;
   // onDeleteProducto: (id: number) => void;
   productos: ProductoProps[];
-  categorias: Categoria[];
+  categorias: CategoriaProps[];
   onDeleteProducto: (id: number, errorMessage: string | null) => void;
   // Nuevas props para la edición inline
   editandoProductoId: number | null;

@@ -1,11 +1,12 @@
 import Button from "../Button/Button";
 import styles from "./ErrorMessage.module.css";
 import { NAMES } from "../../utils/Constants/text";
+import { ErrorMessageProps } from "../../utils/ErrorMessageProps";
 
-interface ErrorMessageProps {
-  message: string;
-  onRetry?: () => void;
-}
+// interface ErrorMessageProps {
+//   message: string;
+//   onRetry?: () => void;
+// }
 
 const ErrorMessage = ({ message, onRetry }: ErrorMessageProps) => {
   return (

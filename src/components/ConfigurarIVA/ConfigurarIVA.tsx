@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import styles from "./ConfigurarIVA.module.css";
 import Button from "../Button/Button";
 import { NAMES } from "../../utils/Constants/text";
+import { ConfigurarIVAProps } from "../../utils/ConfigurarIVAProps";
 
-interface ConfigurarIVAProps {
-  onGuardado: (nuevoIva: number) => Promise<void>;
-  ivaActual: number | null;
-  onCancelar: () => void;
-  errorExterno?: string | null;
-}
+// interface ConfigurarIVAProps {
+//   onGuardado: (nuevoIva: number) => Promise<void>;
+//   ivaActual: number | null;
+//   onCancelar: () => void;
+//   errorExterno?: string | null;
+// }
 
 function ConfigurarIVA({
   onGuardado,

@@ -39,7 +39,7 @@ function CreateUserForm() {
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <h1>Crear Usuario</h1>
+        <h1>{NAMES.REGISTRO_TITULO}</h1>
         <input
           type="text"
           name="name"

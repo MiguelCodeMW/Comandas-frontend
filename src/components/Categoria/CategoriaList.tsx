@@ -2,19 +2,9 @@ import EliminarCategoria from "./EliminarCategoria";
 import Button from "../Button/Button";
 import FormularioCategoria from "./FormularioCategoria";
 import styles from "./Categoria.module.css";
-import { Categoria } from "../../utils/Categoria/CategoriaProps";
+// import { CategoriaProps } from "../../utils/Categoria/CategoriaProps";
 import { NAMES } from "../../utils/Constants/text";
-
-interface CategoriaListProps {
-  categorias: Categoria[];
-  editandoId: number | null;
-  categoriaEnEdicion: Categoria | null;
-  onEdit: (id: number) => void;
-  onCategoriaEditada: (id: number, nuevoNombre: string) => Promise<boolean>;
-  onCancelar: () => void;
-  onEliminarCallback: (id: number, errorMessage: string | null) => void;
-  limpiarMensajesAlCambiar?: () => void;
-}
+import { CategoriaListProps2 } from "../../utils/Categoria/CategoriaListProps2";
 
 function CategoriaList({
   categorias,
@@ -25,7 +15,7 @@ function CategoriaList({
   onCancelar,
   onEliminarCallback,
   limpiarMensajesAlCambiar,
-}: CategoriaListProps) {
+}: CategoriaListProps2) {
   return (
     <ul className={styles.categoriaList}>
       {categorias.map((categoria) => (

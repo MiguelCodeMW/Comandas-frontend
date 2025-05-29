@@ -67,7 +67,7 @@ function LoginForm() {
         />
         <Button
           text={NAMES.REGISTRO_TITULO}
-          onClick={() => navigate("/create")}
+          onClick={() => navigate(ROUTES.CREATE_USER)}
           className="btn padded"
         />
         {message && <p className="message">{message}</p>}

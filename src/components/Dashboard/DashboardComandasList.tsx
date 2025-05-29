@@ -1,13 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Dashboard.module.css";
-import { ComandaDashboard } from "../../hooks/useDashboard";
+// import { ComandaDashboard } from "../../hooks/useDashboard";
 import { ROUTES } from "../../utils/Constants/routes";
 import { NAMES } from "../../utils/Constants/text";
-
-interface DashboardComandasListProps {
-  comandas: ComandaDashboard[];
-  mostrarPagadas: boolean;
-}
+import { DashboardComandasListProps } from "../../utils/Dashboard/DashboardComandasList";
 
 function DashboardComandasList({
   comandas,

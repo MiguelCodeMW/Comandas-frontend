@@ -3,18 +3,19 @@ import Button from "../../Button/Button";
 import styles from "./ComandaDetalle.module.css";
 import { ROUTES } from "../../../utils/Constants/routes";
 import { NAMES } from "../../../utils/Constants/text";
-import { ComandaData } from "../../../hooks/useComandaDetalle";
+// import { ComandaData } from "../../../hooks/useComandaDetalle";
+import { ComandaAccionesButtonsProps } from "../../../utils/Comanda/ComandaAccionesButtonsProps";
 
-interface User {
-  role: string;
-}
-interface ComandaAccionesButtonsProps {
-  comanda: ComandaData | null;
-  user: User | null;
-  onEditar: () => void;
-  onPagar: () => void;
-  onBorrar: () => void;
-}
+// interface User {
+//   role: string;
+// }
+// interface ComandaAccionesButtonsProps {
+//   comanda: ComandaData | null;
+//   user: User | null;
+//   onEditar: () => void;
+//   onPagar: () => void;
+//   onBorrar: () => void;
+// }
 
 function ComandaAccionesButtons({
   comanda,
@@ -30,7 +31,7 @@ function ComandaAccionesButtons({
   return (
     <div className={styles.accionesContainer}>
       <Button
-        text="Volver"
+        text={NAMES.VOLVER}
         onClick={() => navigate(ROUTES.DASHBOARD)}
         className={`${styles.button} ${styles.dashboardButton}`}
       />

@@ -3,21 +3,10 @@ import Button from "../Button/Button";
 import FormularioProducto from "./FormularioProducto";
 import styles from "./Producto.module.css";
 import { ProductoProps } from "../../utils/Producto/ProductoProps";
-import { Categoria } from "../../utils/Categoria/CategoriaProps";
+// import { CategoriaProps } from "../../utils/Categoria/CategoriaProps";
 import { NAMES } from "../../utils/Constants/text";
 import { useDashboard } from "../../hooks/useDashboard"; // Importa useDashboard
-
-interface ProductoListProps {
-  productos: ProductoProps[];
-  categorias: Categoria[];
-  editandoProductoId: number | null;
-  productoEnEdicion: ProductoProps | null;
-  onSetEditandoProductoId: (id: number) => void;
-  onDeleteProducto: (id: number, errorMessage: string | null) => void;
-  onProductoEditado: (id: number, data: ProductoProps) => Promise<boolean>;
-  onCancelarEdicion: () => void;
-  limpiarMensajesAlCambiar?: () => void;
-}
+import { ProductoListProps2 } from "../../utils/Producto/ProductoListProps2";
 
 function ProductoList({
   productos,
@@ -29,7 +18,7 @@ function ProductoList({
   onProductoEditado,
   onCancelarEdicion,
   limpiarMensajesAlCambiar,
-}: ProductoListProps) {
+}: ProductoListProps2) {
   const { moneda } = useDashboard(); // Obtén la moneda del hook
 
   const getCategoriaNombre = (categoriaId: number) => {
@@ -66,7 +55,8 @@ function ProductoList({
               <div className={styles.productInfoText}>
                 <span className={styles.productName}>{producto.nombre}</span>
                 <div>
-                  {NAMES.LABEL_PRECIO} {moneda || "$"}
+                  {/* {NAMES.LABEL_PRECIO} {moneda || "$"} */}
+                  {NAMES.LABEL_PRECIO} {moneda}
                   {producto.precio.toFixed(2)} {/* Usa la moneda */}
                 </div>
                 <div>

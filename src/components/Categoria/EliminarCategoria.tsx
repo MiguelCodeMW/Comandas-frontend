@@ -3,7 +3,7 @@ import { ROUTES } from "../../utils/Constants/routes";
 import styles from "./Categoria.module.css"; // Importa los estilos CSS Modules
 import { NAMES } from "../../utils/Constants/text";
 import { EliminarCategoriaProps } from "../../utils/Categoria/EliminarCategoriaProps";
-import Button from "../Button/Button"; // Asumo que Button.tsx usa la clase global .btn
+import Button from "../Button/Button";
 import axios, { AxiosError } from "axios";
 
 function EliminarCategoria({

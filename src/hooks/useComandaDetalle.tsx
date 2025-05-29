@@ -3,25 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/axio";
 import { ROUTES } from "../utils/Constants/routes";
 import { NAMES } from "../utils/Constants/text";
-
-// Asumiendo una estructura para Comanda y Detalle
-export interface DetalleComanda {
-  id: number;
-  producto: {
-    id: number;
-    nombre: string;
-    precio: number;
-  };
-  cantidad: number;
-}
-export interface ComandaData {
-  id: number;
-  fecha: string;
-  estado: string;
-  user_id: number;
-  detalles: DetalleComanda[];
-  moneda_aplicada?: string;
-}
+import { ComandaData } from "../utils/ComandaData";
 
 export function useComandaDetalle() {
   const { id: comandaId } = useParams<{ id: string }>();

@@ -1,12 +1,8 @@
 import styles from "./Comandas.module.css";
-import { ProductoSeleccionado } from "../../../hooks/useCrearComanda";
-import { useDashboard } from "../../../hooks/useDashboard"; // Importa useDashboard
-
-interface ProductosSeleccionadosListProps {
-  productos: ProductoSeleccionado[];
-  onAumentar: (id: number) => void;
-  onDisminuir: (id: number) => void;
-}
+// import { ProductoSeleccionado } from "../../../hooks/useCrearComanda";
+import { useDashboard } from "../../../hooks/useDashboard";
+import { NAMES } from "../../../utils/Constants/text";
+import { ProductosSeleccionadosListProps } from "../../../utils/Producto/ProductosSeleccionadosListProps";
 
 function ProductosSeleccionadosList({
   productos,
@@ -25,9 +21,10 @@ function ProductosSeleccionadosList({
         <li key={producto.id} className={styles.seleccionadoItem}>
           <div className={styles.selectableWrapper}>
             <span className={styles.seleccionadoInfo}>
-              {producto.nombre} - Cantidad: {producto.cantidad} - Precio Total:
-              {producto.nombre} - Cantidad: {producto.cantidad} - Precio Total:{" "}
-              {moneda || "$"}
+              {producto.nombre} - {NAMES.DETALLES_CANTIDAD} {producto.cantidad}{" "}
+              - {NAMES.LABEL_PRECIO}
+              {producto.precio} - {NAMES.COMANDA_PRECIO_TOTAL} {moneda}
+              {/* - {NAMES.COMANDA_PRECIO_TOTAL} {moneda || "$"} */}
               {(producto.precio * producto.cantidad).toFixed(2)}{" "}
               {/* Usa la moneda */}{" "}
             </span>

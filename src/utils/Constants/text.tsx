@@ -20,6 +20,8 @@ export const NAMES = {
   TOKEN_ERROR: "Error de autenticación: No se encontró token.",
   USER: "user",
   ROL_ADMIN: "admin",
+  MOSTRAR_AJUSTES: "Mostrar Ajustes",
+  OCULTAR_AJUSTES: "Ocultar Ajustes",
 
   //IVA
   GUARDAR_IVA: "Guardar IVA",
@@ -54,6 +56,7 @@ export const NAMES = {
   ALERTA_CATEGORIA_ACTUALIZAR: "Error al actualizar la categoría.",
   ALERTA_CATEGORIA_ELIMINAR:
     "Error al eliminar la categoría. Asegúrate de que no tenga productos asociados.",
+  CATEGORIAS_LISTA: "Lista de Categorías",
 
   //Productos
   PRODUCTO_TITULO: "Gestión de Productos",
@@ -109,9 +112,9 @@ export const NAMES = {
   ALERTA_COMANDA_BORRAR: "Error al borrar la comanda.",
   COMANDA_BUSCAR_PRODUCTOS: "Buscar Producto...",
   COMANDA_BUTTON_BORRAR: "Borrar Comanda",
-
   COMANDA_BUSCAR_ERROR:
     "No hay productos en esta categoría o que coincidan con la búsqueda.",
+  COMANDA_PRECIO_TOTAL: "Precio Total:",
 
   //Detalles de Comanda (Items)
   DETALLES_TITULO: "Detalles de la Comanda",

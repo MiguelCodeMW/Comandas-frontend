@@ -41,15 +41,16 @@
 // components/Button/Button.tsx
 import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { ButtonProps } from "../../utils/ButtonProps"; // Asegúrate de que la ruta sea correcta
 
-type ButtonProps = {
-  text: string;
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
-  navigateTo?: string;
-  className?: string; // Solo usa la clase pasada directamente
-  type?: "button" | "submit" | "reset";
-  disabled?: boolean;
-};
+// type ButtonProps = {
+//   text: string;
+//   onClick?: (e: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
+//   navigateTo?: string;
+//   className?: string; // Solo usa la clase pasada directamente
+//   type?: "button" | "submit" | "reset";
+//   disabled?: boolean;
+// };
 
 function Button({
   text,

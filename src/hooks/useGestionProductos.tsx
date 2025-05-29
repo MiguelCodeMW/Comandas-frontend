@@ -182,7 +182,7 @@
 import { useState, useEffect, useCallback } from "react";
 import api from "../api/axio";
 import { ProductoProps } from "../utils/Producto/ProductoProps";
-import { Categoria } from "../utils/Categoria/CategoriaProps";
+import { CategoriaProps } from "../utils/Categoria/CategoriaProps";
 import { ROUTES } from "../utils/Constants/routes";
 import { NAMES } from "../utils/Constants/text";
 
@@ -190,7 +190,7 @@ export type NuevoProductoData = Omit<ProductoProps, "id">;
 
 export function useGestionProductos() {
   const [productos, setProductos] = useState<ProductoProps[]>([]);
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [categorias, setCategorias] = useState<CategoriaProps[]>([]);
   const [mensaje, setMensaje] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [nuevoProducto, setNuevoProducto] = useState<NuevoProductoData>({

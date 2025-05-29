@@ -49,7 +49,7 @@ function GestionCategoriasPage() {
         </>
       )}
 
-      <h2 className={styles.titleList}>Lista de Categorías</h2>
+      <h2 className={styles.titleList}>{NAMES.CATEGORIAS_LISTA}</h2>
       <CategoriaList
         categorias={categorias}
         editandoId={editandoId}
