@@ -117,6 +117,11 @@ function Dashboard() {
                 className={styles.headerButton}
               />
               <Button
+                navigateTo={ROUTES.TOTAL_MESAS}
+                text={NAMES.CONFIGURAR_MESAS}
+                className={styles.headerButton}
+              />
+              <Button
                 navigateTo={ROUTES.CATEGORY}
                 text={NAMES.CATEGORIAS_BUTTON}
                 className={styles.headerButton}
@@ -124,12 +129,6 @@ function Dashboard() {
               <Button
                 navigateTo={ROUTES.PRODUCT}
                 text={NAMES.CATEGORIAS_PRODUCTOS}
-                className={styles.headerButton}
-              />
-              {/* NUEVO: Botón para configurar mesas (por el admin) */}
-              <Button
-                navigateTo={ROUTES.TOTAL_MESAS} // Necesitarás crear este componente y ruta
-                text={NAMES.CONFIGURAR_MESAS}
                 className={styles.headerButton}
               />
               {errorIva && !showModalIva && (

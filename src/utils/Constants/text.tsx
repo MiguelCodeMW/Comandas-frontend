@@ -20,7 +20,7 @@ export const NAMES = {
   TOKEN_ERROR: "Error de autenticación: No se encontró token.",
   USER: "user",
   ROL_ADMIN: "admin",
-  MOSTRAR_AJUSTES: "Mostrar Ajustes",
+  MOSTRAR_AJUSTES: "Ajustes",
   OCULTAR_AJUSTES: "Ocultar Ajustes",
   COMANDA: "Comanda",
   LISTADO_MESAS: "Listado de Mesas",

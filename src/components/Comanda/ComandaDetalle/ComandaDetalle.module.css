@@ -1,4 +1,4 @@
-.comandaDetalleContainer {
+comandaDetalleContainer {
   padding: var(--spacing-xl);
   font-family: var(--font);
   background: var(--white);
@@ -6,39 +6,52 @@
   margin: var(--spacing-xl) auto;
   box-shadow: var(--shadow-lg);
   border-radius: var(--radius-lg);
+  display: flex; /* Usamos flexbox para organizar mejor el contenido */
+  flex-direction: column;
+  gap: var(--spacing-lg); /* Espacio consistente entre secciones */
 }
 
 .comandaDetalleTitulo {
   font-size: var(--font-size-xxl);
-  margin-bottom: var(--spacing-xl);
+  /* Eliminado margin-bottom aquí para usar el gap del container */
   text-align: center;
   font-weight: 700;
   color: var(--dark);
+  padding-bottom: var(
+    --spacing-md
+  ); /* Pequeño padding inferior para separar del contenido */
+  border-bottom: 1px solid var(--border-color-light); /* Línea sutil para separar el título */
 }
 
 .comandaDetalleInfo {
   font-size: var(--font-size-md);
   color: var(--secondary-dark);
-  margin-bottom: var(--spacing-sm);
   line-height: 1.6;
+  /* margin-bottom eliminado, usa el gap del padre o margenes específicos si es necesario */
 }
 
+/* Estilo para los títulos de sección dentro del detalle (ej. "Productos:") */
 .detallesTitulo {
   font-size: var(--font-size-xl);
-  margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-md);
+  margin-top: var(
+    --spacing-lg
+  ); /* Mantén el margen superior para separar de la info general */
+  margin-bottom: var(--spacing-md); /* Espacio antes de la lista */
   font-weight: 600;
   color: var(--dark);
-  border-left: 4px solid var(--primary);
+  border-left: 5px solid var(--primary); /* Ligeramente más grueso para más impacto */
   padding-left: var(--spacing-md);
+  /* Añadido un pequeño margen a la izquierda para mejor separación visual */
+  margin-left: -1px; /* Ajuste para que la línea quede pegada al borde visualmente si es necesario */
 }
 
 .detallesLista {
   list-style: none;
   padding: 0;
-  margin: 0 0 var(--spacing-xl) 0;
+  margin: 0; /* Reinicia margin para usar solo gap */
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* Ajustado minmax para permitir elementos más pequeños en pantallas estrechas */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--spacing-md);
 }
 
@@ -48,73 +61,111 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
+  display: flex; /* Para organizar el contenido interno del item */
+  flex-direction: column;
+  justify-content: space-between; /* Empuja el precio al final si hay múltiples líneas de info */
 }
 
 .detalleItem:hover {
   background-color: var(--highlight);
   border-color: var(--highlight-border);
   box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
+  transform: translateY(-3px); /* Un poco más de elevación al hacer hover */
 }
 
 .detalleInfo {
   font-size: var(--font-size-md);
-  color: var(--secondary-dark);
-  margin-bottom: var(--spacing-sm);
+  color: var(--dark); /* Cambiado a dark para mayor legibilidad */
+  margin-bottom: var(--spacing-xs); /* Menos espacio entre líneas de info */
 }
 
+.detalleInfo span {
+  font-weight: 600; /* Resalta el texto del nombre/cantidad */
+  color: var(--primary-dark);
+}
+
+/* Sección de totales */
 .totalesBox {
-  background-color: var(--light);
-  padding: var(--spacing-lg);
-  border-radius: var(--radius);
-  margin-top: var(--spacing-xl);
+  background-color: var(
+    --background
+  ); /* Un fondo más neutro para los totales */
+  padding: var(--spacing-xl); /* Más padding para que resalte */
+  border-radius: var(--radius-lg); /* Bordes más redondeados */
+  margin-top: var(--spacing-lg); /* Espacio después de la lista de detalles */
   border: 1px solid var(--border-color);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg); /* Sombra más pronunciada */
+  text-align: right; /* Alinea los totales a la derecha */
 }
 
 .totalesBox .detalleInfo {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-lg); /* Total ligeramente más grande */
   margin-bottom: var(--spacing-sm);
+  display: flex; /* Para alinear el texto y el valor */
+  justify-content: space-between;
+  align-items: baseline;
+  color: var(--dark); /* Color más oscuro para mejor contraste */
 }
 
 .totalesBox .detalleInfo:last-child {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl); /* El precio total final es más grande */
   color: var(--primary);
+  font-weight: 700; /* Negrita para el total final */
+  padding-top: var(--spacing-sm); /* Separación del resto de totales */
+  border-top: 1px dashed var(--border-color); /* Línea de puntos para separar el total */
 }
 
+/* Contenedor de acciones (botones) */
 .accionesContainer {
   display: flex;
   gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-xl); /* Más espacio antes de los botones */
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+  padding-top: var(--spacing-md); /* Espacio interno superior */
+  border-top: 1px solid var(--border-color-light); /* Línea sutil para separar de los totales */
 }
 
 /* CLASE BASE PARA TODOS LOS BOTONES EN ESTE MÓDULO */
+/* Se asume que Button.tsx ya tiene una clase 'btn' o similar que hereda de global.css */
+/* Si no, esta clase 'button' se podría componer directamente de global.css si sus estilos son muy similares */
 .button {
+  /* Si 'Button' componente ya aplica 'btn' de global.css, no necesitas estos estilos aquí */
+  /* Si no, descomenta y ajusta: */
+  /* composes: btn from "../../styles/global.css"; */
   padding: 0.8rem 1.6rem;
   border-radius: var(--radius);
   border: none;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: var(--font-size-md); /* Usar variable para font-size */
   cursor: pointer;
-  transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
+    transform 0.15s ease-in-out;
   box-shadow: var(--shadow);
   text-transform: capitalize;
   flex-shrink: 0;
-  min-width: 120px; /* Asegura un ancho mínimo para todos los botones */
-  display: flex; /* Para centrar el texto vertical y horizontalmente */
+  min-width: 140px; /* Asegura un ancho mínimo para todos los botones */
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .button:hover {
   box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
+  transform: translateY(-3px); /* Consistente con el detalleItem */
 }
 
-/* VARIANTES ESPECÍFICAS DE BOTONES (solo definen color) */
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--secondary); /* Color deshabilitado más claro */
+  box-shadow: none;
+  transform: none;
+}
+
+/* VARIANTES ESPECÍFICAS DE BOTONES */
+/* Estos deberían sobrescribir los estilos de la clase base 'button' o 'btn' */
 .dashboardButton {
   background-color: var(--secondary);
   color: var(--white);
@@ -125,7 +176,7 @@
 
 .editarButton {
   background-color: var(--warning);
-  color: var(--dark);
+  color: var(--dark); /* Mejor contraste para el texto */
 }
 .editarButton:hover {
   background-color: var(--warning-dark);
@@ -147,7 +198,7 @@
   background-color: var(--danger-dark);
 }
 
-/* Mensajes (en ComandaDetalle) */
+/* Mensajes (éxito/error) */
 .message {
   padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--radius);
@@ -158,6 +209,8 @@
   font-size: var(--font-size-md);
   border-width: 1px;
   border-style: solid;
+  width: 100%; /* Asegura que el mensaje ocupe el ancho disponible */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho */
 }
 .success {
   color: var(--success-dark);
@@ -168,4 +221,87 @@
   color: var(--danger-dark);
   background: var(--danger-light);
   border-color: var(--danger);
+}
+
+/* --- Media Queries para responsividad --- */
+@media (max-width: 768px) {
+  .comandaDetalleContainer {
+    padding: var(--spacing-lg);
+    margin: var(--spacing-lg) auto;
+    gap: var(--spacing-md);
+  }
+
+  .comandaDetalleTitulo {
+    font-size: var(--font-size-xl);
+  }
+
+  .detallesTitulo {
+    font-size: var(--font-size-lg);
+    margin-top: var(--spacing-md);
+  }
+
+  .detallesLista {
+    grid-template-columns: 1fr; /* Una columna en pantallas medianas */
+  }
+
+  .detalleItem {
+    padding: var(--spacing-md);
+  }
+
+  .totalesBox {
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+  }
+
+  .totalesBox .detalleInfo:last-child {
+    font-size: var(--font-size-lg);
+  }
+
+  .accionesContainer {
+    flex-direction: column; /* Apila los botones en pantallas pequeñas */
+    align-items: stretch; /* Estira los botones al ancho completo */
+    margin-top: var(--spacing-lg);
+  }
+
+  .button {
+    min-width: unset; /* Reinicia el ancho mínimo para permitir estiramiento */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .comandaDetalleContainer {
+    padding: var(--spacing-md);
+    margin: var(--spacing-md) auto;
+    border-radius: var(--radius); /* Menos redondeado en móviles */
+  }
+
+  .comandaDetalleTitulo {
+    font-size: var(--font-size-lg);
+    padding-bottom: var(--spacing-xs);
+  }
+
+  .detallesTitulo {
+    font-size: var(--font-size-md);
+    padding-left: var(--spacing-sm);
+    border-left-width: 3px;
+  }
+
+  .detalleItem {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+
+  .totalesBox {
+    padding: var(--spacing-md);
+  }
+
+  .totalesBox .detalleInfo {
+    font-size: var(--font-size-md);
+  }
+
+  .totalesBox .detalleInfo:last-child {
+    font-size: var(--font-size-md);
+  }
 }

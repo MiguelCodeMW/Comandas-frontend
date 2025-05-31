@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import api from "../api/axio"; // Asegúrate de que 'api' esté configurado correctamente con la base URL
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
+import api from "../api/axio";
 import {
   ProductoProps,
   ProductoSeleccionado,
   MesaData,
   ComandaData,
-} from "../utils/types/ComandaTypes"; // Asegúrate de que estos tipos estén correctamente definidos e importados
+} from "../utils/types/ComandaTypes";
 import { CategoriaProps } from "../utils/types/CategoriaTypes";
 import { ROUTES } from "../utils/Constants/routes";
 import { NAMES } from "../utils/Constants/text";
@@ -20,7 +20,8 @@ export function useCrearComanda() {
   const [userId, setUserId] = useState<number | null>(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const comandaIdParaEditar = searchParams.get("id"); // Obtiene el ID de la comanda si estamos editando
+  const location = useLocation(); // ¡Este es el hook para acceder al estado de la URL y navegación!
+  const comandaIdParaEditar = searchParams.get("id");
   const [mensaje, setMensaje] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -29,13 +30,32 @@ export function useCrearComanda() {
   const [loadingIvaComanda, setLoadingIvaComanda] = useState<boolean>(true);
   const [errorIvaComanda, setErrorIvaComanda] = useState<string | null>(null);
 
-  // NUEVOS ESTADOS PARA MESAS
+  // ESTADOS PARA MESAS
   const [mesasDisponibles, setMesasDisponibles] = useState<MesaData[]>([]);
   const [mesaSeleccionadaId, setMesaSeleccionadaId] = useState<number | null>(
     null
   );
   const [loadingMesas, setLoadingMesas] = useState<boolean>(true);
   const [errorMesas, setErrorMesas] = useState<string | null>(null);
+
+  // Estado temporal para la mesa preseleccionada desde la navegación.
+  // Será inicializado por el useEffect que usa useLocation.
+  const [initialSelectedMesaId, setInitialSelectedMesaId] = useState<
+    number | null
+  >(null);
+
+  // NUEVO: useEffect para obtener initialSelectedMesaId usando `useLocation`
+  useEffect(() => {
+    // location.state es el objeto que contiene el estado pasado con navigate
+    const state = location.state as { selectedMesaId?: number } | undefined;
+
+    if (state && typeof state.selectedMesaId === "number") {
+      setInitialSelectedMesaId(state.selectedMesaId);
+      // Opcional: Limpiar el estado de navegación para evitar que se aplique de nuevo
+      // Esto es útil si quieres que la preselección solo ocurra una vez al llegar
+      navigate(ROUTES.CREATE_COMANDA, { replace: true, state: {} });
+    }
+  }, [location.state, navigate]); // Dependencias: location.state y navigate
 
   const limpiarMensajes = () => {
     setMensaje(null);
@@ -63,7 +83,6 @@ export function useCrearComanda() {
     }
   }, []);
 
-  // NUEVA FUNCIÓN: Para obtener las mesas
   const fetchMesas = useCallback(async () => {
     setLoadingMesas(true);
     setErrorMesas(null);
@@ -71,9 +90,11 @@ export function useCrearComanda() {
       const response = await api.get(ROUTES.MESAS);
       const fetchedMesas: MesaData[] = response.data;
       setMesasDisponibles(fetchedMesas); // Guarda todas las mesas obtenidas
+      return fetchedMesas; // Devuelve las mesas para usarlas en fetchData
     } catch (err: any) {
       console.error("Error al cargar las mesas:", err);
       setErrorMesas(NAMES.ERROR_CARGA_MESAS);
+      return []; // Devuelve un array vacío en caso de error
     } finally {
       setLoadingMesas(false);
     }
@@ -84,7 +105,10 @@ export function useCrearComanda() {
     limpiarMensajes();
     try {
       // Cargar el IVA y las mesas en paralelo
-      await Promise.all([fetchIvaForComanda(), fetchMesas()]);
+      const [_, fetchedMesas] = await Promise.all([
+        fetchIvaForComanda(),
+        fetchMesas(),
+      ]); // Guarda las mesas devueltas por fetchMesas
 
       // Obtener el ID del usuario logueado
       const userResponse = await api.get(ROUTES.USER);
@@ -100,7 +124,7 @@ export function useCrearComanda() {
       );
       setProductos(productosResponse.data.productos || productosResponse.data);
 
-      // Si es una edición, cargar los productos y la MESA de la comanda existente
+      // Lógica para establecer la mesa seleccionada
       if (comandaIdParaEditar) {
         const comandaResponse = await api.get(
           ROUTES.COMANDA_DETAIL.replace(":id", comandaIdParaEditar)
@@ -119,41 +143,56 @@ export function useCrearComanda() {
               }))
             );
           }
-          // SI LA COMANDA YA TIENE UNA MESA ASIGNADA, SELECCIÓNALA
+          // Si la comanda ya tiene una mesa asignada, seleccionala
           if (
             comandaAEditar.mesa_id !== undefined &&
             comandaAEditar.mesa_id !== null
           ) {
             setMesaSeleccionadaId(comandaAEditar.mesa_id);
           } else {
-            setMesaSeleccionadaId(null); // Asegura que se deseleccione si no tiene mesa
+            setMesaSeleccionadaId(null);
           }
-          // Aquí actualizamos mesasDisponibles para incluir también la mesa actual de la comanda si está ocupada
-          // y asegurarnos que solo las libres y la ocupada por la comanda actual aparezcan para reasignación
-          const allMesasResponse = await api.get(ROUTES.MESAS);
+          // Asegurarse de que en modo edición, las mesas disponibles incluyan la mesa actual de la comanda
+          // incluso si está ocupada, para que el usuario pueda verla.
           setMesasDisponibles(
-            allMesasResponse.data.filter(
+            fetchedMesas.filter(
               (mesa: MesaData) =>
                 mesa.estado === "libre" || mesa.id === comandaAEditar.mesa_id
             )
           );
         }
       } else {
+        // En modo creación, primero intenta usar initialSelectedMesaId
+        if (
+          initialSelectedMesaId !== null &&
+          fetchedMesas.some(
+            (mesa) =>
+              mesa.id === initialSelectedMesaId && mesa.estado === "libre"
+          )
+        ) {
+          setMesaSeleccionadaId(initialSelectedMesaId);
+        } else {
+          // Si no hay initialSelectedMesaId o no es válido, inicializa a null (Sin Mesa)
+          setMesaSeleccionadaId(null);
+        }
         // En modo creación, solo mostramos las mesas libres para seleccionar
-        const initialMesas = await api.get(ROUTES.MESAS);
         setMesasDisponibles(
-          initialMesas.data.filter((mesa: MesaData) => mesa.estado === "libre")
+          fetchedMesas.filter((mesa: MesaData) => mesa.estado === "libre")
         );
-        setMesaSeleccionadaId(null); // Asegura que al crear, la mesa inicial sea "Sin Mesa"
       }
     } catch (err: any) {
       console.error(NAMES.ERROR_CARGA, err);
       setError(NAMES.ERROR_CARGA);
-      setIvaActualComanda(0.21); // Asegurar un fallback en caso de error general
+      setIvaActualComanda(0.21);
     } finally {
       setLoading(false);
     }
-  }, [comandaIdParaEditar, fetchIvaForComanda, fetchMesas]);
+  }, [
+    comandaIdParaEditar,
+    fetchIvaForComanda,
+    fetchMesas,
+    initialSelectedMesaId, // Añade initialSelectedMesaId a las dependencias de fetchData
+  ]);
 
   useEffect(() => {
     fetchData();
@@ -186,13 +225,10 @@ export function useCrearComanda() {
     );
   };
 
-  // NUEVA FUNCIÓN: Manejar la selección de mesa
   const handleSeleccionarMesa = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const selectedValue = event.target.value;
-    // Si el valor es "null" (nuestra opción para sin mesa), se guarda como null.
-    // De lo contrario, se convierte a número.
     setMesaSeleccionadaId(
       selectedValue === "null" ? null : Number(selectedValue)
     );
@@ -214,13 +250,13 @@ export function useCrearComanda() {
     try {
       const payload = {
         user_id: userId,
-        estado: "abierta", // O "cerrada" si quieres una comanda directa de pago
+        estado: "abierta",
         productos: productosSeleccionados.map((p) => ({
           producto_id: p.id,
           cantidad: p.cantidad,
         })),
         iva: ivaParaEnviar,
-        mesa_id: mesaSeleccionadaId, // AÑADIDO: Envía el ID de la mesa seleccionada (puede ser null)
+        mesa_id: mesaSeleccionadaId,
       };
 
       if (comandaIdParaEditar) {
@@ -232,14 +268,13 @@ export function useCrearComanda() {
       } else {
         await api.post(ROUTES.COMANDA, {
           ...payload,
-          fecha: new Date().toISOString(), // La fecha se envía al crear
+          fecha: new Date().toISOString(),
         });
         setMensaje(NAMES.COMANDA_EXITOSA);
       }
       setProductosSeleccionados([]);
-      setMesaSeleccionadaId(null); // Limpiar selección de mesa después de crear/actualizar
-      // Vuelve a cargar las mesas disponibles para reflejar el nuevo estado de la que acaba de ser ocupada
-      await fetchMesas();
+      setMesaSeleccionadaId(null);
+      await fetchMesas(); // Vuelve a cargar las mesas para actualizar su estado
       setTimeout(() => navigate(ROUTES.DASHBOARD), 1500);
     } catch (err: any) {
       console.error("ERROR GUARDAR COMANDA", err);
@@ -258,11 +293,12 @@ export function useCrearComanda() {
     comandaIdParaEditar,
     mensaje,
     error,
-    loading: loading || loadingIvaComanda || loadingMesas, // Considera el loading de mesas
+    loading: loading || loadingIvaComanda || loadingMesas,
     ivaActualComanda,
+    // La lista de mesas disponibles ahora incluye la lógica para la mesa actualmente seleccionada en modo edición
     mesasDisponibles: mesasDisponibles.filter(
       (mesa) => mesa.estado === "libre" || mesa.id === mesaSeleccionadaId
-    ), // Filtra para mostrar solo libres y la actual si está ocupada
+    ),
     mesaSeleccionadaId,
     handleSeleccionarProducto,
     handleAumentarCantidad,

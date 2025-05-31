@@ -1,0 +1,272 @@
+/* src/components/TotalMesas/TotalMesas.module.css */
+@import "../../styles/variables.css";
+
+.container {
+  padding: var(--spacing-lg);
+  font-family: var(--font);
+  background: var(--background);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xl); /* Espacio entre secciones principales */
+  max-width: 800px; /* Limita el ancho del contenido principal */
+  margin: var(--spacing-xl) auto; /* Centra el contenedor */
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+}
+
+.title {
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  width: 100%;
+}
+
+.message {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius);
+  text-align: center;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  font-weight: 500;
+  font-size: var(--font-size-md);
+  border-width: 1px;
+  border-style: solid;
+  width: 100%;
+  max-width: 500px; /* Limita el ancho de los mensajes */
+}
+
+.success {
+  color: var(--success-dark);
+  background: var(--success-light);
+  border-color: var(--success);
+}
+
+.error {
+  color: var(--danger-dark);
+  background: var(--danger-light);
+  border-color: var(--danger);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--light);
+  box-shadow: var(--shadow);
+}
+
+.label {
+  font-size: var(--font-size-lg);
+  color: var(--dark);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.input {
+  padding: var(--spacing-md);
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: var(--font-size-md);
+  color: var(--dark);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary), 0.2);
+}
+
+.button {
+  /* Estilos para el botón de actualizar, usa los estilos globales de .btn */
+  composes: btn from "../../styles/global.css";
+  width: 100%;
+  max-width: 200px; /* Limita el ancho del botón */
+  margin-top: var(--spacing-md);
+}
+
+.mesaSummary {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--light);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.mesaSummary h3 {
+  font-size: var(--font-size-xl);
+  color: var(--dark);
+  margin-bottom: var(--spacing-lg);
+  font-weight: 600;
+}
+
+.mesaSummary p {
+  font-size: var(--font-size-md);
+  color: var(--dark);
+  margin-bottom: var(--spacing-sm);
+}
+
+.mesaSummary p strong {
+  color: var(--primary-dark);
+}
+
+.mesaListContainer {
+  width: 100%;
+  max-width: 500px;
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--light);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.mesaListContainer h3 {
+  font-size: var(--font-size-xl);
+  color: var(--dark);
+  margin-bottom: var(--spacing-lg);
+  font-weight: 600;
+}
+
+.mesaList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.mesaItem {
+  padding: var(--spacing-md);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--dark);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mesaItem:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.mesaItem.ocupada {
+  background-color: var(--danger-light);
+  border-color: var(--danger);
+  color: var(--danger-dark);
+}
+
+.mesaItem.libre {
+  background-color: var(--success-light);
+  border-color: var(--success);
+  color: var(--success-dark);
+}
+
+.backButton {
+  /* Estilos para el botón de volver, usa los estilos globales de .btn */
+  composes: btn from "../../styles/global.css";
+  background-color: var(
+    --secondary
+  ); /* Usa el color secundario para "volver" */
+  width: 100%;
+  max-width: 200px;
+}
+
+.backButton:hover {
+  background-color: var(--secondary-dark);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-md);
+    margin: var(--spacing-lg) auto;
+    gap: var(--spacing-lg);
+  }
+
+  .title {
+    font-size: var(--font-size-xl);
+  }
+
+  .message {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .formGroup,
+  .mesaSummary,
+  .mesaListContainer {
+    padding: var(--spacing-md);
+    max-width: 100%; /* Ajusta el ancho en pantallas más pequeñas */
+  }
+
+  .label {
+    font-size: var(--font-size-md);
+  }
+
+  .input {
+    font-size: var(--font-size-sm);
+  }
+
+  .button,
+  .backButton {
+    max-width: 180px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .mesaList {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .mesaItem {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: var(--spacing-md) auto;
+    padding: var(--spacing-sm);
+  }
+
+  .title {
+    font-size: var(--font-size-lg);
+  }
+
+  .formGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button,
+  .backButton {
+    width: 100%;
+    max-width: none; /* Permite que los botones ocupen todo el ancho disponible */
+  }
+
+  .mesaList {
+    grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
+  }
+}
