@@ -1,4 +1,3 @@
-// src/hooks/useCrearComanda.ts (ESTA ES LA VERSIÓN CORRECTA A USAR)
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import api from "../api/axio";
