@@ -1,6 +1,3 @@
-/* src/components/TotalMesas/TotalMesas.module.css */
-@import "../../styles/variables.css";
-
 .container {
   padding: var(--spacing-lg);
   font-family: var(--font);
@@ -91,7 +88,6 @@
 
 .button {
   /* Estilos para el botón de actualizar, usa los estilos globales de .btn */
-  composes: btn from "../../styles/global.css";
   width: 100%;
   max-width: 200px; /* Limita el ancho del botón */
   margin-top: var(--spacing-md);
@@ -182,12 +178,12 @@
 
 .backButton {
   /* Estilos para el botón de volver, usa los estilos globales de .btn */
-  composes: btn from "../../styles/global.css";
   background-color: var(
     --secondary
   ); /* Usa el color secundario para "volver" */
   width: 100%;
   max-width: 200px;
+  color: var(--light);
 }
 
 .backButton:hover {
@@ -260,13 +256,54 @@
     align-items: stretch;
   }
 
-  .button,
+  /* .button,
   .backButton {
     width: 100%;
     max-width: none; /* Permite que los botones ocupen todo el ancho disponible */
-  }
+}
+.mesaList {
+  grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
+}
+.button,
+.backButton {
+  /* Si 'Button' componente ya aplica 'btn' de global.css, no necesitas estos estilos aquí */
+  /* Si no, descomenta y ajusta: */
+  /* composes: btn from "../../styles/global.css"; */
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 600;
+  font-size: var(--font-size-md); /* Usar variable para font-size */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
+    transform 0.15s ease-in-out;
+  box-shadow: var(--shadow);
+  text-transform: capitalize;
+  flex-shrink: 0;
+  min-width: 140px; /* Asegura un ancho mínimo para todos los botones */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.editarButton {
+  background-color: var(--warning);
+  color: var(--dark); /* Mejor contraste para el texto */
+}
+.editarButton:hover {
+  background-color: var(--warning-dark);
+}
 
-  .mesaList {
-    grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
-  }
+.pagarButton {
+  background-color: var(--success);
+  color: var(--white);
+}
+.pagarButton:hover {
+  background-color: var(--success-dark);
+}
+.dashboardButton {
+  background-color: var(--secondary);
+  color: var(--white);
+}
+.dashboardButton:hover {
+  background-color: var(--secondary-dark);
 }

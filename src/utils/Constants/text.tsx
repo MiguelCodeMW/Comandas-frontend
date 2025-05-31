@@ -28,7 +28,7 @@ export const NAMES = {
 
   //IVA
   GUARDAR_IVA: "Guardar IVA",
-  CONFIGURAR_IVA: "Configurar IVA",
+  CONFIGURAR_IVA: "IVA",
   IVA_ACTUAL: "IVA Actual",
   IVA_EXITO: "IVA configurado con éxito.",
   ALERTA_IVA_INVALIDO:
@@ -37,8 +37,8 @@ export const NAMES = {
   IVA_LABEL: "Valor del IVA",
 
   //Categorías
-  CATEGORIAS_BUTTON: "Gestionar Categorías",
-  CATEGORIAS_PRODUCTOS: "Gestionar Productos",
+  CATEGORIAS_BUTTON: "Categorías",
+  CATEGORIAS_PRODUCTOS: "Productos",
   CATEGORIA_TITULO: "Gestión de Categorías",
   CATEGORIA_NUEVA: "Nueva Categoría",
   CATEGORIA_EDITAR: "Editar Categoría",
@@ -135,8 +135,8 @@ export const NAMES = {
 
   //Dashboard
   DASHBOARD_TITULO: "Panel de Control",
-  DASHBOARD_VER_PENDIENTES: "Ver Pendientes",
-  DASHBOARD_VER_PAGADAS: "Ver Pagadas",
+  DASHBOARD_VER_PENDIENTES: "Comandas pendientes",
+  DASHBOARD_VER_PAGADAS: "Comandas Pagadas",
   DASHBOARD_NO_COMANDAS_PENDIENTES: "No hay comandas pendientes de pago.",
   DASHBOARD_NO_COMANDAS_PAGADAS: "No hay comandas pagadas.",
   DASHBOARD_CONFIGURAR_IVA_ALERTA: "Debes configurar el IVA antes de operar.",
@@ -169,7 +169,7 @@ export const NAMES = {
   IVA_NO_CONFIGURADO: "IVA no configurado",
 
   // Moneda
-  CONFIGURAR_MONEDA: "Configurar Moneda",
+  CONFIGURAR_MONEDA: "Moneda",
   MONEDA_LABEL: "Configuración de Moneda",
   MONEDA_APLICADA: "Código de Moneda (ej: EUR, USD)",
   MONEDA_VALOR_INVALIDO:
@@ -187,7 +187,7 @@ export const NAMES = {
   SELECCIONAR_MESA: "Seleccionar Mesa",
   SIN_MESA: "Sin Mesa",
   MESA: "Mesa",
-  CONFIGURAR_MESAS: "Configurar Mesas",
+  CONFIGURAR_MESAS: "Mesas",
   TOTAL_MESAS_ACTUAL: "Total de Mesas",
   MESAS_LIBRES: "Mesas Libres",
   MESAS_OCUPADAS: "Mesas Ocupadas",

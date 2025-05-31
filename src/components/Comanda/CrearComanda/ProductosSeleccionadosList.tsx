@@ -24,9 +24,9 @@ function ProductosSeleccionadosList({
           <div className={styles.selectableWrapper}>
             <span className={styles.seleccionadoInfo}>
               {producto.nombre} - {NAMES.DETALLES_CANTIDAD} {producto.cantidad}{" "}
-              - {NAMES.LABEL_PRECIO} {moneda} {producto.precio.toFixed(2)} -{" "}
-              {NAMES.COMANDA_PRECIO_TOTAL} {moneda}
-              {(producto.precio * producto.cantidad).toFixed(2)}{" "}
+              - {NAMES.LABEL_PRECIO} {producto.precio.toFixed(2)} {moneda} -{" "}
+              {NAMES.COMANDA_PRECIO_TOTAL}
+              {(producto.precio * producto.cantidad).toFixed(2)} {moneda}
             </span>
             <div className={styles.seleccionadoControles}>
               <button

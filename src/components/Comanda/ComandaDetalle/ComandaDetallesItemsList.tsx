@@ -26,12 +26,13 @@ function ComandaDetallesItemsList({
               {NAMES.DETALLES_CANTIDAD} {detalle.cantidad}
             </p>
             <p className={styles.detalleInfo}>
-              {NAMES.DETALLES_PRECIO_UNITARIO} {monedaComanda}{" "}
-              {detalle.producto.precio.toFixed(2)}
+              {NAMES.DETALLES_PRECIO_UNITARIO}{" "}
+              {detalle.producto.precio.toFixed(2)} {monedaComanda}
             </p>
             <p className={styles.detalleInfo}>
-              {NAMES.DETALLES_TOTAL} {monedaComanda}{" "}
-              {(detalle.cantidad * detalle.producto.precio).toFixed(2)}
+              {NAMES.DETALLES_TOTAL}{" "}
+              {(detalle.cantidad * detalle.producto.precio).toFixed(2)}{" "}
+              {monedaComanda}
             </p>
           </li>
         ))}

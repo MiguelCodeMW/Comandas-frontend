@@ -329,7 +329,7 @@ function TotalMesas() {
         <Button
           text={NAMES.ACTUALIZAR}
           onClick={handleConfigurarMesas}
-          className={styles.button}
+          className={`${styles.button} ${styles.pagarButton}`}
           disabled={
             loading || totalMesasInput === "" || parseInt(totalMesasInput) < 0
           }
@@ -373,7 +373,9 @@ function TotalMesas() {
       <Button
         text={NAMES.VOLVER}
         onClick={() => navigate(ROUTES.DASHBOARD)}
-        className={styles.backButton}
+        className={`${styles.button} ${styles.dashboardButton}`}
+
+        // className={styles.backButton}
       />
     </div>
   );

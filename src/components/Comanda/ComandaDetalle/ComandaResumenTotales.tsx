@@ -11,17 +11,15 @@ function ComandaResumenTotales({
   return (
     <div className={styles.totalesBox}>
       <p className={styles.detalleInfo}>
-        {NAMES.SUBTOTAL} {monedaComanda}
-        {subtotal.toFixed(2)}
+        {NAMES.SUBTOTAL} {subtotal.toFixed(2)} {monedaComanda}
       </p>
       <p className={styles.detalleInfo}>
-        IVA ({(ivaPorcentaje * 100).toFixed(0)}%): {monedaComanda}
-        {(subtotal * ivaPorcentaje).toFixed(2)}
+        IVA ({(ivaPorcentaje * 100).toFixed(0)}%):
+        {(subtotal * ivaPorcentaje).toFixed(2)} {monedaComanda}
       </p>
       <p className={styles.detalleInfo}>
         <strong>
-          {NAMES.TOTAL_CON_IVA} {monedaComanda}
-          {totalConIva.toFixed(2)}
+          {NAMES.TOTAL_CON_IVA} {totalConIva.toFixed(2)} {monedaComanda}
         </strong>
       </p>
     </div>

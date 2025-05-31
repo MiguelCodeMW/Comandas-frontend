@@ -24,8 +24,7 @@ function ProductoSelectorList({
         >
           <div className={styles.productoInfo}>{producto.nombre}</div>
           <div className={styles.productoPrecio}>
-            {moneda}
-            {producto.precio.toFixed(2)}
+            {producto.precio.toFixed(2)} {moneda}
           </div>
         </li>
       ))}

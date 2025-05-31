@@ -56,11 +56,10 @@ function DashboardComandasList({
             {/* Opcional: Mostrar el total si está disponible */}
             {comanda.total_con_iva !== undefined && (
               <p className={styles.itemText}>
-                Total:{" "}
+                Total: {comanda.total_con_iva.toFixed(2)}{" "}
                 {comanda.moneda_aplicada ||
                   localStorage.getItem("moneda_global") ||
-                  "€"}{" "}
-                {comanda.total_con_iva.toFixed(2)}
+                  "€"}
               </p>
             )}
           </li>
