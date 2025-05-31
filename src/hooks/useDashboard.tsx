@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/axio";
 import { ROUTES } from "../utils/Constants/routes";
 import { NAMES } from "../utils/Constants/text";
-import { ComandaDashboard } from "../utils/types/ComandaTypes";
+import { ComandaDashboard } from "../utils/types/ComandaTypes"; // Asegúrate de que incluya mesa y mesa_id
 import { User } from "../utils/types/UserTypes";
 
 export function useDashboard() {
@@ -53,7 +53,12 @@ export function useDashboard() {
   const fetchComandas = useCallback(async () => {
     setError(null);
     try {
-      const res = await api.get(ROUTES.DASHBOARD);
+      // Modifica esta llamada para incluir la relación 'mesa' si tu backend lo soporta.
+      // Si tu index de ComandaController ya carga las relaciones automáticamente,
+      // no necesitas cambiar la URL. Si no, podrías necesitar un parámetro:
+      // const res = await api.get(ROUTES.DASHBOARD + '?with=mesa'); // Ejemplo
+      const res = await api.get(ROUTES.DASHBOARD); // Asumiendo que tu backend ya incluye la mesa
+
       setComandas(
         Array.isArray(res.data.comandas)
           ? res.data.comandas

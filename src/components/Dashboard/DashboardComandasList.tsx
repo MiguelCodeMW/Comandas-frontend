@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Dashboard.module.css";
-import { ComandaDashboard } from "../../utils/types/ComandaTypes";
+import { ComandaDashboard } from "../../utils/types/ComandaTypes"; // Asegúrate de que incluya mesa y mesa_id
 import { ROUTES } from "../../utils/Constants/routes";
 import { NAMES } from "../../utils/Constants/text";
 import { DashboardComandasListProps } from "../../utils/types/ComandaTypes";
@@ -36,14 +36,32 @@ function DashboardComandasList({
               )
             }
           >
-            <h3 className={styles.itemTitle}>Comanda #{comanda.id}</h3>
+            {/* <h3 className={styles.itemTitle}>Comanda #{comanda.id}</h3> */}
+            {comanda.mesa
+              ? `${NAMES.COMANDA} - ${NAMES.MESA} ${comanda.mesa.numero}` // Si tiene mesa: "Comanda - Mesa X"
+              : `${NAMES.COMANDA} #${comanda.id}`}
             <p className={styles.itemText}>Estado: {comanda.estado}</p>
             <p className={styles.itemText}>
               Fecha: {new Date(comanda.fecha).toLocaleString()}
             </p>
-            {/* Opcional: Mostrar el nombre del usuario si está disponible en ComandaDashboard */}
             {comanda.usuario?.name && (
               <p className={styles.itemText}>Usuario: {comanda.usuario.name}</p>
+            )}
+            {/* NUEVO: Mostrar la mesa si está asignada */}
+            {comanda.mesa && comanda.mesa.numero && (
+              <p className={styles.itemText}>
+                {NAMES.MESA}: {comanda.mesa.numero}
+              </p>
+            )}
+            {/* Opcional: Mostrar el total si está disponible */}
+            {comanda.total_con_iva !== undefined && (
+              <p className={styles.itemText}>
+                Total:{" "}
+                {comanda.moneda_aplicada ||
+                  localStorage.getItem("moneda_global") ||
+                  "€"}{" "}
+                {comanda.total_con_iva.toFixed(2)}
+              </p>
             )}
           </li>
         )

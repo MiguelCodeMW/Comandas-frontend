@@ -19,9 +19,12 @@ function CrearComanda() {
     mensaje,
     error,
     loading,
+    mesasDisponibles, // <-- Importa las mesas disponibles
+    mesaSeleccionadaId, // <-- Importa la mesa seleccionada actualmente
     handleSeleccionarProducto,
     handleAumentarCantidad,
     handleDisminuirCantidad,
+    handleSeleccionarMesa, // <-- Importa la función para seleccionar mesa
     handleFinalizarComanda,
   } = useCrearComanda();
   const navigate = useNavigate();
@@ -68,6 +71,36 @@ function CrearComanda() {
       {mensaje && (
         <p className={`${styles.message} ${styles.success}`}>{mensaje}</p>
       )}
+
+      {/* NUEVO: Selector de Mesas */}
+      <div className={styles.mesaSelectorContainer}>
+        <label htmlFor="mesa-select" className={styles.label}>
+          {NAMES.SELECCIONAR_MESA}:
+        </label>
+        <select
+          id="mesa-select"
+          // Importante: Si mesaSeleccionadaId es null, el value debe ser "null" para que la opción "Sin Mesa" funcione.
+          value={mesaSeleccionadaId === null ? "null" : mesaSeleccionadaId}
+          onChange={handleSeleccionarMesa}
+          className={styles.select}
+          disabled={loading} // Deshabilita mientras carga
+        >
+          <option value="null">{NAMES.SIN_MESA}</option>{" "}
+          {/* Opción "Sin mesa" */}
+          {mesasDisponibles.map((mesa) => (
+            <option key={mesa.id} value={mesa.id}>
+              Mesa {mesa.numero} (
+              {mesa.estado === "libre" ? "Libre" : "Ocupada"})
+            </option>
+          ))}
+        </select>
+        {/* Aquí podrías añadir un mensaje de error si errorMesas existe */}
+        {/* {errorMesas && <p className={styles.error}>{errorMesas}</p>} */}
+        <small className={styles.textMuted}>
+          {mesasDisponibles.filter((mesa) => mesa.estado === "libre").length}{" "}
+          mesas libres
+        </small>
+      </div>
 
       <div className={styles.categoriasBar}>
         {categorias.map((categoria: CategoriaProps) => (

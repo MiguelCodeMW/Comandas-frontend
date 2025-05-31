@@ -34,11 +34,8 @@ function Dashboard() {
   const [showAdminSettings, setShowAdminSettings] = useState(false);
 
   useEffect(() => {
-    // Si es admin y no hay IVA ni moneda configurados, muestra el modal de IVA.
-    // Solo si no hay errores de carga ni otros modales activos.
-    // Añadir una comprobación para `user` si es posible que sea null al inicio
     if (
-      user?.role === NAMES.ROL_ADMIN && // Acceder a 'role' de forma segura
+      user?.role === NAMES.ROL_ADMIN &&
       iva === null &&
       moneda === null &&
       !loading &&
@@ -65,7 +62,6 @@ function Dashboard() {
     return <LoadingSpinner />;
   }
 
-  // Se muestra un mensaje de error si hay un error y no hay comandas para mostrar (la carga inicial falló)
   if (error && !comandasFiltradas.length && !loading) {
     return (
       <ErrorMessage
@@ -128,6 +124,12 @@ function Dashboard() {
               <Button
                 navigateTo={ROUTES.PRODUCT}
                 text={NAMES.CATEGORIAS_PRODUCTOS}
+                className={styles.headerButton}
+              />
+              {/* NUEVO: Botón para configurar mesas (por el admin) */}
+              <Button
+                navigateTo={ROUTES.TOTAL_MESAS} // Necesitarás crear este componente y ruta
+                text={NAMES.CONFIGURAR_MESAS}
                 className={styles.headerButton}
               />
               {errorIva && !showModalIva && (

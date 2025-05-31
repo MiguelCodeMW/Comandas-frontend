@@ -22,6 +22,9 @@ export const NAMES = {
   ROL_ADMIN: "admin",
   MOSTRAR_AJUSTES: "Mostrar Ajustes",
   OCULTAR_AJUSTES: "Ocultar Ajustes",
+  COMANDA: "Comanda",
+  LISTADO_MESAS: "Listado de Mesas",
+  NO_MESAS_REGISTRADAS: "No hay mesas registradas.",
 
   //IVA
   GUARDAR_IVA: "Guardar IVA",
@@ -180,4 +183,14 @@ export const NAMES = {
   PRODUCTO_BUSCAR: "Buscar producto...",
   GESTIONAR_PRODUCTOS: "Gestión de productos",
   LISTA_PRODUCTOS: "Lista de productos",
+  ERROR_CARGA_MESAS: "Error al cargar las mesas.",
+  SELECCIONAR_MESA: "Seleccionar Mesa",
+  SIN_MESA: "Sin Mesa",
+  MESA: "Mesa",
+  CONFIGURAR_MESAS: "Configurar Mesas",
+  TOTAL_MESAS_ACTUAL: "Total de Mesas",
+  MESAS_LIBRES: "Mesas Libres",
+  MESAS_OCUPADAS: "Mesas Ocupadas",
+  ESTADO_ACTUAL_MESAS: "Estado Actual de las Mesas",
+  ESTADO: "Estado",
 };

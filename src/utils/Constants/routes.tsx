@@ -19,4 +19,6 @@ export const ROUTES = {
   SET_IVA: "/configuracion/iva",
   GET_MONEDA: "/configuracion/moneda",
   SET_MONEDA: "/configuracion/moneda",
+  MESAS: "/mesas",
+  TOTAL_MESAS: "/configuracion/total-mesas",
 };

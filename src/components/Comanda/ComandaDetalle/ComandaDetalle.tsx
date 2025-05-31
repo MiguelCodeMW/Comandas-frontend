@@ -33,7 +33,7 @@ function ComandaDetalle() {
   }
 
   const monedaDeComanda =
-    comanda.moneda_aplicada || localStorage.getItem("moneda") || "€";
+    comanda.moneda_aplicada || localStorage.getItem("moneda_global") || "€"; // Usa moneda_global
 
   return (
     <div className={styles.comandaDetalleContainer}>
@@ -44,6 +44,12 @@ function ComandaDetalle() {
       <p className={styles.comandaDetalleInfo}>
         Fecha: {new Date(comanda.fecha).toLocaleString()}
       </p>
+      {/* NUEVO: Mostrar la mesa si está asignada */}
+      {comanda.mesa && comanda.mesa.numero && (
+        <p className={styles.comandaDetalleInfo}>
+          {NAMES.MESA}: {comanda.mesa.numero}
+        </p>
+      )}
 
       <ComandaDetallesItemsList
         detalles={comanda.detalles}

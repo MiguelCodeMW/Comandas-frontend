@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react"; // Añadir useCallback
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/axio";
-import { ComandaData } from "../utils/types/ComandaTypes";
+import { ComandaData } from "../utils/types/ComandaTypes"; // Asegúrate de que ComandaData incluya mesa y mesa_id
 import { User } from "../utils/types/UserTypes";
 import { NAMES } from "../utils/Constants/text";
 import { ROUTES } from "../utils/Constants/routes";
@@ -24,7 +24,7 @@ export function useComandaDetalle() {
     setError(null);
   };
 
-  // NUEVA FUNCIÓN: Para obtener el IVA global del backend
+  // Función para obtener el IVA global del backend
   const fetchGlobalIva = useCallback(async () => {
     try {
       const res = await api.get(ROUTES.GET_IVA);
@@ -92,7 +92,7 @@ export function useComandaDetalle() {
       setLoading(false);
       setError(NAMES.COMANDA_ID_NO_PROPORCIONADO);
     }
-  }, [id, fetchGlobalIva]); // Añadir fetchGlobalIva como dependencia
+  }, [id, fetchGlobalIva]);
 
   const handleEditarComanda = () => {
     navigate(`${ROUTES.CREATE_COMANDA}?id=${id}`);
@@ -105,34 +105,28 @@ export function useComandaDetalle() {
       return;
     }
 
-    // Si la comanda ya está cerrada, no permitimos volver a pagarla
     if (comanda.estado === "cerrada") {
-      setMensaje("La comanda ya está cerrada."); // Mensaje adecuado
+      setMensaje("La comanda ya está cerrada.");
       return;
     }
 
     try {
       setLoading(true);
 
-      // Si la comanda ya tiene un IVA, lo usamos.
-      // Si no, obtenemos el IVA global para calcular el pago si fuera necesario en el backend.
-      // Sin embargo, el backend debería usar el IVA guardado en la comanda para el cálculo final
-      // al actualizar el estado a 'cerrada'. Por seguridad, podemos enviar el IVA que ya tenemos.
       const ivaParaPagar =
         comanda.iva !== null && comanda.iva !== undefined
           ? comanda.iva
-          : ivaPorcentaje; // Usa el que ya está calculado o el global
+          : ivaPorcentaje;
 
       const response = await api.put(
         ROUTES.COMANDA_PAGAR.replace(":id", id || ""),
-        { iva: ivaParaPagar } // Enviamos el IVA con el que se está calculando
+        { iva: ivaParaPagar }
       );
 
       setComanda(response.data.comanda);
-      // Ojo: los campos subtotal, iva y total_con_iva deben venir en la respuesta
-      // del backend si se recalculan al pagar. Si no, quita estas líneas:
+      // Asegúrate de que tu backend devuelve estos campos actualizados al pagar
       setSubtotal(response.data.subtotal);
-      setIvaPorcentaje(response.data.iva); // Actualiza con el IVA que viene del backend
+      setIvaPorcentaje(response.data.iva);
       setTotalConIva(response.data.total_con_iva);
       setMensaje(response.data.message);
       setError(null);
