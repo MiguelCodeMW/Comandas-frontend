@@ -1,5 +1,3 @@
-// src/components/Comanda/ComandaResumenTotales.tsx
-
 import styles from "./ComandaDetalle.module.css";
 import { NAMES } from "../../../utils/Constants/text";
 import { ComandaResumenTotalesProps } from "../../../utils/types/ComandaTypes";

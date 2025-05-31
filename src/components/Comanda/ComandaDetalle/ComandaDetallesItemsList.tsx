@@ -1,5 +1,3 @@
-// src/components/Comanda/ComandaDetallesItemsList.tsx
-
 import styles from "./ComandaDetalle.module.css";
 import { NAMES } from "../../../utils/Constants/text";
 import {

@@ -1,8 +1,6 @@
-// src/hooks/useCrearComanda.ts
-
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import api from "../api/axio"; // Asegúrate de que esta ruta es correcta
+import api from "../api/axio";
 import {
   ProductoProps,
   ProductoSeleccionado,
@@ -106,86 +104,6 @@ export function useCrearComanda() {
     );
   };
 
-  // const handleFinalizarComanda = async () => {
-  //   limpiarMensajes();
-  //   if (!userId) {
-  //     setError(NAMES.ERROR_ID);
-  //     return;
-  //   }
-  //   if (productosSeleccionados.length === 0) {
-  //     setError(NAMES.COMANDA_SIN_PRODUCTOS);
-  //     return;
-  //   }
-
-  //   // try {
-  //   //   const payload = {
-  //   //     user_id: userId,
-  //   //     estado: "abierta", // O el estado inicial que desees
-  //   //     productos: productosSeleccionados.map((p) => ({
-  //   //       producto_id: p.id,
-  //   //       cantidad: p.cantidad,
-  //   //     })),
-  //   //   };
-
-  //   //   if (comandaIdParaEditar) {
-  //   //     await api.put(
-  //   //       ROUTES.COMANDA_DETAIL.replace(":id", comandaIdParaEditar),
-  //   //       payload
-  //   //     );
-  //   //     setMensaje(NAMES.COMANDA_ACTUALIZADA_EXITO);
-  //   //   } else {
-  //   //     await api.post(ROUTES.COMANDA, {
-  //   //       ...payload,
-  //   //       fecha: new Date().toISOString(), // Asegúrate de que el backend espera este formato
-  //   //     });
-  //   //     setMensaje(NAMES.COMANDA_EXITOSA);
-  //   //   }
-  //   //   setProductosSeleccionados([]);
-  //   //   setTimeout(() => navigate(ROUTES.DASHBOARD), 1500);
-  //   // } catch (err) {
-  //   //   console.error("ERROR GUARDAR COMANDA", err);
-  //   //   setError("Alerta Guardar comanda");
-  //   // }
-  //   try {
-  //     // 1. Asegurar que el IVA está disponible
-  //     const ivaParaEnviar = globalIva !== null ? globalIva : 0.21;
-
-  //     const payload = {
-  //       user_id: userId,
-  //       estado: "abierta",
-  //       productos: productosSeleccionados.map((p) => ({
-  //         producto_id: p.id,
-  //         cantidad: p.cantidad,
-  //       })),
-  //       iva: ivaParaEnviar, // ✅ Añadir IVA al payload principal
-  //     };
-
-  //     if (comandaIdParaEditar) {
-  //       // 2. PUT: Actualizar comanda existente (incluir IVA)
-  //       await api.put(
-  //         ROUTES.COMANDA_DETAIL.replace(":id", comandaIdParaEditar),
-  //         payload // Ahora incluye el IVA
-  //       );
-  //       setMensaje(NAMES.COMANDA_ACTUALIZADA_EXITO);
-  //     } else {
-  //       // 3. POST: Crear nueva comanda (ya incluye IVA en payload)
-  //       await api.post(ROUTES.COMANDA, {
-  //         ...payload, // ✅ IVA ya está incluido aquí
-  //         fecha: new Date().toISOString(),
-  //       });
-  //       setMensaje(NAMES.COMANDA_EXITOSA);
-  //     }
-
-  //     setProductosSeleccionados([]);
-  //     setTimeout(() => navigate(ROUTES.DASHBOARD), 1500);
-  //   } catch (err: any) {
-  //     // Mejorar el manejo de errores
-  //     console.error("ERROR GUARDAR COMANDA", err);
-  //     const backendErrorMessage =
-  //       err.response?.data?.message || "Error desconocido";
-  //     setError(`Error al guardar: ${backendErrorMessage}`); // Mensaje más específico
-  //   }
-  // };
   const handleFinalizarComanda = async () => {
     limpiarMensajes();
     if (!userId) {

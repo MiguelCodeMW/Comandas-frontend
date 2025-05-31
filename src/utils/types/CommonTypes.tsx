@@ -18,6 +18,3 @@ export interface ConfigurarIVAProps {
   onCancelar: () => void;
   errorExterno?: string | null;
 }
-
-// Si tienes un tipo 'Role' que se usa en varios lugares, también podría ir aquí
-// export type Role = "admin" | "user" | "guest";

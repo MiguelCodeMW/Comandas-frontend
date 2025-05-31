@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../api/axio";
 import { User } from "../../../utils/User";
 import Button from "../../Button/Button";
-import styles from "../LoginForm/LoginForm.module.css"; // Importa los estilos CSS
+import styles from "../LoginForm/LoginForm.module.css";
 import { ROUTES } from "../../../utils/Constants/routes";
 import { NAMES } from "../../../utils/Constants/text";
 

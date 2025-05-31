@@ -15,7 +15,6 @@ export const ROUTES = {
   COMANDA_DETAIL: "/comandas/:id",
   COMANDA_CREAR: "/comandas/crear?id=:id",
   COMANDA_PAGAR: "/comandas/:id/pagar",
-
   GET_IVA: "/configuracion/iva",
   SET_IVA: "/configuracion/iva",
   GET_MONEDA: "/configuracion/moneda",

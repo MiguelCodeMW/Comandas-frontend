@@ -4,7 +4,7 @@ export type ButtonProps = {
   text: string;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
   navigateTo?: string;
-  className?: string; // Solo usa la clase pasada directamente
+  className?: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
 };

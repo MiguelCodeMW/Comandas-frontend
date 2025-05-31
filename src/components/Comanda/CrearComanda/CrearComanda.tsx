@@ -1,9 +1,7 @@
-// src/pages/Comanda/CrearComanda/CrearComanda.tsx
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button/Button";
-import ProductoSelectorList from "../../../components/Producto/ProductoSelectorList"; // Asegúrate de que esta ruta es correcta
+import ProductoSelectorList from "../../../components/Producto/ProductoSelectorList";
 import ProductosSeleccionadosList from "./ProductosSeleccionadosList";
 import styles from "./Comandas.module.css";
 import { NAMES } from "../../../utils/Constants/text";

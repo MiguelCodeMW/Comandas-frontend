@@ -1,8 +1,6 @@
-// src/components/Comanda/ComandaAccionesButtons.tsx
-
 import { useNavigate } from "react-router-dom";
-import Button from "../../Button/Button"; // Asegúrate de que esta ruta es correcta
-import styles from "./ComandaDetalle.module.css"; // Asegúrate de que esta ruta es correcta
+import Button from "../../Button/Button";
+import styles from "./ComandaDetalle.module.css";
 import { ROUTES } from "../../../utils/Constants/routes";
 import { NAMES } from "../../../utils/Constants/text";
 import { ComandaAccionesButtonsProps } from "../../../utils/types/ComandaTypes";

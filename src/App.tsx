@@ -17,8 +17,7 @@ import GestionProductosPage from "./components/Producto";
 import FormularioProducto from "./components/Producto/FormularioProducto";
 
 import { ROUTES } from "./utils/Constants/routes";
-import "./styles/global.css"; // Importación del CSS global (asegúrate de que variables.css se importa dentro de global.css)
-
+import "./styles/global.css";
 function App() {
   return (
     <Router>
