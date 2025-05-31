@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/axio";
-import { User } from "../../../utils/User";
+import { User } from "../../../utils/types/RegisterTypes";
 import Button from "../../Button/Button";
 import styles from "../LoginForm/LoginForm.module.css";
 import { ROUTES } from "../../../utils/Constants/routes";

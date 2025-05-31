@@ -176,4 +176,8 @@ export const NAMES = {
   MONEDA_NO_CONFIGURADA: "No configurada",
   CARGANDO_MONEDA: "Cargando Moneda...",
   GUARDAR_MONEDA: "Guardar Moneda",
+
+  PRODUCTO_BUSCAR: "Buscar producto...",
+  GESTIONAR_PRODUCTOS: "Gestión de productos",
+  LISTA_PRODUCTOS: "Lista de productos",
 };

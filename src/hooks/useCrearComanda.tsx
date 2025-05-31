@@ -1,3 +1,4 @@
+// src/hooks/useCrearComanda.ts (ESTA ES LA VERSIÓN CORRECTA A USAR)
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import api from "../api/axio";
@@ -22,19 +23,56 @@ export function useCrearComanda() {
   const [mensaje, setMensaje] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const globalIva = parseFloat(localStorage.getItem("iva") || "0.21");
+
+  // Nuevo estado para el IVA en useCrearComanda
+  const [ivaActualComanda, setIvaActualComanda] = useState<number | null>(null);
+  const [loadingIvaComanda, setLoadingIvaComanda] = useState<boolean>(true);
+  const [errorIvaComanda, setErrorIvaComanda] = useState<string | null>(null);
+
   const limpiarMensajes = () => {
     setMensaje(null);
     setError(null);
   };
 
+  // Nueva función para obtener el IVA en useCrearComanda
+  const fetchIvaForComanda = useCallback(async () => {
+    setLoadingIvaComanda(true);
+    setErrorIvaComanda(null);
+    try {
+      const res = await api.get(ROUTES.GET_IVA); // Llama al backend
+      const ivaObtenido = res.data.iva;
+
+      // AÑADIR ESTOS CONSOLE.LOGS PARA DEPURACIÓN FINAL
+      console.log("DEBUG: IVA obtenido del backend (Comanda):", ivaObtenido);
+      console.log("DEBUG: Tipo de IVA obtenido (Comanda):", typeof ivaObtenido);
+
+      if (ivaObtenido !== undefined && ivaObtenido !== null) {
+        setIvaActualComanda(Number(ivaObtenido));
+        // No es necesario actualizar localStorage aquí, ya que el backend es la fuente de verdad.
+        // localStorage.setItem("iva", String(ivaObtenido));
+      } else {
+        // Esto debería ocurrir si el backend devuelve '{"iva": null}' o similar
+        // Aunque con el último cambio en ConfiguracionController.php, debería devolver 0.21 si no está configurado.
+        setIvaActualComanda(0.21); // Fallback por si acaso
+      }
+    } catch (err: any) {
+      console.error("Error al cargar IVA para comanda:", err);
+      setErrorIvaComanda(NAMES.IVA_NO_CONFIGURADO);
+      setIvaActualComanda(0.21); // Usa 0.21 como fallback si falla la carga del backend
+    } finally {
+      setLoadingIvaComanda(false);
+    }
+  }, []);
+
   const fetchData = useCallback(async () => {
     setLoading(true);
     limpiarMensajes();
     try {
+      // Cargar el IVA primero (o en paralelo con lo demás)
+      await fetchIvaForComanda(); // Asegúrate de que esto se complete
+
       // Obtener el ID del usuario logueado
       const userResponse = await api.get(ROUTES.USER);
-      // Ajusta según la estructura exacta de tu respuesta de /user (ej: { user: { id: 1 } } o { id: 1 })
       setUserId(userResponse.data.id || userResponse.data.user?.id || null);
 
       // Obtener categorías
@@ -68,10 +106,11 @@ export function useCrearComanda() {
     } catch (err) {
       console.error(NAMES.ERROR_CARGA, err);
       setError(NAMES.ERROR_CARGA);
+      setIvaActualComanda(0.21); // Asegurar un fallback en caso de error general
     } finally {
       setLoading(false);
     }
-  }, [comandaIdParaEditar]);
+  }, [comandaIdParaEditar, fetchIvaForComanda]); // Añade fetchIvaForComanda como dependencia
 
   useEffect(() => {
     fetchData();
@@ -115,8 +154,9 @@ export function useCrearComanda() {
       return;
     }
 
-    // 🔥 Añade esta línea para obtener el IVA global
-    const ivaParaEnviar = parseFloat(localStorage.getItem("iva") || "0.21");
+    // Usa el IVA que has obtenido directamente en este hook
+    // Asegúrate de que ivaActualComanda no sea null. Si es null, usa el por defecto (0.21)
+    const ivaParaEnviar = ivaActualComanda !== null ? ivaActualComanda : 0.21;
 
     try {
       const payload = {
@@ -126,7 +166,7 @@ export function useCrearComanda() {
           producto_id: p.id,
           cantidad: p.cantidad,
         })),
-        iva: ivaParaEnviar, // 🔥 Incluye el IVA en el payload
+        iva: ivaParaEnviar, // Incluye el IVA en el payload
       };
 
       if (comandaIdParaEditar) {
@@ -159,7 +199,8 @@ export function useCrearComanda() {
     comandaIdParaEditar,
     mensaje,
     error,
-    loading,
+    loading: loading || loadingIvaComanda, // Considera el loading del IVA también
+    ivaActualComanda, // Exporta el IVA si lo necesitas en el componente
     handleSeleccionarProducto,
     handleAumentarCantidad,
     handleDisminuirCantidad,

@@ -1,6 +1,6 @@
 import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { ButtonProps } from "../../utils/ButtonProps";
+import { ButtonProps } from "../../utils/types/ButtonTypes";
 
 function Button({
   text,
