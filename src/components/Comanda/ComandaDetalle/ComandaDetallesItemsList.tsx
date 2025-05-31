@@ -1,12 +1,11 @@
-import styles from "./ComandaDetalle.module.css";
-// import { DetalleComanda } from "../../../hooks/useComandaDetalle";
-import { NAMES } from "../../../utils/Constants/text";
-import { ComandaDetallesItemsListProps } from "../../../utils/Comanda/ComandaDetallesItemsListProps";
+// src/components/Comanda/ComandaDetallesItemsList.tsx
 
-// interface ComandaDetallesItemsListProps {
-//   detalles: DetalleComanda[];
-//   monedaComanda: string | null; // Moneda específica para esta comanda
-// }
+import styles from "./ComandaDetalle.module.css";
+import { NAMES } from "../../../utils/Constants/text";
+import {
+  ComandaDetalle,
+  ComandaDetallesItemsListProps,
+} from "../../../utils/types/ComandaTypes";
 
 function ComandaDetallesItemsList({
   detalles,
@@ -20,7 +19,7 @@ function ComandaDetallesItemsList({
     <>
       <h2 className={styles.detallesTitulo}>{NAMES.DETALLES_TITULO}</h2>
       <ul className={styles.detallesLista}>
-        {detalles.map((detalle) => (
+        {detalles.map((detalle: ComandaDetalle) => (
           <li key={detalle.id} className={styles.detalleItem}>
             <p className={styles.detalleInfo}>
               {NAMES.DETALLES_PRODUCTO} {detalle.producto.nombre}
@@ -29,13 +28,11 @@ function ComandaDetallesItemsList({
               {NAMES.DETALLES_CANTIDAD} {detalle.cantidad}
             </p>
             <p className={styles.detalleInfo}>
-              {NAMES.DETALLES_PRECIO_UNITARIO} {monedaComanda}
-              {/* {NAMES.DETALLES_PRECIO_UNITARIO} {monedaComanda || "$"} */}
+              {NAMES.DETALLES_PRECIO_UNITARIO} {monedaComanda}{" "}
               {detalle.producto.precio.toFixed(2)}
             </p>
             <p className={styles.detalleInfo}>
-              {NAMES.DETALLES_TOTAL} {monedaComanda}
-              {/* {NAMES.DETALLES_TOTAL} {monedaComanda || "$"} */}
+              {NAMES.DETALLES_TOTAL} {monedaComanda}{" "}
               {(detalle.cantidad * detalle.producto.precio).toFixed(2)}
             </p>
           </li>

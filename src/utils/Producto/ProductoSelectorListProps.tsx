@@ -1,6 +1,6 @@
-import { ProductoProps } from "./ProductoProps";
+// import { ProductoProps } from "./ProductoProps";
 
-export type ProductoSelectorListProps = {
-  productos: ProductoProps[];
-  onProductoClick: (producto: ProductoProps) => void;
-};
+// export type ProductoSelectorListProps = {
+//   productos: ProductoProps[];
+//   onProductoClick: (producto: ProductoProps) => void;
+// };

@@ -1,15 +1,23 @@
+// src/pages/Comanda/CrearComanda/ProductosSeleccionadosList.tsx
+
 import styles from "./Comandas.module.css";
-// import { ProductoSeleccionado } from "../../../hooks/useCrearComanda";
-import { useDashboard } from "../../../hooks/useDashboard";
 import { NAMES } from "../../../utils/Constants/text";
-import { ProductosSeleccionadosListProps } from "../../../utils/Producto/ProductosSeleccionadosListProps";
+import {
+  ProductosSeleccionadosListProps,
+  ProductoSeleccionado,
+} from "../../../utils/types/ComandaTypes";
+// Asumo que useDashboard es un hook que te da la moneda global.
+// Si no existe, deberías crearlo o pasar la moneda como prop desde un componente padre.
+import { useDashboard } from "../../../hooks/useDashboard";
 
 function ProductosSeleccionadosList({
   productos,
   onAumentar,
   onDisminuir,
 }: ProductosSeleccionadosListProps) {
-  const { moneda } = useDashboard(); // Obtén la moneda del hook
+  // Asegúrate de que useDashboard devuelve 'moneda'.
+  // Si no lo hace, necesitarás ajustarlo o pasar la moneda de otra forma.
+  const { moneda } = useDashboard();
 
   if (productos.length === 0) {
     return <p className={styles.message}>No hay productos seleccionados.</p>;
@@ -17,16 +25,14 @@ function ProductosSeleccionadosList({
 
   return (
     <ul className={styles.seleccionadosLista}>
-      {productos.map((producto) => (
+      {productos.map((producto: ProductoSeleccionado) => (
         <li key={producto.id} className={styles.seleccionadoItem}>
           <div className={styles.selectableWrapper}>
             <span className={styles.seleccionadoInfo}>
               {producto.nombre} - {NAMES.DETALLES_CANTIDAD} {producto.cantidad}{" "}
-              - {NAMES.LABEL_PRECIO}
-              {producto.precio} - {NAMES.COMANDA_PRECIO_TOTAL} {moneda}
-              {/* - {NAMES.COMANDA_PRECIO_TOTAL} {moneda || "$"} */}
+              - {NAMES.LABEL_PRECIO} {moneda} {producto.precio.toFixed(2)} -{" "}
+              {NAMES.COMANDA_PRECIO_TOTAL} {moneda}
               {(producto.precio * producto.cantidad).toFixed(2)}{" "}
-              {/* Usa la moneda */}{" "}
             </span>
             <div className={styles.seleccionadoControles}>
               <button

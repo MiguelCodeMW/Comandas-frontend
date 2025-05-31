@@ -1,7 +1,7 @@
-import { ProductoSeleccionado } from "../../hooks/useCrearComanda";
+// import { ProductoSeleccionado } from "../../hooks/useCrearComanda";
 
-export type ProductosSeleccionadosListProps = {
-  productos: ProductoSeleccionado[];
-  onAumentar: (id: number) => void;
-  onDisminuir: (id: number) => void;
-};
+// export type ProductosSeleccionadosListProps = {
+//   productos: ProductoSeleccionado[];
+//   onAumentar: (id: number) => void;
+//   onDisminuir: (id: number) => void;
+// };

@@ -18,8 +18,6 @@ function ComandaDetalle() {
     handleEditarComanda,
     handlePagarComanda,
     handleBorrarComanda,
-    // Asegúrate de que useComandaDetalle devuelva la moneda de la comanda
-    // Si tu useComandaDetalle no la devuelve, tendrás que añadirla allí.
   } = useComandaDetalle();
 
   if (loading) {
@@ -34,11 +32,9 @@ function ComandaDetalle() {
     );
   }
 
-  // Obtenemos la moneda de la comanda. Si no está definida, usamos un valor por defecto, por ejemplo, "€" o "EUR".
-  // Idealmente, el backend ya devolvería la moneda_aplicada de la comanda.
   const monedaDeComanda =
-    // comanda.moneda_aplicada || localStorage.getItem("moneda") || "€"; // Si el backend no la devuelve, usa la de localStorage o un default
-    comanda.moneda_aplicada || localStorage.getItem("moneda");
+    comanda.moneda_aplicada || localStorage.getItem("moneda") || "€";
+
   return (
     <div className={styles.comandaDetalleContainer}>
       <h1 className={styles.comandaDetalleTitulo}>
@@ -49,13 +45,11 @@ function ComandaDetalle() {
         Fecha: {new Date(comanda.fecha).toLocaleString()}
       </p>
 
-      {/* Lista de detalles */}
       <ComandaDetallesItemsList
         detalles={comanda.detalles}
         monedaComanda={monedaDeComanda}
       />
 
-      {/* Resumen de totales */}
       <ComandaResumenTotales
         subtotal={subtotal}
         ivaPorcentaje={ivaPorcentaje}
@@ -63,7 +57,6 @@ function ComandaDetalle() {
         monedaComanda={monedaDeComanda}
       />
 
-      {/* Mensaje de éxito o error */}
       {mensaje && (
         <p
           className={`${styles.message} ${
@@ -74,7 +67,6 @@ function ComandaDetalle() {
         </p>
       )}
 
-      {/* Botones de acciones */}
       <ComandaAccionesButtons
         comanda={comanda}
         user={user}

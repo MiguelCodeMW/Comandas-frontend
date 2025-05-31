@@ -1,4 +1,4 @@
-export type ErrorMessageProps = {
-  message: string;
-  onRetry?: () => void;
-};
+// export type ErrorMessageProps = {
+//   message: string;
+//   onRetry?: () => void;
+// };

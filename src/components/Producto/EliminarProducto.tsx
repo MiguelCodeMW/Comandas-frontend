@@ -1,6 +1,6 @@
 import api from "../../api/axio";
 import { ROUTES } from "../../utils/Constants/routes";
-import { EliminarProductoProps } from "../../utils/Producto/EliminarProductoProps";
+import { EliminarProductoProps } from "../../utils/types/ComandaTypes";
 import styles from "./Producto.module.css";
 import Button from "../Button/Button";
 import { NAMES } from "../../utils/Constants/text";

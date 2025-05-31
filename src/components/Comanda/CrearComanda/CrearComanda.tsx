@@ -1,14 +1,16 @@
-import { useState } from "react";
-import { useEffect } from "react";
+// src/pages/Comanda/CrearComanda/CrearComanda.tsx
+
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../Button/Button";
-import ProductoSelectorList from "../../Producto/ProductoSelectorList";
+import Button from "../../../components/Button/Button";
+import ProductoSelectorList from "../../../components/Producto/ProductoSelectorList"; // Asegúrate de que esta ruta es correcta
 import ProductosSeleccionadosList from "./ProductosSeleccionadosList";
 import styles from "./Comandas.module.css";
 import { NAMES } from "../../../utils/Constants/text";
 import { ROUTES } from "../../../utils/Constants/routes";
 import { useCrearComanda } from "../../../hooks/useCrearComanda";
-import { CategoriaProps } from "../../../utils/Categoria/CategoriaProps";
+import { CategoriaProps } from "../../../utils/types/CategoriaTypes";
+import { ProductoProps } from "../../../utils/types/ComandaTypes";
 
 function CrearComanda() {
   const {
@@ -31,26 +33,23 @@ function CrearComanda() {
     number | null
   >(null);
 
-  // Efecto para seleccionar la primera categoría por defecto al cargar
   useEffect(() => {
     if (categorias.length > 0 && categoriaSeleccionadaId === null) {
       setCategoriaSeleccionadaId(categorias[0].id);
     }
   }, [categorias, categoriaSeleccionadaId]);
 
-  const productosMostrados = productos.filter((p) => {
+  const productosMostrados: ProductoProps[] = productos.filter((p) => {
     const coincideConBusqueda = p.nombre
       .toLowerCase()
       .includes(busqueda.toLowerCase());
 
-    // Si hay texto en la búsqueda, filtramos por búsqueda en todos los productos
     if (busqueda.trim() !== "") {
       return coincideConBusqueda;
     }
 
-    // Si no hay búsqueda, filtramos por la categoría seleccionada
     const esDeCategoriaSeleccionada =
-      categoriaSeleccionadaId === null || // Debería estar seleccionada por defecto
+      categoriaSeleccionadaId === null ||
       p.categoria_id === categoriaSeleccionadaId;
 
     return esDeCategoriaSeleccionada;
@@ -72,7 +71,6 @@ function CrearComanda() {
         <p className={`${styles.message} ${styles.success}`}>{mensaje}</p>
       )}
 
-      {/* Contenedor de la barra de categorías */}
       <div className={styles.categoriasBar}>
         {categorias.map((categoria: CategoriaProps) => (
           <Button
@@ -80,7 +78,7 @@ function CrearComanda() {
             text={categoria.nombre}
             onClick={() => {
               setCategoriaSeleccionadaId(categoria.id);
-              setBusqueda(""); //limpiar búsqueda al cambiar de categoría
+              setBusqueda("");
             }}
             className={`${styles.categoriaButton} ${
               categoria.id === categoriaSeleccionadaId

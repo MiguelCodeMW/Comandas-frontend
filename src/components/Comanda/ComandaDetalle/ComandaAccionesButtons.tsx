@@ -1,21 +1,11 @@
+// src/components/Comanda/ComandaAccionesButtons.tsx
+
 import { useNavigate } from "react-router-dom";
-import Button from "../../Button/Button";
-import styles from "./ComandaDetalle.module.css";
+import Button from "../../Button/Button"; // Asegúrate de que esta ruta es correcta
+import styles from "./ComandaDetalle.module.css"; // Asegúrate de que esta ruta es correcta
 import { ROUTES } from "../../../utils/Constants/routes";
 import { NAMES } from "../../../utils/Constants/text";
-// import { ComandaData } from "../../../hooks/useComandaDetalle";
-import { ComandaAccionesButtonsProps } from "../../../utils/Comanda/ComandaAccionesButtonsProps";
-
-// interface User {
-//   role: string;
-// }
-// interface ComandaAccionesButtonsProps {
-//   comanda: ComandaData | null;
-//   user: User | null;
-//   onEditar: () => void;
-//   onPagar: () => void;
-//   onBorrar: () => void;
-// }
+import { ComandaAccionesButtonsProps } from "../../../utils/types/ComandaTypes";
 
 function ComandaAccionesButtons({
   comanda,

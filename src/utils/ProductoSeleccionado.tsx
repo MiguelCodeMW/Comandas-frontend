@@ -1,5 +1,5 @@
-import { ProductoProps } from "./Producto/ProductoProps";
+// import { ProductoProps } from "./Producto/ProductoProps";
 
-export type ProductoSeleccionado = ProductoProps & {
-  cantidad: number;
-};
+// export type ProductoSeleccionado = ProductoProps & {
+//   cantidad: number;
+// };

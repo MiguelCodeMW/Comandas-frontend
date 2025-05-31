@@ -1,4 +1,4 @@
-export type CategoriaProps = {
-  id: number;
-  nombre: string;
-};
+// export type CategoriaProps = {
+//   id: number;
+//   nombre: string;
+// };
